@@ -16,6 +16,6 @@ following license.
 List of applicable sound files
 
 	chimeconnect.wav
-        chimedisconnect.wav
+    chimedisconnect.wav
 	errormessage.wav
 	warningmessage.wav
