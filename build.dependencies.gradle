@@ -1,9 +1,11 @@
 repositories {
     mavenCentral()
     google() // Needed for androidx
+    maven { url = 'https://maven.brott.dev' } // Needed for FTC Dashboard
 }
 
 dependencies {
+    // FTC Libraries
     implementation 'org.firstinspires.ftc:Inspection:9.1.0'
     implementation 'org.firstinspires.ftc:Blocks:9.1.0'
     implementation 'org.firstinspires.ftc:Tfod:9.1.0'
@@ -14,8 +16,12 @@ dependencies {
     implementation 'org.firstinspires.ftc:FtcCommon:9.1.0'
     implementation 'org.firstinspires.ftc:Vision:9.1.0'
     implementation 'org.firstinspires.ftc:gameAssets-CenterStage:1.0.0'
+
+    // FTC Associated Libraries
     implementation 'org.tensorflow:tensorflow-lite-task-vision:0.4.3'
     runtimeOnly 'org.tensorflow:tensorflow-lite:2.12.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'
-}
 
+    // FTC Dashboard
+    implementation 'com.acmerobotics.dashboard:dashboard:0.4.15'
+}
