@@ -5,8 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import org.firstinspires.ftc.teamcode.utils.isNotNull
 
 abstract class API {
-    // TODO: Make this resettable
-    private var uninitializedOpMode: OpMode? = null
+    private var uninitializedOpMode: OpMode? by Resettable { null }
 
     // Make sure to error about calling super.init() too.
     protected val opMode: OpMode
