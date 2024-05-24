@@ -35,5 +35,7 @@ abstract class API {
         }
 
         this.uninitializedOpMode = opMode
+
+        Dependencies.registerAPI(this)
     }
 }
