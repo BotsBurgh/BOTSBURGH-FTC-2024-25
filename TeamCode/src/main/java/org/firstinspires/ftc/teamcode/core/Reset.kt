@@ -72,11 +72,6 @@ object ResetListener : OpModeManagerNotifier.Notifications {
 
     override fun onOpModePostStop(opMode: OpMode) {}
 
-    private fun resetAll() {
-        // Call each function in the global set.
-        resetFunctions.forEach { it() }
-    }
-
     @OnCreateEventLoop
     @JvmStatic
     fun register(
@@ -85,5 +80,10 @@ object ResetListener : OpModeManagerNotifier.Notifications {
         ftcEventLoop: FtcEventLoop,
     ) {
         ftcEventLoop.opModeManager.registerListener(this)
+    }
+
+    private fun resetAll() {
+        // Call each function in the global set.
+        resetFunctions.forEach { it() }
     }
 }
