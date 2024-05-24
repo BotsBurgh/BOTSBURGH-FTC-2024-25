@@ -9,14 +9,21 @@ abstract class API {
 
     // Make sure to error about calling super.init() too.
     protected val opMode: OpMode
-        get() = TODO()
+        get() = this.uninitializedOpMode ?: throw APINotInitialized(this::class)
 
     protected val linearOpMode: LinearOpMode
-        get() = TODO()
+        get() {
+            if (!this.isLinear) {
+                throw IllegalLinearOpModeAccess(this::class)
+            }
+
+            return this.opMode as LinearOpMode
+        }
 
     open val isLinear: Boolean = false
+    open val dependencies: Set<API> = emptySet()
 
-    open fun init() {
+    open fun init(opMode: OpMode) {
         // You can only initialize an API once without tearing it down.
         if (this.uninitializedOpMode.isNotNull()) {
             throw InitAPIMoreThanOnce(this::class)
@@ -28,11 +35,5 @@ abstract class API {
         }
 
         this.uninitializedOpMode = opMode
-
-        TODO("API Dependencies")
     }
-
-    open fun teardown() {}
-
-    open fun dependencies(): Set<API> = emptySet()
 }
