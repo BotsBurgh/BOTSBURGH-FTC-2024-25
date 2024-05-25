@@ -8,6 +8,7 @@ plugins {
     // Note for FTC Teams: Do not modify this yourself.
     id("com.android.application") version "7.2.0" apply false
     id("org.jetbrains.kotlin.android") version "1.9.22" apply false
+    id("org.jmailen.kotlinter") version "4.1.1" apply false
 }
 
 // This is now required because aapt2 has to be downloaded from the

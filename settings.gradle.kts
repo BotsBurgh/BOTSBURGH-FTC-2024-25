@@ -1,5 +1,5 @@
-include("FtcRobotController")
-include("TeamCode")
+include(":FtcRobotController")
+include(":TeamCode")
 
 pluginManagement {
     repositories {
