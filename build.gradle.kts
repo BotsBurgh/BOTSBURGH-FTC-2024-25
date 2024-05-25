@@ -4,16 +4,10 @@
  * It is extraordinarily rare that you will ever need to edit this file.
  */
 
-buildscript {
-    repositories {
-        mavenCentral()
-        google()
-    }
-    dependencies {
-        // Note for FTC Teams: Do not modify this yourself.
-        classpath("com.android.tools.build:gradle:7.2.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22")
-    }
+plugins {
+    // Note for FTC Teams: Do not modify this yourself.
+    id("com.android.application") version "7.2.0" apply false
+    id("org.jetbrains.kotlin.android") version "1.9.22" apply false
 }
 
 // This is now required because aapt2 has to be downloaded from the
