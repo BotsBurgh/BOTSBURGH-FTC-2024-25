@@ -1,6 +1,6 @@
 [versions]
 # Do not modify this unless you want to have a really bad time.
-androidGradlePlugin = "7.2.2"
+androidGradlePlugin = "7.4.2"
 
 # Kotlin language version.
 kotlin = "1.9.22"
