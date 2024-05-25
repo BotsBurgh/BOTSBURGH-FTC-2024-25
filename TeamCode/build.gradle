@@ -9,8 +9,9 @@
 // before doing so.
 
 plugins {
-    id("com.android.application")
-    id("org.jmailen.kotlinter")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.kotlinter)
 }
 
 // Include common definitions from above.
