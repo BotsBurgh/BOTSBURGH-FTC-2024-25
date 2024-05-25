@@ -14,8 +14,8 @@ plugins {
 }
 
 // Include common definitions from above.
-apply from: "../build.common.gradle"
-apply from: "../build.dependencies.gradle"
+apply(from: "../build.common.gradle")
+apply(from: "../build.dependencies.gradle")
 
 android {
     namespace = "org.firstinspires.ftc.teamcode"

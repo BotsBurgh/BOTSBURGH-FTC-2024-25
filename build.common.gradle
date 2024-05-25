@@ -5,11 +5,11 @@
  * evolves. Rather, if it is necessary to customize the build process, do those edits in
  * the build.gradle.kts file in TeamCode.
  *
- * This file contains the necessary content of the 'build.gradle.kts' files for robot controller
- * applications built using the FTC SDK. Each individual 'build.gradle.kts' in those applications
+ * This file contains the necessary content of the "build.gradle.kts" files for robot controller
+ * applications built using the FTC SDK. Each individual "build.gradle.kts" in those applications
  * can simply contain the one line:
  *
- *      apply from: '../build.common.gradle'
+ *      apply from: "../build.common.gradle"
  *
  * which will pick up this file here. This approach allows makes it easier to integrate
  * updates to the FTC SDK into your code.
@@ -20,8 +20,7 @@ import java.util.regex.Pattern
 apply plugin: 'com.android.application'
 
 android {
-
-    compileSdkVersion 29
+    compileSdkVersion = 29
 
     signingConfigs {
         release {
@@ -32,18 +31,18 @@ android {
                 storeFile file(System.getenv("APK_SIGNING_STORE_FILE"))
                 storePassword System.getenv("APK_SIGNING_STORE_PASSWORD")
             } else {
-                keyAlias 'androiddebugkey'
-                keyPassword 'android'
-                storeFile rootProject.file('libs/ftc.debug.keystore')
-                storePassword 'android'
+                keyAlias "androiddebugkey"
+                keyPassword "android"
+                storeFile rootProject.file("libs/ftc.debug.keystore")
+                storePassword "android"
             }
         }
 
         debug {
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-            storeFile rootProject.file('libs/ftc.debug.keystore')
-            storePassword 'android'
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+            storeFile rootProject.file("libs/ftc.debug.keystore")
+            storePassword "android"
         }
     }
 
@@ -53,7 +52,7 @@ android {
 
     defaultConfig {
         signingConfig signingConfigs.debug
-        applicationId 'com.qualcomm.ftcrobotcontroller'
+        applicationId "com.qualcomm.ftcrobotcontroller"
         minSdkVersion 24
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
@@ -70,7 +69,7 @@ android {
          * @see <a href="http://developer.android.com/tools/building/configuring-gradle.html">Configure Your Build</a>
          * @see <a href="http://developer.android.com/tools/publishing/versioning.html">Versioning Your App</a>
          */
-        def manifestFile = project(':FtcRobotController').file('src/main/AndroidManifest.xml');
+        def manifestFile = project(":FtcRobotController").file("src/main/AndroidManifest.xml");
         def manifestText = manifestFile.getText()
         //
         def vCodePattern = Pattern.compile("versionCode=\"(\\d+(\\.\\d+)*)\"")
@@ -106,20 +105,16 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     packagingOptions {
-        pickFirst '**/*.so'
+        pickFirst "**/*.so"
     }
     sourceSets.main {
         jni.srcDirs = []
-        jniLibs.srcDir rootProject.file('libs')
+        jniLibs.srcDir rootProject.file("libs")
     }
-    ndkVersion '21.3.6528147'
+    ndkVersion "21.3.6528147"
 }
-
-repositories {
-}
-
