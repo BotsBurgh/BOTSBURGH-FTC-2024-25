@@ -11,8 +11,8 @@ buildscript {
     }
     dependencies {
         // Note for FTC Teams: Do not modify this yourself.
-        classpath 'com.android.tools.build:gradle:7.2.0'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22'
+        classpath("com.android.tools.build:gradle:7.2.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22")
     }
 }
 
