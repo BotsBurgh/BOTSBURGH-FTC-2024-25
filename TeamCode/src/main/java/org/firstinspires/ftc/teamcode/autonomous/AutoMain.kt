@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
  */
 @Autonomous(name = "Main")
 class AutoMain : LinearOpMode() {
+    // This function is the entrypoint into our code. It is run when the "Init" button is pressed.
     override fun runOpMode() {
         // Initialization
 

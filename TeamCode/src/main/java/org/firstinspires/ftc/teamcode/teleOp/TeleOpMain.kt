@@ -8,7 +8,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
  */
 @TeleOp(name = "Main")
 class TeleOpMain : OpMode() {
+    // This function is run once when the "Init" button is pressed.
     override fun init() {}
 
+    // This function is run repeatedly after the "Run" button is pressed.
     override fun loop() {}
 }
