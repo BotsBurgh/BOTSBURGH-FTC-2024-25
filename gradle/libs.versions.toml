@@ -1,9 +1,42 @@
 [versions]
-androidGradlePlugin = "7.2.0"
+# Do not modify this unless you want to have a really bad time.
+androidGradlePlugin = "7.4.2"
+
+# Kotlin language version.
 kotlin = "1.9.22"
+
+# See https://github.com/jeremymailen/kotlinter-gradle for versions.
 kotlinter = "4.1.1"
 
+ftc = "9.1.0"
+ftcCenterStageAssets = "1.0.0"
+
+tensorflowLiteTaskVision = "0.4.3"
+tensorflowLite = "2.12.0"
+androidxAppCompat = "1.2.0"
+
+ftcDashboard = "0.4.15"
+
 [libraries]
+# FTC libraries.
+ftc-inspection = { group = "org.firstinspires.ftc", name = "Inspection", version.ref = "ftc" }
+ftc-blocks = { group = "org.firstinspires.ftc", name = "Blocks", version.ref = "ftc" }
+ftc-tfod = { group = "org.firstinspires.ftc", name = "Tfod", version.ref = "ftc" }
+ftc-robotcore = { group = "org.firstinspires.ftc", name = "RobotCore", version.ref = "ftc" }
+ftc-robotserver = { group = "org.firstinspires.ftc", name = "RobotServer", version.ref = "ftc" }
+ftc-onbotjava = { group = "org.firstinspires.ftc", name = "OnBotJava", version.ref = "ftc" }
+ftc-hardware = { group = "org.firstinspires.ftc", name = "Hardware", version.ref = "ftc" }
+ftc-common = { group = "org.firstinspires.ftc", name = "FtcCommon", version.ref = "ftc" }
+ftc-vision = { group = "org.firstinspires.ftc", name = "Vision", version.ref = "ftc" }
+ftc-gameassets-centerstage = { group = "org.firstinspires.ftc", name = "gameAssets-CenterStage", version.ref = "ftcCenterStageAssets" }
+
+# FTC associated libraries.
+tensorflowLite = { group = "org.tensorflow", name = "tensorflow-lite", version.ref = "tensorflowLite" }
+tensorflowLite-taskVision = { group = "org.tensorflow", name = "tensorflow-lite-task-vision", version.ref = "tensorflowLiteTaskVision" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
+
+# FTC Dashboard.
+ftcDashboard = { group = "com.acmerobotics.dashboard", name = "dashboard", version.ref = "ftcDashboard" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
