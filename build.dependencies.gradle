@@ -24,4 +24,7 @@ dependencies {
 
     // FTC Dashboard
     implementation libs.ftcDashboard
+
+    // Test framework
+    testImplementation libs.kotlinTest
 }
