@@ -62,6 +62,9 @@ class Resettable<T>(private val default: () -> T) {
     }
 }
 
+/**
+ * A listener that resets all [Resettable] variables before the [OpMode] starts.
+ */
 object ResetListener : OpModeManagerNotifier.Notifications {
     override fun onOpModePreInit(opMode: OpMode) {
         // Reset everything when init is pressed.

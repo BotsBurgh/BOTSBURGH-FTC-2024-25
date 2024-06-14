@@ -6,12 +6,14 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManagerNotifier
 import org.firstinspires.ftc.ftccommon.external.OnCreateEventLoop
 
+/**
+ * A listener that ensures API dependencies are properly initialized when the start button is
+ * pressed.
+ */
 object Dependencies : OpModeManagerNotifier.Notifications {
-    private val initializedAPIs = mutableSetOf<API>()
+    private val initializedAPIs: MutableSet<API> by Resettable { mutableSetOf() }
 
-    override fun onOpModePreInit(opMode: OpMode) {
-        this.initializedAPIs.clear()
-    }
+    override fun onOpModePreInit(opMode: OpMode) {}
 
     override fun onOpModePreStart(opMode: OpMode) {
         this.checkDependencies()
@@ -29,6 +31,12 @@ object Dependencies : OpModeManagerNotifier.Notifications {
         ftcEventLoop.opModeManager.registerListener(this)
     }
 
+    /**
+     * Registers an API as initialized.
+     *
+     * This is called within the super implementation of [API.init], and should never be called
+     * manually.
+     */
     internal fun registerAPI(api: API) {
         this.initializedAPIs.add(api)
     }
