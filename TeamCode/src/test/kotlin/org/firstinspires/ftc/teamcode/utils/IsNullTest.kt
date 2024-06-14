@@ -4,7 +4,6 @@ import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-
 internal class IsNullTest {
     private val a: Int? = null
     private val b: Int? = 10
