@@ -39,13 +39,13 @@ class APITest {
 
     @Test
     fun testLinearAPI() {
-        val api = EmptyLinearAPI()
+        val linearAPI = EmptyLinearAPI()
         val linearOpMode = EmptyLinearOpMode()
 
-        api.init(linearOpMode)
+        linearAPI.init(linearOpMode)
 
-        assertSame(linearOpMode, api.accessOpMode())
-        assertSame(linearOpMode, api.accessLinearOpMode())
+        assertSame(linearOpMode, linearAPI.accessOpMode())
+        assertSame(linearOpMode, linearAPI.accessLinearOpMode())
     }
 
     @Test
@@ -78,9 +78,9 @@ class APITest {
 
     @Test
     fun testInitLinearAPIWithoutLinearOpMode() {
-        val api = EmptyLinearAPI()
+        val linearAPI = EmptyLinearAPI()
         val opMode = EmptyOpMode()
 
-        assertFailsWith<InitLinearAPIWithoutLinearOpMode> { api.init(opMode) }
+        assertFailsWith<InitLinearAPIWithoutLinearOpMode> { linearAPI.init(opMode) }
     }
 }
