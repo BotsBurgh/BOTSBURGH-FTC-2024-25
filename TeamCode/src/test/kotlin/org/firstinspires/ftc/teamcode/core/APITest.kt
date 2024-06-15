@@ -6,7 +6,7 @@ import kotlin.test.Test
 import kotlin.test.assertFailsWith
 import kotlin.test.assertSame
 
-class APITest {
+internal class APITest {
     private open class EmptyAPI : API() {
         fun accessOpMode() = this.opMode
 
