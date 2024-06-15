@@ -22,7 +22,7 @@ ftcDashboard = "0.4.15"
 
 # Road Runner.
 roadRunner = "1.0.0-beta8"
-roadRunnerFtc = "0.1.12"
+roadRunnerFtc = "0.1.13"
 
 [libraries]
 # FTC libraries.
