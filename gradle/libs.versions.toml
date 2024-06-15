@@ -8,14 +8,21 @@ kotlin = "1.9.22"
 # See https://github.com/jeremymailen/kotlinter-gradle for versions.
 kotlinter = "4.1.1"
 
+# FTC libraries.
 ftc = "9.1.0"
 ftcCenterStageAssets = "1.0.0"
 
+# FTC associated libraries.
 tensorflowLiteTaskVision = "0.4.3"
 tensorflowLite = "2.12.0"
 androidxAppCompat = "1.2.0"
 
+# FTC Dashboard.
 ftcDashboard = "0.4.15"
+
+# Road Runner.
+roadRunner = "1.0.0-beta8"
+roadRunnerFtc = "0.1.12"
 
 [libraries]
 # FTC libraries.
@@ -35,11 +42,16 @@ tensorflowLite = { group = "org.tensorflow", name = "tensorflow-lite", version.r
 tensorflowLite-taskVision = { group = "org.tensorflow", name = "tensorflow-lite-task-vision", version.ref = "tensorflowLiteTaskVision" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
 
+# Test framework.
+kotlinTest = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
+
 # FTC Dashboard.
 ftcDashboard = { group = "com.acmerobotics.dashboard", name = "dashboard", version.ref = "ftcDashboard" }
 
-# Test framework
-kotlinTest = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
+# Road Runner.
+roadRunner-core = { group = "com.acmerobotics.roadrunner", name = "core", version.ref = "roadRunner" }
+roadRunner-actions = { group = "com.acmerobotics.roadrunner", name = "actions", version.ref = "roadRunner" }
+roadRunner-ftc = { group = "com.acmerobotics.roadrunner", name = "ftc", version.ref = "roadRunnerFtc" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
