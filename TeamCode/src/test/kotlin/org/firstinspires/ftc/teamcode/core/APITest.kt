@@ -5,23 +5,33 @@ import kotlin.test.Test
 import kotlin.test.assertFailsWith
 
 class APITest {
+    private open class EmptyAPI : API() {
+        fun accessOpMode() = this.opMode
+
+        fun accessLinearOpMode() = this.linearOpMode
+    }
+
+    private class EmptyLinearAPI : EmptyAPI() {
+        override val isLinear = true
+    }
+
+    private class EmptyOpMode : OpMode() {
+        override fun init() {}
+
+        override fun loop() {}
+    }
+
     @Test
     fun testAPINotInitialized() {
-        val api = object : API() {
-            fun accessOpMode() = this.opMode
-        }
+        val api = EmptyAPI()
 
         assertFailsWith<APINotInitialized> { api.accessOpMode() }
     }
 
     @Test
     fun testInitAPIMoreThanOnce() {
-        val opMode = object : OpMode() {
-            override fun init() {}
-            override fun loop() {}
-        }
-
-        val api = object : API() {}
+        val api = EmptyAPI()
+        val opMode = EmptyOpMode()
 
         // Initialize API once.
         api.init(opMode)
@@ -34,23 +44,15 @@ class APITest {
 
     @Test
     fun testIllegalLinearOpModeAccess() {
-        val api = object : API() {
-            fun accessLinearOpMode() = this.linearOpMode
-        }
+        val api = EmptyAPI()
 
         assertFailsWith<IllegalLinearOpModeAccess> { api.accessLinearOpMode() }
     }
 
     @Test
     fun testInitLinearAPIWithoutLinearOpMode() {
-        val opMode = object : OpMode() {
-            override fun init() {}
-            override fun loop() {}
-        }
-
-        val api = object : API() {
-            override val isLinear = true
-        }
+        val api = EmptyLinearAPI()
+        val opMode = EmptyOpMode()
 
         assertFailsWith<InitLinearAPIWithoutLinearOpMode> { api.init(opMode) }
     }
