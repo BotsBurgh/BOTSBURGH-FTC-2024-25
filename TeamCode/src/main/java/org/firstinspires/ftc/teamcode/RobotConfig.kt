@@ -6,7 +6,7 @@ package org.firstinspires.ftc.teamcode.utils
 
 /**
  * This is an immutable object representing robot configuration.
- * 
+ *
  * It is meant to orchestrate FTC Dashboard and other configuration together. Certain sub-objects
  * are annotated with `@Config`. This designates them as FTC Dashboard configuration that can be
  * modified at runtime. **To permanently change these values, you must also modify the code!** The
@@ -26,13 +26,13 @@ object RobotConfig {
      */
     override fun toString() = "RobotConfig(debug=$DEBUG)"
     /** Example on how to set up a Config Variable.
-    @Config
-    object NameOfObject {
-    /**
+     @Config
+     object NameOfObject {
+     /**
      * This is what the variable does.
      */
-    @JvmField
-    var NAME_OF_VARIABLE: Double = 145.1
-    }
+     @JvmField
+     var NAME_OF_VARIABLE: Double = 145.1
+     }
      */
 }
