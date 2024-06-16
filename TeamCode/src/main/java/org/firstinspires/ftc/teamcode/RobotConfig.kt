@@ -31,7 +31,7 @@ object RobotConfig {
     object NameOfObject {
     /**
      * This is what the variable does.
-    */
+     */
     @JvmField
     var NAME_OF_VARIABLE: Double = 145.1
     }
