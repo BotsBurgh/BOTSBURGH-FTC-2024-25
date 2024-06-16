@@ -3,7 +3,7 @@
 androidGradlePlugin = "7.4.2"
 
 # Kotlin language version.
-kotlin = "1.9.22"
+kotlin = "2.0.0"
 
 # See https://github.com/jeremymailen/kotlinter-gradle for versions.
 kotlinter = "4.1.1"
