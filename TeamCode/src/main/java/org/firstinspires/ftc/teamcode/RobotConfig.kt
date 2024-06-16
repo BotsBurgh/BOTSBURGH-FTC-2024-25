@@ -7,11 +7,11 @@ package org.firstinspires.ftc.teamcode.utils
 /**
  * This is an immutable object representing robot configuration.
  *
- * It is meant to orchestrate FTC Dashboard and other configuration together.
- * Certain sub-objects are annotated with `@Config`. This designates them as FTC Dashboard
- * configuration that can be modified at runtime. **To permanently change these values, you must
- * also modify the code!** The configuration can also change during initialization depending on
- * various build constants like [DEBUG].
+ * It is meant to orchestrate FTC Dashboard and other configuration together. Certain sub-objects
+ * are annotated with `@Config`. This designates them as FTC Dashboard configuration that can be
+ * modified at runtime. **To permanently change these values, you must also modify the code!** The
+ * configuration can also change during initialization depending on various build constants like
+ * [debug].
  */
 object RobotConfig {
 
