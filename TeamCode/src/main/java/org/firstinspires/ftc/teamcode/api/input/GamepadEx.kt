@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.api.input
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Gamepad
 
 /**
@@ -60,10 +60,11 @@ class GamepadEx(private val number: GamepadNumber) {
         this.justPressed.clear()
         this.justReleased.clear()
 
-        val gamepad = when (this.number) {
-            GamepadNumber.Gamepad1 -> opMode.gamepad1
-            GamepadNumber.Gamepad2 -> opMode.gamepad2
-        }
+        val gamepad =
+            when (this.number) {
+                GamepadNumber.Gamepad1 -> opMode.gamepad1
+                GamepadNumber.Gamepad2 -> opMode.gamepad2
+            }
 
         for (button in Button.entries) {
             if (button.pressed(gamepad)) {
