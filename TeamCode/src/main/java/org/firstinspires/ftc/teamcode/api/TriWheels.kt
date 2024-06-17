@@ -9,10 +9,9 @@ import kotlin.math.PI
 import kotlin.math.sin
 
 /**
- * An API for controlling the wheels of a triangle robot.
+ * An API for controlling the wheels of the triangle robot.
  */
 object TriWheels : API() {
-    // All 3 wheels on the robot
     lateinit var red: DcMotorEx
         private set
     lateinit var green: DcMotorEx
