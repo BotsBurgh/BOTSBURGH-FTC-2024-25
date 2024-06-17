@@ -28,7 +28,7 @@ internal class APITest {
     }
 
     @Test
-    fun testAPI() {
+    fun testAPIOpModeAccess() {
         val api = EmptyAPI()
         val opMode = EmptyOpMode()
 
@@ -38,7 +38,7 @@ internal class APITest {
     }
 
     @Test
-    fun testLinearAPI() {
+    fun testLinearAPIOpModeAccess() {
         val linearAPI = EmptyLinearAPI()
         val linearOpMode = EmptyLinearOpMode()
 
@@ -71,6 +71,7 @@ internal class APITest {
 
     @Test
     fun testIllegalLinearOpModeAccess() {
+        // A non-linear API.
         val api = EmptyAPI()
 
         assertFailsWith<IllegalLinearOpModeAccess> { api.accessLinearOpMode() }
@@ -79,6 +80,7 @@ internal class APITest {
     @Test
     fun testInitLinearAPIWithoutLinearOpMode() {
         val linearAPI = EmptyLinearAPI()
+        // A non-linear opmode.
         val opMode = EmptyOpMode()
 
         assertFailsWith<InitLinearAPIWithoutLinearOpMode> { linearAPI.init(opMode) }
