@@ -27,7 +27,6 @@ jobs:
 
       - name: Lint project
         run: |
-          chmod +x ./gradlew
           ./gradlew lintKotlin
 
   build:
@@ -46,5 +45,22 @@ jobs:
 
       - name: Build project
         run: |
-          chmod +x ./gradlew
           ./gradlew build
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: temurin
+          cache: gradle
+
+      - name: Test project
+        run: |
+          ./gradlew testDebugUnitTest
