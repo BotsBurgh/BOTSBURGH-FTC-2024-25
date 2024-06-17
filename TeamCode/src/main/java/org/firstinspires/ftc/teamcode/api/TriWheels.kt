@@ -1,12 +1,9 @@
-//Code from 2023-2024 Botsburgh GitHub
-// https://github.com/BotsBurgh/BOTSBURGH-FTC-2023-24
-
 package org.firstinspires.ftc.teamcode.api
-
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
+import org.firstinspires.ftc.teamcode.core.API
 import kotlin.math.PI
 import kotlin.math.sin
 
@@ -67,22 +64,6 @@ object TriWheels : API() {
     ) {
         val (r, g, b) = wheelRatio(radians, magnitude, rotation)
         power(r, g, b)
-    }
-
-    /**
-     * Does the same thing as [drive] but it rotates the robot with a given [rotation] too.
-     */
-    @Deprecated(
-        message = "driveWithRotation is deprecated, use drive with rotation parameter instead.",
-        replaceWith = ReplaceWith("TriWheels.drive(radius, magnitude, rotation = rotation)"),
-        level = DeprecationLevel.ERROR,
-    )
-    fun driveWithRotation(
-        radians: Double,
-        magnitude: Double,
-        rotation: Double,
-    ) {
-        drive(radians, magnitude, rotation)
     }
 
     private fun wheelRatio(
