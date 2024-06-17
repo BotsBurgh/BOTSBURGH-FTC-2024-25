@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.api
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
+import com.qualcomm.robotcore.hardware.DcMotorEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import org.firstinspires.ftc.teamcode.core.API
 import kotlin.math.PI
@@ -12,14 +13,14 @@ import kotlin.math.sin
  */
 object TriWheels : API() {
     // All 3 wheels on the robot
-    lateinit var red: DcMotor
+    lateinit var red: DcMotorEx
         private set
-    lateinit var green: DcMotor
+    lateinit var green: DcMotorEx
         private set
-    lateinit var blue: DcMotor
+    lateinit var blue: DcMotorEx
         private set
 
-    // The angles of each wheel
+    // The angles of each wheel in radians, where red is forward.
     private const val RED_ANGLE: Double = PI / 2.0
     private const val GREEN_ANGLE: Double = PI * (11.0 / 6.0)
     private const val BLUE_ANGLE: Double = PI * (7.0 / 6.0)
@@ -27,9 +28,9 @@ object TriWheels : API() {
     override fun init(opMode: OpMode) {
         super.init(opMode)
 
-        red = this.opMode.hardwareMap.get(DcMotor::class.java, "redWheel")
-        green = this.opMode.hardwareMap.get(DcMotor::class.java, "greenWheel")
-        blue = this.opMode.hardwareMap.get(DcMotor::class.java, "blueWheel")
+        red = this.opMode.hardwareMap.get(DcMotorEx::class.java, "redWheel")
+        green = this.opMode.hardwareMap.get(DcMotorEx::class.java, "greenWheel")
+        blue = this.opMode.hardwareMap.get(DcMotorEx::class.java, "blueWheel")
 
         stopAndResetMotors()
     }
@@ -48,7 +49,7 @@ object TriWheels : API() {
     }
 
     /**
-     * Rotates the wheels with a given power.
+     * Rotates all of the wheels with a given [power].
      */
     fun rotate(power: Double) {
         power(power, power, power)
@@ -56,6 +57,9 @@ object TriWheels : API() {
 
     /**
      * Makes the robot drive in a certain direction [radians] with a given strength [magnitude].
+     *
+     * If [rotation] is specified, it acts as a offset applied to each wheel to make the entire
+     * robot spin.
      */
     fun drive(
         radians: Double,
@@ -65,17 +69,6 @@ object TriWheels : API() {
         val (r, g, b) = wheelRatio(radians, magnitude, rotation)
         power(r, g, b)
     }
-
-    private fun wheelRatio(
-        radians: Double,
-        magnitude: Double,
-        rotation: Double = 0.0,
-    ): Triple<Double, Double, Double> =
-        Triple(
-            magnitude * sin(RED_ANGLE - radians) + rotation,
-            magnitude * sin(GREEN_ANGLE - radians) + rotation,
-            magnitude * sin(BLUE_ANGLE - radians) + rotation,
-        )
 
     /**
      * Makes all 3 wheels stop.
@@ -91,14 +84,14 @@ object TriWheels : API() {
      *
      * That includes:
      *
-     * - Their encoder position
-     * - Their run mode
-     * - Their braking behavior
-     * - Their direction
+     * - Their speed.
+     * - Their encoder position.
+     * - Their run mode.
+     * - Their braking behavior.
+     * - Their direction.
      *
      * If you manually changed something like a motor's direction, you'll have to do it again after
-     * calling this function. This also stops all the wheels, due to the nature of resetting
-     * encoder values.
+     * calling this function.
      */
     fun stopAndResetMotors() {
         stop()
@@ -110,4 +103,24 @@ object TriWheels : API() {
             motor.direction = DcMotorSimple.Direction.FORWARD
         }
     }
+
+    /**
+     * Returns the ratio of how much each wheel should spin for given angle in [radians].
+     *
+     * The [magnitude] can be used to scale the ration (make it faster / larger), and the [rotation]
+     * can be used to add a constant offset (to make it spin while traveling in a direction).
+     *
+     * For a visual demonstration of what this is doing, see
+     * [this Desmos graph](https://www.desmos.com/geometry/b6h0f7fjls).
+     */
+    private fun wheelRatio(
+        radians: Double,
+        magnitude: Double,
+        rotation: Double = 0.0,
+    ): Triple<Double, Double, Double> =
+        Triple(
+            magnitude * sin(RED_ANGLE - radians) + rotation,
+            magnitude * sin(GREEN_ANGLE - radians) + rotation,
+            magnitude * sin(BLUE_ANGLE - radians) + rotation,
+        )
 }
