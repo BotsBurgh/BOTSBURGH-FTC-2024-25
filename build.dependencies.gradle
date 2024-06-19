@@ -22,9 +22,14 @@ dependencies {
     runtimeOnly libs.tensorflowLite
     implementation libs.appcompat
 
+    // Test framework
+    testImplementation libs.kotlinTest
+
     // FTC Dashboard
     implementation libs.ftcDashboard
 
-    // Test framework
-    testImplementation libs.kotlinTest
+    // Road Runner
+    implementation libs.roadRunner.core
+    implementation libs.roadRunner.actions
+    implementation libs.roadRunner.ftc
 }
