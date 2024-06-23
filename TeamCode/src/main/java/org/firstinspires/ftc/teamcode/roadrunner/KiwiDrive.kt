@@ -5,14 +5,15 @@ import com.acmerobotics.roadrunner.AngularVelConstraint
 import com.acmerobotics.roadrunner.MinVelConstraint
 import com.acmerobotics.roadrunner.Pose2d
 import com.acmerobotics.roadrunner.ProfileAccelConstraint
+import com.acmerobotics.roadrunner.ProfileParams
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
+import com.acmerobotics.roadrunner.TrajectoryBuilderParams
 import com.acmerobotics.roadrunner.TranslationalVelConstraint
 import com.acmerobotics.roadrunner.TurnConstraints
 import com.acmerobotics.roadrunner.VelConstraint
-import com.qualcomm.robotcore.hardware.HardwareMap
 import kotlin.math.PI
 
-class KiwiDrive(config: Config, private val hardwareMap: HardwareMap, private val pos: Pose2d) {
+class KiwiDrive(config: Config, private val pos: Pose2d) {
     data class Config(
         /** Minimum translational velocity, in in/s. */
         val minTransVel: Double = 20.0,
@@ -26,6 +27,13 @@ class KiwiDrive(config: Config, private val hardwareMap: HardwareMap, private va
         val maxAngAccel: Double = PI,
     )
 
+    // Values copied from `MecanumDrive`.
+    private val trajectoryBuilderParams =
+        TrajectoryBuilderParams(
+            1e-6,
+            ProfileParams(0.25, 0.1, 1e-2),
+        )
+
     private val turnConstraints =
         TurnConstraints(
             config.maxAngVel,
@@ -36,7 +44,7 @@ class KiwiDrive(config: Config, private val hardwareMap: HardwareMap, private va
     private val velConstraints: VelConstraint =
         MinVelConstraint(
             listOf(
-                // Min translation velocity is 20 in/s.
+                // TODO: Switch to wheel constraints.
                 TranslationalVelConstraint(config.minTransVel),
                 AngularVelConstraint(config.maxAngVel),
             ),
@@ -52,8 +60,9 @@ class KiwiDrive(config: Config, private val hardwareMap: HardwareMap, private va
         return TrajectoryActionBuilder(
             TODO("Turn action"),
             TODO("Follow (trajectory) action"),
-            TODO("Trajectory builder params"),
+            this.trajectoryBuilderParams,
             beginPos,
+            // Robot should end stopped.
             0.0,
             this.turnConstraints,
             this.velConstraints,
