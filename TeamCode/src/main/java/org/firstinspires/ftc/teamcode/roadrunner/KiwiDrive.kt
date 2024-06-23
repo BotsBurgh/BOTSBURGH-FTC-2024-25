@@ -15,22 +15,10 @@ import com.acmerobotics.roadrunner.TranslationalVelConstraint
 import com.acmerobotics.roadrunner.TurnConstraints
 import com.acmerobotics.roadrunner.VelConstraint
 import com.acmerobotics.roadrunner.now
-import kotlin.math.PI
+import org.firstinspires.ftc.teamcode.api.Voltage
+import org.firstinspires.ftc.teamcode.utils.RobotConfig
 
-class KiwiDrive(config: Config, private val pos: Pose2d) {
-    data class Config(
-        /** Minimum translational velocity, in in/s. */
-        val minTransVel: Double = 20.0,
-        /** Minimum profile acceleration, in in/s^2. */
-        val minProfileAccel: Double = -30.0,
-        /** Maximum profile acceleration, in in/s^2. */
-        val maxProfileAccel: Double = 50.0,
-        /** Maximum angular velocity, in rad/s. */
-        val maxAngVel: Double = PI,
-        /** Maximum angular acceleration, in rad/s^2. */
-        val maxAngAccel: Double = PI,
-    )
-
+class KiwiDrive(private val pos: Pose2d) {
     class TurnAction(private val turn: TimeTurn) : Action {
         /**
          * When this action was first run.
@@ -53,18 +41,15 @@ class KiwiDrive(config: Config, private val pos: Pose2d) {
             // TODO: Exit condition after certain amount of time has passed, stopping wheels.
 
             val target = this.turn[elapsed]
-            // TODO: Writer shenanigans.
 
             // TODO: Kiwi controller command.
-            // TODO: Writer shenanigans.
 
             // TODO: Inverse command for wheel velocities.
-            // TODO: Get voltage.
+            val voltage = Voltage.get()
 
             // TODO: Create feed-forward.
 
             // TODO: Calculate wheel power.
-            // TODO: Writer shenanigans.
 
             // TODO: Set wheel power.
 
@@ -83,24 +68,24 @@ class KiwiDrive(config: Config, private val pos: Pose2d) {
 
     private val turnConstraints =
         TurnConstraints(
-            config.maxAngVel,
-            -config.maxAngAccel,
-            config.maxAngAccel,
+            RobotConfig.KiwiDrive.maxAngVel,
+            -RobotConfig.KiwiDrive.maxAngAccel,
+            RobotConfig.KiwiDrive.maxAngAccel,
         )
 
     private val velConstraints: VelConstraint =
         MinVelConstraint(
             listOf(
                 // TODO: Switch to wheel constraints.
-                TranslationalVelConstraint(config.minTransVel),
-                AngularVelConstraint(config.maxAngVel),
+                TranslationalVelConstraint(RobotConfig.KiwiDrive.minTransVel),
+                AngularVelConstraint(RobotConfig.KiwiDrive.maxAngVel),
             ),
         )
 
     private val accelConstraints: AccelConstraint =
         ProfileAccelConstraint(
-            config.minProfileAccel,
-            config.maxProfileAccel,
+            RobotConfig.KiwiDrive.minProfileAccel,
+            RobotConfig.KiwiDrive.maxProfileAccel,
         )
 
     fun actionBuilder(beginPos: Pose2d): TrajectoryActionBuilder {

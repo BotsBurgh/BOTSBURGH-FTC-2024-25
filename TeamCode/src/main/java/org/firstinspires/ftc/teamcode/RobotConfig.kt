@@ -4,6 +4,9 @@
 
 package org.firstinspires.ftc.teamcode.utils
 
+import com.acmerobotics.dashboard.config.Config
+import kotlin.math.PI
+
 /**
  * This is an immutable object representing robot configuration.
  *
@@ -25,6 +28,7 @@ object RobotConfig {
      * Creates a string representing the current robot build constants.
      */
     override fun toString() = "RobotConfig(debug=$DEBUG)"
+
     /** Example on how to set up a Config Variable.
      @Config
      object NameOfObject {
@@ -35,4 +39,39 @@ object RobotConfig {
      var NAME_OF_VARIABLE: Double = 145.1
      }
      */
+
+    @Config
+    object KiwiDrive {
+        /** Coefficient of static for the wheel feedforward. */
+        @JvmField
+        var kS = 0.0
+
+        /** Coefficient of velocity for the wheel feedforward. */
+        @JvmField
+        var kV = 0.0
+
+        /** Coefficient of acceleration for the wheel feedforward. */
+        @JvmField
+        var kA = 0.0
+
+        /** Minimum translational velocity, in in/s. */
+        @JvmField
+        var minTransVel = 20.0
+
+        /** Minimum profile acceleration, in in/s^2. */
+        @JvmField
+        var minProfileAccel = -30.0
+
+        /** Maximum profile acceleration, in in/s^2. */
+        @JvmField
+        var maxProfileAccel = 50.0
+
+        /** Maximum angular velocity, in rad/s. */
+        @JvmField
+        var maxAngVel = PI
+
+        /** Maximum angular acceleration, in rad/s^2. */
+        @JvmField
+        var maxAngAccel = PI
+    }
 }
