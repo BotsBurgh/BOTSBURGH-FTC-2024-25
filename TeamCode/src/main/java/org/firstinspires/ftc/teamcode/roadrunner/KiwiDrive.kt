@@ -15,6 +15,7 @@ import com.acmerobotics.roadrunner.TranslationalVelConstraint
 import com.acmerobotics.roadrunner.TurnConstraints
 import com.acmerobotics.roadrunner.VelConstraint
 import com.acmerobotics.roadrunner.now
+import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.api.Voltage
 import org.firstinspires.ftc.teamcode.utils.RobotConfig
 
@@ -38,7 +39,11 @@ class KiwiDrive(private val pos: Pose2d) {
                     now() - start
                 }
 
-            // TODO: Exit condition after certain amount of time has passed, stopping wheels.
+            // Exit condition.
+            if (elapsed >= this.turn.duration) {
+                TriWheels.stop()
+                return false
+            }
 
             val target = this.turn[elapsed]
 
