@@ -39,6 +39,14 @@ abstract class API {
         }
 
     /**
+     * Returns true if [init] has been called for this opmode.
+     *
+     * Use this to detect if API can be used, or if it needs to be initialized.
+     */
+    val isInit: Boolean
+        get() = this.nullableOpMode.isNotNull()
+
+    /**
      * Defines whether this API requires features from [LinearOpMode].
      *
      * If set to true, [init] can only be called from within a [LinearOpMode]. This is useful if you
