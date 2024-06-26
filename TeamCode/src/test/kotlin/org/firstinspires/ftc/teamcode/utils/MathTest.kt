@@ -18,14 +18,6 @@ internal class MathTest {
     }
 
     @Test
-    fun testVector2dAbs() {
-        val expected = Vector2d(2.0, 1.0)
-        val actual = Vector2d(-2.0, -1.0).abs()
-
-        assertEquals(expected, actual)
-    }
-
-    @Test
     fun testVector2dMap() {
         val expected = Vector2d(4.0, 3.0)
         val actual = Vector2d(2.0, 1.5).map { it * 2.0 }

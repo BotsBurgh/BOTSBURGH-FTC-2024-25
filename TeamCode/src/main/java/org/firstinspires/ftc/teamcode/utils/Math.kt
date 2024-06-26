@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.utils
 
 import com.acmerobotics.roadrunner.Vector2d
-import kotlin.math.absoluteValue
 import kotlin.math.pow
 import kotlin.math.round
 
@@ -18,9 +17,6 @@ fun Double.truncate(places: Int): Double {
     val k = 10.0.pow(places)
     return round(this * k) / k
 }
-
-/** Returns the absolute value of a [Vector2d]. */
-fun Vector2d.abs() = Vector2d(this.x.absoluteValue, this.y.absoluteValue)
 
 /** Applies function [f] to both [Vector2d.x] and [Vector2d.y], returning the result. */
 inline fun Vector2d.map(f: (Double) -> Double) = Vector2d(f(this.x), f(this.y))
