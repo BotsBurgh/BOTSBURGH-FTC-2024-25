@@ -124,38 +124,40 @@ internal class InputTest {
     }
 
     @Test
-    fun testAPIShortcuts() = withReset {
-        val opMode = EmptyOpMode()
-        Input.init(opMode)
+    fun testAPIShortcuts() =
+        withReset {
+            val opMode = EmptyOpMode()
+            Input.init(opMode)
 
-        opMode.gamepad1.dpad_up = true
-        Input.update()
+            opMode.gamepad1.dpad_up = true
+            Input.update()
 
-        assertTrue(Input.pressed(Button.DPadUp))
-        assertTrue(Input.justPressed(Button.DPadUp))
+            assertTrue(Input.pressed(Button.DPadUp))
+            assertTrue(Input.justPressed(Button.DPadUp))
 
-        opMode.gamepad1.dpad_up = false
-        Input.update()
+            opMode.gamepad1.dpad_up = false
+            Input.update()
 
-        assertFalse(Input.pressed(Button.DPadUp))
-        assertTrue(Input.justReleased(Button.DPadUp))
-    }
+            assertFalse(Input.pressed(Button.DPadUp))
+            assertTrue(Input.justReleased(Button.DPadUp))
+        }
 
     @Test
-    fun testAPIGamepads() = withReset {
-        val opMode = EmptyOpMode()
-        Input.init(opMode)
+    fun testAPIGamepads() =
+        withReset {
+            val opMode = EmptyOpMode()
+            Input.init(opMode)
 
-        val gamepad1 = Input.gamepad1
-        val gamepad2 = Input.gamepad2
+            val gamepad1 = Input.gamepad1
+            val gamepad2 = Input.gamepad2
 
-        opMode.gamepad1.left_bumper = true
-        opMode.gamepad2.right_bumper = true
-        Input.update()
+            opMode.gamepad1.left_bumper = true
+            opMode.gamepad2.right_bumper = true
+            Input.update()
 
-        assertTrue(gamepad1.pressed(Button.LeftBumper))
-        assertTrue(gamepad2.pressed(Button.RightBumper))
-    }
+            assertTrue(gamepad1.pressed(Button.LeftBumper))
+            assertTrue(gamepad2.pressed(Button.RightBumper))
+        }
 
     @Test
     fun testButtonPressed() {
