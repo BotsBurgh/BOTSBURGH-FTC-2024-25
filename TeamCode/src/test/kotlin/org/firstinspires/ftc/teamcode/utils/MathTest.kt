@@ -6,15 +6,15 @@ import kotlin.test.assertEquals
 
 internal class MathTest {
     @Test
-    fun testDoubleTruncate() {
+    fun testDoubleRoundDecimal() {
         val a = 0.9999999999
-        assertEquals(1.0, a.truncate(3))
+        assertEquals(1.0, a.roundDecimal(3))
 
         val b = 2.1111111111
-        assertEquals(2.111, b.truncate(3))
+        assertEquals(2.111, b.roundDecimal(3))
 
         val c = 1.0
-        assertEquals(1.0, c.truncate(3))
+        assertEquals(1.0, c.roundDecimal(3))
     }
 
     @Test

@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.api
 import com.acmerobotics.roadrunner.Vector2d
 import org.firstinspires.ftc.teamcode.utils.Polar2d
 import org.firstinspires.ftc.teamcode.utils.map
-import org.firstinspires.ftc.teamcode.utils.truncate
+import org.firstinspires.ftc.teamcode.utils.roundDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -27,6 +27,6 @@ internal class TriWheelsTest {
         val ratio = TriWheels.compute(Polar2d.fromCartesian(expected))
         val actual = TriWheels.inverse(ratio)
 
-        assertEquals(expected, actual.map { it.truncate(4) })
+        assertEquals(expected, actual.map { it.roundDecimal(4) })
     }
 }
