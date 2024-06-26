@@ -65,8 +65,8 @@ object TriWheels : API() {
         magnitude: Double,
         rotation: Double = 0.0,
     ) {
-        val (r, g, b) = wheelRatio(radians, magnitude, rotation)
-        power(r, g, b)
+        val (r, g, b) = compute(radians, magnitude)
+        power(r + rotation, g + rotation, b + rotation)
     }
 
     /**
@@ -104,22 +104,19 @@ object TriWheels : API() {
     }
 
     /**
-     * Returns the ratio of how much each wheel should spin for given angle in [radians].
-     *
-     * The [magnitude] can be used to scale the ration (make it faster / larger), and the [rotation]
-     * can be used to add a constant offset (to make it spin while traveling in a direction).
+     * Returns the ratio of how much each wheel should spin for given angle in [radians] and
+     * strength in [magnitude].
      *
      * For a visual demonstration of what this is doing, see
      * [this Desmos graph](https://www.desmos.com/geometry/b6h0f7fjls).
      */
-    private fun wheelRatio(
+    fun compute(
         radians: Double,
         magnitude: Double,
-        rotation: Double = 0.0,
     ): Triple<Double, Double, Double> =
         Triple(
-            magnitude * sin(RED_ANGLE - radians) + rotation,
-            magnitude * sin(GREEN_ANGLE - radians) + rotation,
-            magnitude * sin(BLUE_ANGLE - radians) + rotation,
+            magnitude * sin(RED_ANGLE - radians),
+            magnitude * sin(GREEN_ANGLE - radians),
+            magnitude * sin(BLUE_ANGLE - radians),
         )
 }
