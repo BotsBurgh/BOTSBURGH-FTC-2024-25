@@ -127,10 +127,11 @@ object TriWheels : API() {
     fun compute(polar: Polar2d) = compute(polar.theta, polar.radius)
 
     fun inverse(ratio: Triple<Double, Double, Double>): Vector2d {
-        val r = Polar2d(RED_ANGLE + PI_2, ratio.first).toCartesian()
-        val g = Polar2d(GREEN_ANGLE + PI_2, ratio.second).toCartesian()
-        val b = Polar2d(BLUE_ANGLE + PI_2, ratio.third).toCartesian()
+        val r = Polar2d(RED_ANGLE - PI_2, ratio.first).toCartesian()
+        val g = Polar2d(GREEN_ANGLE - PI_2, ratio.second).toCartesian()
+        val b = Polar2d(BLUE_ANGLE - PI_2, ratio.third).toCartesian()
 
-        return r + g + b
+        // For some reason there's a coefficient of 1.5 that needs to be divided out.
+        return (r + g + b) / 1.5
     }
 }
