@@ -19,12 +19,12 @@ object RobotConfig {
      *
      * This should be disabled for competitions.
      */
-    const val DEBUG: Boolean = true
+    const val debug: Boolean = true
 
     /**
      * Creates a string representing the current robot build constants.
      */
-    override fun toString() = "RobotConfig(debug=$DEBUG)"
+    override fun toString() = "RobotConfig(debug=$debug)"
     /** Example on how to set up a Config Variable.
      @Config
      object NameOfObject {
