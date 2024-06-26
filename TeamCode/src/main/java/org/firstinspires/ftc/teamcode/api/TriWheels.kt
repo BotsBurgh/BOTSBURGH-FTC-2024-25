@@ -26,6 +26,8 @@ object TriWheels : API() {
     private const val GREEN_ANGLE: Double = PI * (11.0 / 6.0)
     private const val BLUE_ANGLE: Double = PI * (7.0 / 6.0)
 
+    private const val PI_2: Double = PI / 2.0
+
     override fun init(opMode: OpMode) {
         super.init(opMode)
 
@@ -125,9 +127,9 @@ object TriWheels : API() {
     fun compute(polar: Polar2d) = compute(polar.theta, polar.radius)
 
     fun inverse(ratio: Triple<Double, Double, Double>): Vector2d {
-        val r = Polar2d(RED_ANGLE, ratio.first).toCartesian()
-        val g = Polar2d(GREEN_ANGLE, ratio.second).toCartesian()
-        val b = Polar2d(BLUE_ANGLE, ratio.third).toCartesian()
+        val r = Polar2d(RED_ANGLE + PI_2, ratio.first).toCartesian()
+        val g = Polar2d(GREEN_ANGLE + PI_2, ratio.second).toCartesian()
+        val b = Polar2d(BLUE_ANGLE + PI_2, ratio.third).toCartesian()
 
         return r + g + b
     }
