@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.api
 
+import com.acmerobotics.roadrunner.Vector2d
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import org.firstinspires.ftc.teamcode.core.API
+import org.firstinspires.ftc.teamcode.utils.Polar2d
 import kotlin.math.PI
 import kotlin.math.sin
 
@@ -119,4 +121,14 @@ object TriWheels : API() {
             magnitude * sin(GREEN_ANGLE - radians),
             magnitude * sin(BLUE_ANGLE - radians),
         )
+
+    fun compute(polar: Polar2d) = compute(polar.theta, polar.radius)
+
+    fun inverse(ratio: Triple<Double, Double, Double>): Vector2d {
+        val r = Polar2d(RED_ANGLE, ratio.first).toCartesian()
+        val g = Polar2d(GREEN_ANGLE, ratio.second).toCartesian()
+        val b = Polar2d(BLUE_ANGLE, ratio.third).toCartesian()
+
+        return r + g + b
+    }
 }
