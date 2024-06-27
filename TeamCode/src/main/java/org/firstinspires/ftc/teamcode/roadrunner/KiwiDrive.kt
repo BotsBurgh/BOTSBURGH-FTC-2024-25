@@ -8,6 +8,7 @@ import com.acmerobotics.roadrunner.MinVelConstraint
 import com.acmerobotics.roadrunner.Pose2d
 import com.acmerobotics.roadrunner.ProfileAccelConstraint
 import com.acmerobotics.roadrunner.ProfileParams
+import com.acmerobotics.roadrunner.TimeTrajectory
 import com.acmerobotics.roadrunner.TimeTurn
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
 import com.acmerobotics.roadrunner.TrajectoryBuilderParams
@@ -19,7 +20,7 @@ import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.api.Voltage
 import org.firstinspires.ftc.teamcode.utils.RobotConfig
 
-class KiwiDrive(private val pos: Pose2d) {
+class KiwiDrive {
     class TurnAction(private val turn: TimeTurn) : Action {
         /**
          * When this action was first run.
@@ -64,6 +65,12 @@ class KiwiDrive(private val pos: Pose2d) {
         }
     }
 
+    class FollowTrajectoryAction(private val trajectory: TimeTrajectory) : Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            TODO()
+        }
+    }
+
     // Values copied from `MecanumDrive`.
     private val trajectoryBuilderParams =
         TrajectoryBuilderParams(
@@ -95,8 +102,8 @@ class KiwiDrive(private val pos: Pose2d) {
 
     fun actionBuilder(beginPos: Pose2d): TrajectoryActionBuilder {
         return TrajectoryActionBuilder(
-            TODO("Turn action"),
-            TODO("Follow (trajectory) action"),
+            ::TurnAction,
+            ::FollowTrajectoryAction,
             this.trajectoryBuilderParams,
             beginPos,
             // Robot should end stopped.
