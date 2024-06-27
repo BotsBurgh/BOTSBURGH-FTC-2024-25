@@ -42,6 +42,15 @@ object RobotConfig {
 
     @Config
     object KiwiDrive {
+        @JvmField
+        var ticksPerRev = 145.1
+
+        @JvmField
+        var wheelDiameter = 4.0
+
+        @JvmField
+        var maxVelocity = 1150.0
+
         /** Coefficient of static for the wheel feedforward. */
         @JvmField
         var kS = 0.0
