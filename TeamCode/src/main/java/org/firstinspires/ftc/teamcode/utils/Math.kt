@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.utils
 
+import com.acmerobotics.roadrunner.DualNum
 import com.acmerobotics.roadrunner.Vector2d
+import kotlin.math.min
 import kotlin.math.pow
 import kotlin.math.round
 
@@ -20,3 +22,13 @@ fun Double.roundDecimal(places: Int): Double {
 
 /** Applies function [f] to both [Vector2d.x] and [Vector2d.y], returning the result. */
 inline fun Vector2d.map(f: (Double) -> Double) = Vector2d(f(this.x), f(this.y))
+
+fun <Param> DualNum<Param>.atan2(x: DualNum<Param>): DualNum<Param> {
+    val out = DoubleArray(min(size(), x.size()))
+
+    for (i in out.indices) {
+        out[i] = kotlin.math.atan2(this[i], x[i])
+    }
+
+    return DualNum(out.toList())
+}

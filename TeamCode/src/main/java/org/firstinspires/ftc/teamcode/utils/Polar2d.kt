@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.utils
 
+import com.acmerobotics.roadrunner.DualNum
 import com.acmerobotics.roadrunner.Vector2d
+import com.acmerobotics.roadrunner.Vector2dDual
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.hypot
@@ -37,9 +39,28 @@ data class Polar2d(val theta: Double, val radius: Double) {
     }
 
     /** Returns the cartesian form of these polar coordinates. */
-    fun toCartesian(): Vector2d =
+    fun toCartesian() =
         Vector2d(
             this.radius * cos(this.theta),
             this.radius * sin(this.theta),
+        )
+}
+
+data class Polar2dDual<Param>(val theta: DualNum<Param>, val radius: DualNum<Param>) {
+    companion object {
+        fun <Param> fromCartesian(
+            x: DualNum<Param>,
+            y: DualNum<Param>,
+        ): Polar2dDual<Param> {
+            val theta = y.atan2(x)
+            val radius = (x * x + y * y).sqrt()
+            return Polar2dDual(theta, radius)
+        }
+    }
+
+    fun toCartesian() =
+        Vector2dDual(
+            this.radius * this.theta.cos(),
+            this.radius * this.theta.sin(),
         )
 }

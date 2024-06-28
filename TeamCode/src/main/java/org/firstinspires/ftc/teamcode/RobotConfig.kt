@@ -48,6 +48,9 @@ object RobotConfig {
         @JvmField
         var wheelDiameter = 4.0
 
+        val inPerTick: Double
+            get() = (PI * wheelDiameter) / ticksPerRev
+
         @JvmField
         var maxVelocity = 1150.0
 

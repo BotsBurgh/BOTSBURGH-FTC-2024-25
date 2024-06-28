@@ -22,9 +22,9 @@ object TriWheels : API() {
         private set
 
     // The angles of each wheel in radians, where red is forward.
-    private const val RED_ANGLE: Double = PI / 2.0
-    private const val GREEN_ANGLE: Double = PI * (11.0 / 6.0)
-    private const val BLUE_ANGLE: Double = PI * (7.0 / 6.0)
+    const val RED_ANGLE: Double = PI / 2.0
+    const val GREEN_ANGLE: Double = PI * (11.0 / 6.0)
+    const val BLUE_ANGLE: Double = PI * (7.0 / 6.0)
 
     private const val PI_2: Double = PI / 2.0
 

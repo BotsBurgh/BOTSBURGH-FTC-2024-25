@@ -16,6 +16,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit
 import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.core.API
 import org.firstinspires.ftc.teamcode.core.Resettable
+import org.firstinspires.ftc.teamcode.utils.RobotConfig
 
 object KiwiLocalizer : API() {
     override val dependencies = setOf(TriWheels)
@@ -91,19 +92,19 @@ object KiwiLocalizer : API() {
                             (redPosVel.position - lastRedPos).toDouble(),
                             redPosVel.velocity.toDouble(),
                         ),
-                    ),
+                    ).times(RobotConfig.KiwiDrive.inPerTick),
                     DualNum<Time>(
                         listOf(
                             (greenPosVel.position - lastGreenPos).toDouble(),
                             greenPosVel.velocity.toDouble(),
                         ),
-                    ),
+                    ).times(RobotConfig.KiwiDrive.inPerTick),
                     DualNum<Time>(
                         listOf(
                             (bluePosVel.position - lastBluePos).toDouble(),
                             bluePosVel.velocity.toDouble(),
                         ),
-                    ),
+                    ).times(RobotConfig.KiwiDrive.inPerTick),
                 ),
             )
 
