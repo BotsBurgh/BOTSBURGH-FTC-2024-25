@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.core.API
 import org.firstinspires.ftc.teamcode.utils.RobotConfig
 
 object KiwiDrive : API() {
-    override val dependencies = setOf(TriWheels)
+    override val dependencies = setOf(TriWheels, KiwiLocalizer)
 
     // Values copied from `MecanumDrive`.
     private val trajectoryBuilderParams =
