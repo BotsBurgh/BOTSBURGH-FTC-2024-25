@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import org.firstinspires.ftc.teamcode.core.API
+import org.firstinspires.ftc.teamcode.utils.PI_2
 import org.firstinspires.ftc.teamcode.utils.Polar2d
 import kotlin.math.PI
 import kotlin.math.sin
@@ -25,8 +26,6 @@ object TriWheels : API() {
     private const val RED_ANGLE: Double = PI / 2.0
     private const val GREEN_ANGLE: Double = PI * (11.0 / 6.0)
     private const val BLUE_ANGLE: Double = PI * (7.0 / 6.0)
-
-    private const val PI_2: Double = PI / 2.0
 
     override fun init(opMode: OpMode) {
         super.init(opMode)

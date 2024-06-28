@@ -1,8 +1,12 @@
 package org.firstinspires.ftc.teamcode.utils
 
 import com.acmerobotics.roadrunner.Vector2d
+import kotlin.math.PI
 import kotlin.math.pow
 import kotlin.math.round
+
+/** PI / 2 */
+const val PI_2: Double = PI / 2.0
 
 /**
  * Rounds a number to a certain number of decimal places.
