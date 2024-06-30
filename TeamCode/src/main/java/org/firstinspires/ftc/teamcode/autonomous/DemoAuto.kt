@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.util.ElapsedTime
 import org.firstinspires.ftc.teamcode.api.DemoAPI
 import org.firstinspires.ftc.teamcode.api.linear.DemoLinearAPI
 
-@Autonomous(name = "Demo Autonomous")
+@Autonomous(name = "Demo Auto")
 @Disabled
-class DemoAutonomous : LinearOpMode() {
+class DemoAuto : LinearOpMode() {
     override fun runOpMode() {
         // APIs are initialized here
         DemoAPI.init(this)
