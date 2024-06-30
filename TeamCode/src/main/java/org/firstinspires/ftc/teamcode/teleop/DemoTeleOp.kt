@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import org.firstinspires.ftc.teamcode.api.DemoAPI
+import org.firstinspires.ftc.teamcode.api.linear.DemoLinearAPI
 
 @TeleOp(name = "Demo TeleOp")
 @Disabled
@@ -13,6 +14,9 @@ class DemoTeleOp : OpMode() {
 
         // Initializes an API, shared code used by components.
         DemoAPI.init(this)
+
+        // Initialize the April Vision API
+        DemoLinearAPI.init(this)
     }
 
     // Run repeatedly while the robot is running.

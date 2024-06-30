@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.util.ElapsedTime
 import org.firstinspires.ftc.teamcode.api.DemoAPI
+import org.firstinspires.ftc.teamcode.api.linear.DemoLinearAPI
 
 @Autonomous(name = "Demo Autonomous")
 @Disabled
@@ -13,6 +14,9 @@ class DemoAutonomous : LinearOpMode() {
 
         // APIs are initialized here
         DemoAPI.init(this)
+
+        // Initialize the April Vision API
+        DemoLinearAPI.init(this)
 
         // Wait for the run button to be pressed
         waitForStart()

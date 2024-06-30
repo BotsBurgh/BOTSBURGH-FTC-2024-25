@@ -11,7 +11,7 @@ import kotlin.math.sqrt
  *
  * Requires the [TriWheels] API.
  */
-object AprilMovement : API() {
+object DemoLinearAPI : API() {
     override val isLinear = true
 
     // The max speed for individual components of the movement
