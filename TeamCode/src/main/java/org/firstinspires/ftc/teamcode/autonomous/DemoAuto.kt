@@ -11,7 +11,6 @@ import org.firstinspires.ftc.teamcode.api.linear.DemoLinearAPI
 @Disabled
 class DemoAutonomous : LinearOpMode() {
     override fun runOpMode() {
-
         // APIs are initialized here
         DemoAPI.init(this)
 

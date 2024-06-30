@@ -11,7 +11,6 @@ import org.firstinspires.ftc.teamcode.api.linear.DemoLinearAPI
 class DemoTeleOp : OpMode() {
     // Run once, when "Init" is pressed on driver hub.
     override fun init() {
-
         // Initializes an API, shared code used by components.
         DemoAPI.init(this)
 
