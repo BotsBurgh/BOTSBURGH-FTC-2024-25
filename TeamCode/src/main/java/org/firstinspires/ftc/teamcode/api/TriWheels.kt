@@ -72,6 +72,14 @@ object TriWheels : API() {
         power(r + rotation, g + rotation, b + rotation)
     }
 
+    fun drive(
+        polar: Polar2d,
+        rotation: Double = 0.0,
+    ) {
+        val (r, g, b) = compute(polar)
+        power(r + rotation, g + rotation, b + rotation)
+    }
+
     /**
      * Makes all 3 wheels stop.
      *
