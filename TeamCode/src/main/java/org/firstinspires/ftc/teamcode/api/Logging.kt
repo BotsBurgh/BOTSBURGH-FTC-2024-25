@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.api
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil
 import org.firstinspires.ftc.teamcode.core.API
+import org.firstinspires.ftc.teamcode.utils.RobotConfig
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
@@ -20,14 +21,13 @@ object Logging: API() {
     override fun init(opMode: OpMode) {
         super.init(opMode)
 
+        if (RobotConfig.debug) {
+            //TODO delete old files
+        }
 
-//        if (RobotConfig.debug) {
-//
-//        }
-        //@TODO delete old files
     }
 
-    val BOTSBURGH_FOLDER: File by lazy {
+    private val BOTSBURGH_FOLDER: File by lazy {
         val res = File(AppUtil.ROOT_FOLDER, "/BotsBurgh/")
         res.mkdirs()
         res
@@ -37,27 +37,33 @@ object Logging: API() {
      * Creates new files to log to (old files are deleted after every run)
      */
     fun createFile(fileName: String) {
-        logFile = File(BOTSBURGH_FOLDER, "/$fileName.csv")
-        logWriter = BufferedWriter(FileWriter(logFile))
-        logFile.createNewFile()
+        if (RobotConfig.debug) {
+            logFile = File(BOTSBURGH_FOLDER, "/$fileName.csv")
+            logWriter = BufferedWriter(FileWriter(logFile))
+            logFile.createNewFile()
+        }
     }
 
     /**
      * Writes Double data to the targeted file
      */
     fun writeFile(data: Double) {
-        logWriter.write("$data")
-        logWriter.write(opMode.runtime.toString())
-        logWriter.newLine()
+        if (RobotConfig.debug) {
+            logWriter.write("$data")
+            logWriter.write(opMode.runtime.toString())
+            logWriter.newLine()
+        }
     }
 
     /**
      * Writes Array Double data to the targeted file
      */
     fun writeFile(data: Array<Double>) {
-        for (i in data) logWriter.write(i.toString())
+        if (RobotConfig.debug) {
+            for (i in data) logWriter.write("$i")
 
-        logWriter.write(opMode.runtime.toString())
-        logWriter.newLine()
+            logWriter.write(opMode.runtime.toString())
+            logWriter.newLine()
+        }
     }
 }
