@@ -85,7 +85,7 @@ object ResetListener : OpModeManagerNotifier.Notifications {
         ftcEventLoop.opModeManager.registerListener(this)
     }
 
-    private fun resetAll() {
+    internal fun resetAll() {
         // Call each function in the global set.
         resetFunctions.forEach { it() }
     }
