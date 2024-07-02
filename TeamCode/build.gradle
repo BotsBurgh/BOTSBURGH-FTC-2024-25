@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin)
     alias(libs.plugins.kotlinter)
+    id("org.jetbrains.dokka") version "1.9.20"
 }
 
 // Include common definitions from above.
