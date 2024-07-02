@@ -3,7 +3,7 @@ name: Docs
 on:
   # Update on pushes to main
   push:
-    branches: ['main']
+    branches: [main]
 
   # Allow running workflow manually
   workflow_dispatch:
@@ -16,7 +16,7 @@ permissions:
 
 # Only run one at a time, but don't cancel in-progress deployments
 concurrency:
-  group: 'pages'
+  group: pages
   cancel-in-progress: false
 
 jobs:
@@ -34,18 +34,16 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: 17
-          distribution: 'temurin'
-          cache: 'gradle'
+          distribution: temurin
+          cache: gradle
 
       - name: Build documentation
-        run: |
-          chmod +x ./gradlew
-          ./gradlew dokkaHtml
+        run: ./gradlew dokkaHtml
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'TeamCode/build/dokka/html'
+          path: TeamCode/build/dokka/html
 
       - name: Deploy to Github Pages
         id: deployment

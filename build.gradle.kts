@@ -9,7 +9,6 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin) apply false
     alias(libs.plugins.kotlinter) apply false
-    id("org.jetbrains.dokka") version "1.9.20"
 }
 
 // This is now required because aapt2 has to be downloaded from the
