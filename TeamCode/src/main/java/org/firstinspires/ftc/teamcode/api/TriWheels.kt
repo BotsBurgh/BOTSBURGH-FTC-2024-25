@@ -1,10 +1,13 @@
 package org.firstinspires.ftc.teamcode.api
 
+import com.acmerobotics.roadrunner.Vector2d
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import org.firstinspires.ftc.teamcode.core.API
+import org.firstinspires.ftc.teamcode.utils.PI_2
+import org.firstinspires.ftc.teamcode.utils.Polar2d
 import kotlin.math.PI
 import kotlin.math.sin
 
@@ -65,8 +68,16 @@ object TriWheels : API() {
         magnitude: Double,
         rotation: Double = 0.0,
     ) {
-        val (r, g, b) = wheelRatio(radians, magnitude, rotation)
-        power(r, g, b)
+        val (r, g, b) = compute(radians, magnitude)
+        power(r + rotation, g + rotation, b + rotation)
+    }
+
+    fun drive(
+        polar: Polar2d,
+        rotation: Double = 0.0,
+    ) {
+        val (r, g, b) = compute(polar)
+        power(r + rotation, g + rotation, b + rotation)
     }
 
     /**
@@ -104,22 +115,30 @@ object TriWheels : API() {
     }
 
     /**
-     * Returns the ratio of how much each wheel should spin for given angle in [radians].
-     *
-     * The [magnitude] can be used to scale the ration (make it faster / larger), and the [rotation]
-     * can be used to add a constant offset (to make it spin while traveling in a direction).
+     * Returns the ratio of how much each wheel should spin for given angle in [radians] and
+     * strength in [magnitude].
      *
      * For a visual demonstration of what this is doing, see
      * [this Desmos graph](https://www.desmos.com/geometry/b6h0f7fjls).
      */
-    private fun wheelRatio(
+    fun compute(
         radians: Double,
         magnitude: Double,
-        rotation: Double = 0.0,
     ): Triple<Double, Double, Double> =
         Triple(
-            magnitude * sin(RED_ANGLE - radians) + rotation,
-            magnitude * sin(GREEN_ANGLE - radians) + rotation,
-            magnitude * sin(BLUE_ANGLE - radians) + rotation,
+            magnitude * sin(RED_ANGLE - radians),
+            magnitude * sin(GREEN_ANGLE - radians),
+            magnitude * sin(BLUE_ANGLE - radians),
         )
+
+    fun compute(polar: Polar2d) = compute(polar.theta, polar.radius)
+
+    fun inverse(ratio: Triple<Double, Double, Double>): Vector2d {
+        val r = Polar2d(RED_ANGLE - PI_2, ratio.first).toCartesian()
+        val g = Polar2d(GREEN_ANGLE - PI_2, ratio.second).toCartesian()
+        val b = Polar2d(BLUE_ANGLE - PI_2, ratio.third).toCartesian()
+
+        // For some reason there's a coefficient of 1.5 that needs to be divided out.
+        return (r + g + b) / 1.5
+    }
 }
