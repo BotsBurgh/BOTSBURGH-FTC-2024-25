@@ -12,6 +12,8 @@ import kotlin.math.sqrt
  * Requires the [TriWheels] API.
  */
 object DemoLinearAPI : API() {
+    // `isLinear` requires that this API is only initialized with a `LinearOpMode`.
+    // By enabling it, you can access `this.linearOpMode`.
     override val isLinear = true
 
     // The max speed for individual components of the movement
