@@ -14,8 +14,8 @@ class DemoTeleOp : OpMode() {
         // Initializes an API, shared code used by components.
         DemoAPI.init(this)
 
-        // Initialize the April Vision API
-        DemoLinearAPI.init(this)
+        // This line will throw an exception because linear APIs cannot be initialized with OpModes, only LinearOpModes.
+        // DemoLinearAPI.init(this)
     }
 
     // Run repeatedly while the robot is running.
