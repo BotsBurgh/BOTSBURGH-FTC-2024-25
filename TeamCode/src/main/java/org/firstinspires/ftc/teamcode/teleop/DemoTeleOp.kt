@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import org.firstinspires.ftc.teamcode.api.DemoAPI
 import org.firstinspires.ftc.teamcode.api.linear.DemoLinearAPI
 
-@TeleOp(name = "Demo TeleOp")
+@TeleOp(name = "Demo TeleOp", group = "Demo")
 @Disabled
 class DemoTeleOp : OpMode() {
     // Run once, when "Init" is pressed on driver hub.
