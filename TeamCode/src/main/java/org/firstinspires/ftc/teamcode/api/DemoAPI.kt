@@ -16,8 +16,8 @@ object DemoAPI : API() {
     private lateinit var bl: DcMotor
     private lateinit var br: DcMotor
 
-    // `init()` is run once at the beginning of the program.
-    // It initializes things and sets up configuration
+    // `init()` is called by the opmode in order to use this API.
+    // Override it if you need do things at startup, such as accessing hardware.
     override fun init(opMode: OpMode) {
         // You must call super.init(opMode), or the API will not initialize correctly.
         super.init(opMode)
