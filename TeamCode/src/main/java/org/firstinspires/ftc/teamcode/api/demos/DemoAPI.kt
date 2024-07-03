@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.api
+package org.firstinspires.ftc.teamcode.api.demos
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
@@ -22,10 +22,10 @@ object DemoAPI : API() {
         // You must call super.init(opMode), or the API will not initialize correctly.
         super.init(opMode)
 
-        this.fl = this.opMode.hardwareMap.get(DcMotor::class.java, "fl")
-        this.fr = this.opMode.hardwareMap.get(DcMotor::class.java, "fr")
-        this.bl = this.opMode.hardwareMap.get(DcMotor::class.java, "bl")
-        this.br = this.opMode.hardwareMap.get(DcMotor::class.java, "br")
+        fl = this.opMode.hardwareMap.get(DcMotor::class.java, "fl")
+        fr = this.opMode.hardwareMap.get(DcMotor::class.java, "fr")
+        bl = this.opMode.hardwareMap.get(DcMotor::class.java, "bl")
+        br = this.opMode.hardwareMap.get(DcMotor::class.java, "br")
     }
 
     // A public function that sets the power of all four wheels.

@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.util.ElapsedTime
-import org.firstinspires.ftc.teamcode.api.DemoAPI
-import org.firstinspires.ftc.teamcode.api.linear.DemoLinearAPI
+import org.firstinspires.ftc.teamcode.api.demos.DemoAPI
+import org.firstinspires.ftc.teamcode.api.demos.DemoLinearAPI
 
 @Autonomous(name = "Demo Auto", group = "Demo")
 @Disabled

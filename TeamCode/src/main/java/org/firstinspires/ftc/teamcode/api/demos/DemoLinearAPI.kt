@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.api.linear
+package org.firstinspires.ftc.teamcode.api.demos
 
 import com.qualcomm.robotcore.util.Range
 import org.firstinspires.ftc.teamcode.api.TriWheels
@@ -15,6 +15,10 @@ object DemoLinearAPI : API() {
     // `isLinear` requires that this API is only initialized with a `LinearOpMode`.
     // By enabling it, you can access `this.linearOpMode`.
     override val isLinear = true
+
+    // This API uses the `TriWheels` API. By setting it as a dependency, the opmode will crash if
+    // it is not also initialized.
+    override val dependencies = setOf(TriWheels)
 
     // The max speed for individual components of the movement
     private const val MAX_RANGE = 0.3
@@ -92,6 +96,4 @@ object DemoLinearAPI : API() {
         // Stop the wheels from moving, the target has been reached!
         TriWheels.stop()
     }
-
-    override val dependencies = setOf(TriWheels)
 }

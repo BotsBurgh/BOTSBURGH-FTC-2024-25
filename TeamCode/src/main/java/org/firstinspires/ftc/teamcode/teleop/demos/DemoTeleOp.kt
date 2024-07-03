@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.teleop.demos
 import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
-import org.firstinspires.ftc.teamcode.api.DemoAPI
+import org.firstinspires.ftc.teamcode.api.demos.DemoAPI
 
 @TeleOp(name = "Demo TeleOp", group = "Demo")
 @Disabled
@@ -13,7 +13,8 @@ class DemoTeleOp : OpMode() {
         // Initializes an API, shared code used by components.
         DemoAPI.init(this)
 
-        // This line will throw an exception because linear APIs cannot be initialized with OpModes, only LinearOpModes.
+        // This line will throw an exception because linear APIs cannot be initialized with OpModes,
+        // only LinearOpModes:
         // DemoLinearAPI.init(this)
     }
 
