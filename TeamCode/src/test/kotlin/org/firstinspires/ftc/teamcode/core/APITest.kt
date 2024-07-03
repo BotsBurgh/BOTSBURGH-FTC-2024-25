@@ -4,7 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
 import kotlin.test.assertSame
+import kotlin.test.assertTrue
 
 internal class APITest {
     private open class EmptyAPI : API() {
@@ -34,6 +36,7 @@ internal class APITest {
 
         api.init(opMode)
 
+        assertTrue(api.isInit)
         assertSame(opMode, api.accessOpMode())
     }
 
@@ -52,6 +55,7 @@ internal class APITest {
     fun testAPINotInitialized() {
         val api = EmptyAPI()
 
+        assertFalse(api.isInit)
         assertFailsWith<APINotInitialized> { api.accessOpMode() }
     }
 
