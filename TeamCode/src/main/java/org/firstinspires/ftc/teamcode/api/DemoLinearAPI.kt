@@ -89,8 +89,8 @@ object DemoLinearAPI : API() {
         // Set the power of the wheels
         TriWheels.drive(radians, magnitude, rotation = heading)
 
-    // Stop the wheels from moving, the target has been reached!
-    TriWheels.stop()
+        // Stop the wheels from moving, the target has been reached!
+        TriWheels.stop()
     }
     override val dependencies = setOf(TriWheels)
 }
