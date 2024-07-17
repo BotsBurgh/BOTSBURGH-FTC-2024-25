@@ -10,13 +10,11 @@ import kotlin.math.sqrt
 
 @TeleOp(name = "Main")
 class TeleOpMain : OpMode() {
-
     override fun init() {
         TriWheels.init(this)
     }
 
     override fun loop() {
-
         // joystick input
         val joyX = -this.gamepad1.left_stick_x.toDouble()
         val joyY = this.gamepad1.left_stick_y.toDouble()
