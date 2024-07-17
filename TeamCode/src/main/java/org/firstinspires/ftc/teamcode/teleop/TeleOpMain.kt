@@ -2,15 +2,38 @@ package org.firstinspires.ftc.teamcode.teleOp
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import org.firstinspires.ftc.teamcode.api.TriWheels
+import org.firstinspires.ftc.teamcode.utils.RobotConfig
+import kotlin.math.PI
+import kotlin.math.atan2
+import kotlin.math.sqrt
 
-/**
- * This is the main code for the driver-controlled segment of the game.
- */
 @TeleOp(name = "Main")
 class TeleOpMain : OpMode() {
-    // This function is run once when the "Init" button is pressed.
-    override fun init() {}
 
-    // This function is run repeatedly after the "Run" button is pressed.
-    override fun loop() {}
+    override fun init() {
+        TriWheels.init(this)
+    }
+
+    override fun loop() {
+
+        // joystick input
+        val joyX = -this.gamepad1.left_stick_x.toDouble()
+        val joyY = this.gamepad1.left_stick_y.toDouble()
+
+        // angle and strength
+        // PI / 3 because 0 radians is right, not forward
+        val joyRadians = atan2(joyY, joyX) - (PI / 3.0) - (2.0 * PI / 3.0)
+
+        val joyMagnitude = sqrt(joyY * joyY + joyX * joyX)
+
+        val rotationPower = -this.gamepad1.right_stick_x.toDouble()
+
+        // movement of all wheels
+        TriWheels.drive(
+            joyRadians,
+            joyMagnitude * RobotConfig.TeleOpMain.DRIVE_SPEED,
+            rotation = rotationPower * RobotConfig.TeleOpMain.ROTATE_SPEED,
+        )
+    }
 }
