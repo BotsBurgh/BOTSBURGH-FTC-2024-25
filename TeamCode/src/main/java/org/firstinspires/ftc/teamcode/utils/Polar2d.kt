@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.utils
 
+import com.acmerobotics.roadrunner.DualNum
 import com.acmerobotics.roadrunner.Vector2d
+import com.acmerobotics.roadrunner.Vector2dDual
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.hypot
@@ -37,9 +39,39 @@ data class Polar2d(val theta: Double, val radius: Double) {
     }
 
     /** Returns the cartesian form of these polar coordinates. */
-    fun toCartesian(): Vector2d =
+    fun toCartesian() =
         Vector2d(
             this.radius * cos(this.theta),
             this.radius * sin(this.theta),
         )
+}
+
+/** The dual number variant of [Polar2d]. */
+data class Polar2dDual<Param>(val theta: DualNum<Param>, val radius: DualNum<Param>) {
+    companion object {
+        /** Creates a new [Polar2dDual] from a constant [Polar2d] and a size. */
+        fun <Param> constant(
+            p: Polar2d,
+            n: Int,
+        ) = Polar2dDual<Param>(DualNum.constant(p.theta, n), DualNum.constant(p.radius, n))
+
+        fun <Param> fromCartesian(v: Vector2dDual<Param>): Polar2dDual<Param> {
+            val theta = TODO("Inverse tangent `DualNum`.")
+
+            // Calculate the hypotenuse.
+            val radius = v.x * v.x + v.y * v.y
+
+            return Polar2dDual(theta, radius)
+        }
+    }
+
+    /** Returns the cartesian form of these polar coordinates. */
+    fun toCartesian() =
+        Vector2dDual(
+            this.radius * this.theta.cos(),
+            this.radius * this.theta.sin(),
+        )
+
+    /** Returns the value of this polar coordinate. */
+    fun value() = Polar2d(this.theta.value(), this.radius.value())
 }
