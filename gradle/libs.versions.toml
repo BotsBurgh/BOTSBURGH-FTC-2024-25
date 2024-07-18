@@ -9,7 +9,7 @@ kotlin = "2.0.0"
 kotlinter = "4.1.1"
 
 # FTC libraries.
-ftc = "9.1.0"
+ftc = "9.2.0"
 ftcCenterStageAssets = "1.0.0"
 
 # FTC associated libraries.
