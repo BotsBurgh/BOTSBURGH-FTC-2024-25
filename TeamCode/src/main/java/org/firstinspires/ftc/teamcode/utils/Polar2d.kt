@@ -56,7 +56,8 @@ data class Polar2dDual<Param>(val theta: DualNum<Param>, val radius: DualNum<Par
         ) = Polar2dDual<Param>(DualNum.constant(p.theta, n), DualNum.constant(p.radius, n))
 
         fun <Param> fromCartesian(v: Vector2dDual<Param>): Polar2dDual<Param> {
-            val theta = TODO("Inverse tangent `DualNum`.")
+            // Calculate the slope.
+            val theta = v.atan2()
 
             // Calculate the hypotenuse.
             val radius = v.x * v.x + v.y * v.y
