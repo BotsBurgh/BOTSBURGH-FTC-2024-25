@@ -10,9 +10,10 @@ import java.io.File
 @TeleOp(name = "Logging Test")
 class LoggingTest : OpMode() {
     private var wheel: Logging = Logging
+
+    private var distance: Logging = Logging
     override fun init() {
         Logging.init(this)
-
 
 
         wheel.createFile("Wheel Power")
@@ -20,6 +21,12 @@ class LoggingTest : OpMode() {
         wheel.writeFile(arrayOf(0.25, 0.6, 1.0))
 
         wheel.writeFile(0.5)
+
+        distance.createFile("Distance")
+
+        distance.writeFile(arrayOf(0.25, 0.6, 1.0))
+
+        distance.writeFile(0.5)
 
     }
 
