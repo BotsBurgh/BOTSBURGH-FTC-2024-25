@@ -66,4 +66,11 @@ object Logging: API() {
             logWriter.newLine()
         }
     }
+
+    /**
+     * Closes file
+     **/
+    fun close() {
+        logWriter.close()
+    }
 }
