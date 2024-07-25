@@ -48,8 +48,9 @@ object Logging: API() {
      * Writes Double data to the targeted file
      */
     fun writeFile(data: Double) {
-        if (RobotConfig.debug) {
-            logWriter.write("$data")
+        if (RobotConfig.debug)
+        {
+            logWriter.write("$data, ")
             logWriter.write(opMode.runtime.toString())
             logWriter.newLine()
         }
@@ -59,12 +60,13 @@ object Logging: API() {
      * Writes Array Double data to the targeted file
      */
     fun writeFile(data: Array<Double>) {
-        if (RobotConfig.debug) {
-            for (i in data) logWriter.write("$i")
-
-            logWriter.write(opMode.runtime.toString())
-            logWriter.newLine()
+        if (RobotConfig.debug)
+        {
+            for (i in data) logWriter.write("$i, ")
         }
+        logWriter.write(opMode.runtime.toString())
+        logWriter.newLine()
+
     }
 
     /**
