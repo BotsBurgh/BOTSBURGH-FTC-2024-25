@@ -22,7 +22,7 @@ object Logging: API() {
         super.init(opMode)
 
         if (RobotConfig.debug) {
-            //TODO delete old files
+            for (file in BOTSBURGH_FOLDER.listFiles()) if (!file.isDirectory) file.delete()
         }
 
     }
