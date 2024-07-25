@@ -39,7 +39,7 @@ object Logging: API() {
     fun createFile(fileName: String) {
         if (RobotConfig.debug) {
             logFile = File(BOTSBURGH_FOLDER, "/$fileName.csv")
-            logWriter = BufferedWriter(FileWriter(logFile))
+            logWriter = BufferedWriter(FileWriter(logFile, true))
             logFile.createNewFile()
         }
     }
