@@ -21,7 +21,7 @@ androidxAppCompat = "1.3.1"
 ftcDashboard = "0.4.15"
 
 # Road Runner.
-roadRunner = "1.0.0-beta8"
+roadRunner = "1.0.0"
 roadRunnerFtc = "0.1.13"
 
 [libraries]
