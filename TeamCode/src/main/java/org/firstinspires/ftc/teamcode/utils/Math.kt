@@ -38,27 +38,27 @@ fun <Param> DualNum<Param>.atan(): DualNum<Param> {
     val x = this.values().toDoubleArray()
     val y = DoubleArray(x.size)
 
-    if (y.isEmpty()) return y.toDual()
+    if (y.isEmpty()) return DualNum(y)
 
     // Constant value
     y[0] = kotlin.math.atan(x[0])
-    if (y.size == 1) return y.toDual()
+    if (y.size == 1) return DualNum(y)
 
     // First derivative
     val firstDeriv = 1 / (x[0].squared() + 1)
     y[1] = firstDeriv * x[1]
-    if (y.size == 2) return y.toDual()
+    if (y.size == 2) return DualNum(y)
 
     // Second derivative
     val secondDeriv = (-2 * x[0]) / (x[0].squared() + 1).squared()
     y[2] = secondDeriv * x[1] + firstDeriv * x[2]
-    if (y.size == 3) return y.toDual()
+    if (y.size == 3) return DualNum(y)
 
     // Third derivative
     val thirdDeriv = (6 * x[0].squared() - 2) / (x[0].squared() + 1).cubed()
     y[3] = thirdDeriv * x[1] + secondDeriv * x[2] + secondDeriv * x[2] + firstDeriv * x[3]
 
-    return y.toDual()
+    return DualNum(y)
 }
 
 /**
@@ -84,14 +84,6 @@ fun <Param> Vector2dDual<Param>.atan2(): DualNum<Param> {
 
     return (this.y / this.x).atan()
 }
-
-/**
- * Converts a [DoubleArray] to a [DualNum].
- *
- * This is a temporary method until
- * [road-runner#108](https://github.com/acmerobotics/road-runner/pull/108) is released.
- */
-private fun <Param> DoubleArray.toDual() = DualNum<Param>(this.toList())
 
 /** Returns the minimum size of a [Vector2dDual]'s components. */
 private val <Param> Vector2dDual<Param>.size
