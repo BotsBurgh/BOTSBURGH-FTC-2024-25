@@ -27,9 +27,9 @@ class KiwiKinematics(val radius: Double) {
         val g = Polar2dDual(DualNum.constant(GREEN_ANGLE - PI_2, 4), w.green).toCartesian()
         val b = Polar2dDual(DualNum.constant(BLUE_ANGLE - PI_2, 4), w.blue).toCartesian()
 
-        Twist2dDual(
+        return Twist2dDual(
             (r + g + b) / 1.5,
-            TODO("Calculate angle from wheel ticks"),
+            (w.red + w.green + w.blue) / radius,
         )
     }
 
