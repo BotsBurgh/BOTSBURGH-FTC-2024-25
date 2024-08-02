@@ -11,8 +11,7 @@ import java.io.FileWriter
 /**
  * An API for creating, managing, and writing to logging files.
  */
-object Logging: API() {
-
+object Logging : API() {
     lateinit var logFile: File
         private set
     lateinit var logWriter: BufferedWriter
@@ -24,9 +23,9 @@ object Logging: API() {
         if (RobotConfig.debug) {
             for (file in BOTSBURGH_FOLDER.listFiles()) if (!file.isDirectory) file.delete()
         }
-
     }
 
+    // root folder is /storage/emulated/0/BotsBurgh
     private val BOTSBURGH_FOLDER: File by lazy {
         val res = File(AppUtil.ROOT_FOLDER, "/BotsBurgh/")
         res.mkdirs()
@@ -34,7 +33,7 @@ object Logging: API() {
     }
 
     /**
-     * Creates new files to log to (old files are deleted after every run)
+     * Creates new files to log to (old files are deleted after every run).
      */
     fun createFile(fileName: String) {
         if (RobotConfig.debug) {
@@ -48,8 +47,7 @@ object Logging: API() {
      * Writes Double data to the targeted file
      */
     fun writeFile(data: Double) {
-        if (RobotConfig.debug)
-        {
+        if (RobotConfig.debug) {
             logWriter.write("$data, ")
             logWriter.write(opMode.runtime.toString())
             logWriter.newLine()
@@ -60,13 +58,11 @@ object Logging: API() {
      * Writes Array Double data to the targeted file
      */
     fun writeFile(data: Array<Double>) {
-        if (RobotConfig.debug)
-        {
+        if (RobotConfig.debug) {
             for (i in data) logWriter.write("$i, ")
         }
         logWriter.write(opMode.runtime.toString())
         logWriter.newLine()
-
     }
 
     /**
