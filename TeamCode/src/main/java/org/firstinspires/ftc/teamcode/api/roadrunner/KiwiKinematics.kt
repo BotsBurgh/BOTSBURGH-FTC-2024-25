@@ -67,7 +67,14 @@ class KiwiKinematics(private val radius: Double) {
      * This is the dual-form of [TriWheels.compute].
      */
     fun <Param> inverse(t: PoseVelocity2dDual<Param>): WheelVelocities<Param> {
-        val polar = Polar2dDual.fromCartesian(t.linearVel)
+        var polar = Polar2dDual.fromCartesian(t.linearVel)
+
+        // If X is negative...
+        if (t.linearVel.x.value() < 0) {
+            // ...make the radius negative.
+            // See https://github.com/BotsBurgh/BOTSBURGH-FTC-2024-25/pull/47#issuecomment-2266043378.
+            polar = Polar2dDual(polar.theta, -polar.radius)
+        }
 
         val redAngle = DualNum.constant<Param>(RED_ANGLE, polar.theta.size())
         val greenAngle = DualNum.constant<Param>(GREEN_ANGLE, polar.theta.size())
