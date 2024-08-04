@@ -80,10 +80,12 @@ class KiwiKinematics(private val radius: Double) {
         val greenAngle = DualNum.constant<Param>(GREEN_ANGLE, polar.theta.size())
         val blueAngle = DualNum.constant<Param>(BLUE_ANGLE, polar.theta.size())
 
+        val wheelAngVel = t.angVel / 3.0
+
         return WheelVelocities(
-            polar.radius * (redAngle - polar.theta).sin() + t.angVel,
-            polar.radius * (greenAngle - polar.theta).sin() + t.angVel,
-            polar.radius * (blueAngle - polar.theta).sin() + t.angVel,
+            polar.radius * (redAngle - polar.theta).sin() + wheelAngVel,
+            polar.radius * (greenAngle - polar.theta).sin() + wheelAngVel,
+            polar.radius * (blueAngle - polar.theta).sin() + wheelAngVel,
         )
     }
 
