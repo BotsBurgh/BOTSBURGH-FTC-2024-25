@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.teleop
 
-import android.util.Log
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import org.firstinspires.ftc.teamcode.api.Logging
@@ -17,8 +16,6 @@ class LoggingTest : OpMode() {
 
         Logging.writeFile("Wheel Power", arrayOf(0.25, 0.6, 1.0))
         Logging.writeFile("Distance", 1.0)
-
-
     }
 
     override fun loop() {

@@ -22,8 +22,6 @@ object Logging : API() {
     override fun init(opMode: OpMode) {
         super.init(opMode)
 
-
-
         if (RobotConfig.debug) {
             for (file in BOTSBURGH_FOLDER.listFiles()) if (!file.isDirectory) file.delete()
         }
@@ -41,17 +39,20 @@ object Logging : API() {
      */
     fun createFile(fileName: String) {
         if (RobotConfig.debug) {
-
-
-            fileHash[fileName] = BufferedWriter(FileWriter( File(BOTSBURGH_FOLDER, "/$fileName.csv"), true))
+            fileHash[fileName] = BufferedWriter(FileWriter(File(BOTSBURGH_FOLDER, "/$fileName.csv"), true))
             File(BOTSBURGH_FOLDER, "/$fileName.csv").createNewFile()
         }
     }
 
     /**
      * Writes Double data to the targeted file
+     * @param file Name of the file that is being logged to
+     * @param data Double data that is being logged
      */
-    fun writeFile(file: String, data: Double) {
+    fun writeFile(
+        file: String,
+        data: Double,
+    ) {
         if (RobotConfig.debug) {
             fileHash.get(file)?.write("$data, ")
             fileHash.get(file)?.write(opMode.runtime.toString())
@@ -61,8 +62,13 @@ object Logging : API() {
 
     /**
      * Writes Array Double data to the targeted file
+     * @param file Name of the file that is being logged to
+     * @param data Array Double data that is being logged
      */
-    fun writeFile(file: String, data: Array<Double>) {
+    fun writeFile(
+        file: String,
+        data: Array<Double>,
+    ) {
         if (RobotConfig.debug) {
             for (i in data) fileHash.get(file)?.write("$i, ")
         }
@@ -72,6 +78,7 @@ object Logging : API() {
 
     /**
      * Closes file
+     * @param file Name of file to close
      **/
     fun close(file: String) {
         fileHash.get(file)?.close()
