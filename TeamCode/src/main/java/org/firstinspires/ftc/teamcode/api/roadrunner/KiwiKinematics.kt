@@ -46,7 +46,7 @@ class KiwiKinematics(private val radius: Double) {
             // Sum the cartesian coordinates and divide by 1.5 coefficient.
             (rxy + gxy + bxy) / 1.5,
             // Find rotation by summing linear distance and dividing by radius.
-            (w.red + w.green + w.blue) / radius,
+            (w.red + w.green + w.blue) / this.radius,
         )
     }
 
@@ -80,12 +80,12 @@ class KiwiKinematics(private val radius: Double) {
         val greenAngle = DualNum.constant<Param>(GREEN_ANGLE, polar.theta.size())
         val blueAngle = DualNum.constant<Param>(BLUE_ANGLE, polar.theta.size())
 
-        val wheelAngVel = t.angVel / 3.0
+        val wheelLinVel = t.angVel * this.radius / 3.0
 
         return WheelVelocities(
-            polar.radius * (redAngle - polar.theta).sin() + wheelAngVel,
-            polar.radius * (greenAngle - polar.theta).sin() + wheelAngVel,
-            polar.radius * (blueAngle - polar.theta).sin() + wheelAngVel,
+            polar.radius * (redAngle - polar.theta).sin() + wheelLinVel,
+            polar.radius * (greenAngle - polar.theta).sin() + wheelLinVel,
+            polar.radius * (blueAngle - polar.theta).sin() + wheelLinVel,
         )
     }
 
