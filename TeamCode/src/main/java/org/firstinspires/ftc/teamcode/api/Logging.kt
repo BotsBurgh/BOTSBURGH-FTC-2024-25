@@ -12,10 +12,6 @@ import java.io.FileWriter
  * An API for creating, managing, and writing to logging files.
  */
 object Logging : API() {
-    lateinit var logFile: File
-        private set
-    lateinit var logWriter: BufferedWriter
-        private set
 
     var fileHash = hashMapOf<String, BufferedWriter>()
 
