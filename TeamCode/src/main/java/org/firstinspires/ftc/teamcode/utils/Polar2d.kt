@@ -60,7 +60,7 @@ data class Polar2dDual<Param>(val theta: DualNum<Param>, val radius: DualNum<Par
             val theta = v.atan2()
 
             // Calculate the hypotenuse.
-            val radius = v.x * v.x + v.y * v.y
+            val radius = (v.x * v.x + v.y * v.y).sqrt()
 
             return Polar2dDual(theta, radius)
         }
