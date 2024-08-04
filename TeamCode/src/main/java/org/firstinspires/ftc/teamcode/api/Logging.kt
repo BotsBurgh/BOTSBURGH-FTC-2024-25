@@ -15,6 +15,8 @@ object Logging : API() {
 
     var fileHash = hashMapOf<String, BufferedWriter>()
 
+    var volatileFileHash = hashMapOf<String, File>()
+
     override fun init(opMode: OpMode) {
         super.init(opMode)
 
@@ -31,11 +33,21 @@ object Logging : API() {
     }
 
     /**
-     * Creates new files to log to (old files are deleted after every run).
+     * Creates new files to log to (old files are deleted after every run). File must be closed.
      */
     fun createFile(fileName: String) {
         if (RobotConfig.debug) {
             fileHash[fileName] = BufferedWriter(FileWriter(File(BOTSBURGH_FOLDER, "/$fileName.csv"), true))
+            File(BOTSBURGH_FOLDER, "/$fileName.csv").createNewFile()
+        }
+    }
+
+    /**
+     * Creates new volatile files to log to (old files are deleted after every run). Only use volatile files to diagnose power issues.
+     */
+    fun createVolatileFile(fileName: String) {
+        if (RobotConfig.debug) {
+            volatileFileHash[fileName] = File(BOTSBURGH_FOLDER, "/$fileName.csv")
             File(BOTSBURGH_FOLDER, "/$fileName.csv").createNewFile()
         }
     }
@@ -73,7 +85,40 @@ object Logging : API() {
     }
 
     /**
-     * Closes file
+     * Writes Double data to the targeted volatile file
+     * @param file Name of the file that is being logged to
+     * @param data Double data that is being logged
+     */
+    fun writeVolatileFile(
+        file: String,
+        data: Double,
+    ) {
+        if (RobotConfig.debug) {
+            fileHash.get(file)?.write("$data, ")
+            fileHash.get(file)?.write(opMode.runtime.toString())
+            fileHash.get(file)?.newLine()
+        }
+    }
+
+    /**
+     * Writes Array Double data to the targeted volatile file
+     * @param file Name of the file that is being logged to
+     * @param data Array Double data that is being logged
+     */
+
+    fun writeVolatileFile(
+        file: String,
+        data: Array<Double>,
+    ) {
+        if (RobotConfig.debug) {
+            for (i in data) fileHash.get(file)?.write("$i, ")
+        }
+        fileHash.get(file)?.write(opMode.runtime.toString())
+        fileHash.get(file)?.newLine()
+    }
+
+        /**
+     * Closes file. Only use on non-volatile files
      * @param file Name of file to close
      **/
     fun close(file: String) {
