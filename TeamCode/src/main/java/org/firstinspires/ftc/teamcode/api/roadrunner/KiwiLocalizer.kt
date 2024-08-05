@@ -36,9 +36,6 @@ object KiwiLocalizer : API() {
 
     private var firstUpdate = true
 
-    // TODO: Find this value
-    private const val inPerTick = 0.0
-
     override fun init(opMode: OpMode) {
         super.init(opMode)
 
@@ -90,9 +87,24 @@ object KiwiLocalizer : API() {
         val twist =
             this.kinematics.forward(
                 KiwiKinematics.WheelTicks(
-                    DualNum<Time>(doubleArrayOf((redPosVel.position - this.lastRedPos).toDouble(), redPosVel.velocity.toDouble())) * this.inPerTick,
-                    DualNum<Time>(doubleArrayOf((greenPosVel.position - this.lastGreenPos).toDouble(), greenPosVel.velocity.toDouble())) * this.inPerTick,
-                    DualNum<Time>(doubleArrayOf((bluePosVel.position - this.lastBluePos).toDouble(), bluePosVel.velocity.toDouble())) * this.inPerTick,
+                    DualNum<Time>(
+                        doubleArrayOf(
+                            (redPosVel.position - this.lastRedPos).toDouble(),
+                            redPosVel.velocity.toDouble(),
+                        ),
+                    ) * RobotConfig.KiwiLocalizer.INCHES_PER_TICK,
+                    DualNum<Time>(
+                        doubleArrayOf(
+                            (greenPosVel.position - this.lastGreenPos).toDouble(),
+                            greenPosVel.velocity.toDouble(),
+                        ),
+                    ) * RobotConfig.KiwiLocalizer.INCHES_PER_TICK,
+                    DualNum<Time>(
+                        doubleArrayOf(
+                            (bluePosVel.position - this.lastBluePos).toDouble(),
+                            bluePosVel.velocity.toDouble(),
+                        ),
+                    ) * RobotConfig.KiwiLocalizer.INCHES_PER_TICK,
                 ),
             )
 

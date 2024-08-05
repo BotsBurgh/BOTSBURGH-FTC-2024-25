@@ -45,5 +45,9 @@ object RobotConfig {
         /** The radius of the robot, from the center to the wheel. */
         @JvmField
         var RADIUS: Double = 1.0
+
+        /** The amount of inches a wheel travels in a single tick. */
+        @JvmField
+        var INCHES_PER_TICK: Double = 1.0
     }
 }
