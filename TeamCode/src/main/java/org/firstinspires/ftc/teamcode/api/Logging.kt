@@ -62,9 +62,9 @@ object Logging : API() {
         data: Double,
     ) {
         if (RobotConfig.debug) {
-            fileHash.get(file)?.write("$data, ")
-            fileHash.get(file)?.write(opMode.runtime.toString())
-            fileHash.get(file)?.newLine()
+            fileHash[file]!!.write("$data, ")
+            fileHash[file]!!.write(opMode.runtime.toString())
+            fileHash[file]!!.newLine()
         }
     }
 
@@ -78,10 +78,10 @@ object Logging : API() {
         data: Array<Double>,
     ) {
         if (RobotConfig.debug) {
-            for (i in data) fileHash.get(file)?.write("$i, ")
+            for (i in data) fileHash[file]!!.write("$i, ")
         }
-        fileHash.get(file)?.write(opMode.runtime.toString())
-        fileHash.get(file)?.newLine()
+        fileHash[file]!!.write(opMode.runtime.toString())
+        fileHash[file]!!.newLine()
     }
 
     /**
@@ -94,9 +94,9 @@ object Logging : API() {
         data: Double,
     ) {
         if (RobotConfig.debug) {
-            fileHash.get(file)?.write("$data, ")
-            fileHash.get(file)?.write(opMode.runtime.toString())
-            fileHash.get(file)?.newLine()
+            fileHash[file]!!.write("$data, ")
+            fileHash[file]!!.write(opMode.runtime.toString())
+            fileHash[file]!!.newLine()
         }
     }
 
@@ -111,10 +111,10 @@ object Logging : API() {
         data: Array<Double>,
     ) {
         if (RobotConfig.debug) {
-            for (i in data) fileHash.get(file)?.write("$i, ")
+            for (i in data) fileHash[file]!!.write("$i, ")
         }
-        fileHash.get(file)?.write(opMode.runtime.toString())
-        fileHash.get(file)?.newLine()
+        fileHash[file]!!.write(opMode.runtime.toString())
+        fileHash[file]!!.newLine()
     }
 
         /**
@@ -122,6 +122,6 @@ object Logging : API() {
      * @param file Name of file to close
      **/
     fun close(file: String) {
-        fileHash.get(file)?.close()
+        fileHash[file]!!.close()
     }
 }
