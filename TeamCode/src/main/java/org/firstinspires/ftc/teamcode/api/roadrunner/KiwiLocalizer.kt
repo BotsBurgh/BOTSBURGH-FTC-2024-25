@@ -15,6 +15,7 @@ import com.qualcomm.robotcore.hardware.IMU
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit
 import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.core.API
+import org.firstinspires.ftc.teamcode.utils.RobotConfig
 
 object KiwiLocalizer : API() {
     override val dependencies = setOf(TriWheels)
@@ -57,8 +58,7 @@ object KiwiLocalizer : API() {
         )
         this.imu.resetYaw()
 
-        // TODO: Set kiwi radius from `RobotConfig`.
-        this.kinematics = KiwiKinematics(1.0)
+        this.kinematics = KiwiKinematics(RobotConfig.KiwiLocalizer.RADIUS)
     }
 
     fun update(): Twist2dDual<Time> {
