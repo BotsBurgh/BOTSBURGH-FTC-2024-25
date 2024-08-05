@@ -38,13 +38,4 @@ object RobotConfig {
      }
      */
 
-    /** Configuration related to logging. */
-    @Config
-    object Logging {
-        /**
-         * The frequency that new data gets written to logging files in milliseconds
-         */
-        @JvmField
-        var frequency: Long = 1000
-    }
 }
