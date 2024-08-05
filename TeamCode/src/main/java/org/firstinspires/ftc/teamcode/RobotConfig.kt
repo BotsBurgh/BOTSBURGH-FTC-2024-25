@@ -37,5 +37,4 @@ object RobotConfig {
      var NAME_OF_VARIABLE: Double = 145.1
      }
      */
-
 }
