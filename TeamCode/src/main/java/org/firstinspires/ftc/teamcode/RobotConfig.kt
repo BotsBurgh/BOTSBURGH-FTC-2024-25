@@ -4,6 +4,8 @@
 
 package org.firstinspires.ftc.teamcode.utils
 
+import com.acmerobotics.dashboard.config.Config
+
 /**
  * This is an immutable object representing robot configuration.
  *
@@ -25,14 +27,16 @@ object RobotConfig {
      * Creates a string representing the current robot build constants.
      */
     override fun toString() = "RobotConfig(debug=$debug)"
-    /** Example on how to set up a Config Variable.
-     @Config
-     object NameOfObject {
-     /**
-     * This is what the variable does.
-     */
-     @JvmField
-     var NAME_OF_VARIABLE: Double = 145.1
-     }
-     */
+
+    /** Configuration related to the TeleOpMain opmode. */
+    @Config
+    object TeleOpMain {
+        /** A multiplier that scales that robot's driving / strafing speed. */
+        @JvmField
+        var DRIVE_SPEED: Double = 0.6
+
+        /** A multiplier that scales the robot's rotation speed. */
+        @JvmField
+        var ROTATE_SPEED: Double = 0.3
+    }
 }
