@@ -11,7 +11,7 @@ import java.io.FileWriter
 /**
  * An API for creating, managing, and writing to logging files.
  */
-object Logging : API() {
+object CsvLogging : API() {
     private val fileHash = hashMapOf<String, BufferedWriter>()
     private val volatileFileHash = hashMapOf<String, File>()
 
