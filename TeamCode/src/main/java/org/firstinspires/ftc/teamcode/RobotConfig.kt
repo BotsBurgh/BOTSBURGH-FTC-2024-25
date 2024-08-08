@@ -4,8 +4,6 @@
 
 package org.firstinspires.ftc.teamcode.utils
 
-import com.acmerobotics.dashboard.config.Config
-
 /**
  * This is an immutable object representing robot configuration.
  *

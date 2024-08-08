@@ -12,10 +12,8 @@ import java.io.FileWriter
  * An API for creating, managing, and writing to logging files.
  */
 object Logging : API() {
-
-    var fileHash = hashMapOf<String, BufferedWriter>()
-
-    var volatileFileHash = hashMapOf<String, File>()
+    private val fileHash = hashMapOf<String, BufferedWriter>()
+    private val volatileFileHash = hashMapOf<String, File>()
 
     override fun init(opMode: OpMode) {
         super.init(opMode)
@@ -105,7 +103,6 @@ object Logging : API() {
      * @param file Name of the file that is being logged to
      * @param data Array Double data that is being logged
      */
-
     fun writeVolatileFile(
         file: String,
         data: Array<Double>,
@@ -117,10 +114,10 @@ object Logging : API() {
         fileHash[file]!!.newLine()
     }
 
-        /**
+    /**
      * Closes file. Only use on non-volatile files
      * @param file Name of file to close
-     **/
+     */
     fun close(file: String) {
         fileHash[file]!!.close()
     }
