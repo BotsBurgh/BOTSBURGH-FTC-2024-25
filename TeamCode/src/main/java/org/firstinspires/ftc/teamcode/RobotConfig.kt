@@ -21,12 +21,12 @@ object RobotConfig {
      *
      * This should be disabled for competitions.
      */
-    const val DEBUG: Boolean = true
+    const val debug: Boolean = true
 
     /**
      * Creates a string representing the current robot build constants.
      */
-    override fun toString() = "RobotConfig(debug=$DEBUG)"
+    override fun toString() = "RobotConfig(debug=$debug)"
 
     /** Configuration related to the TeleOpMain opmode. */
     @Config
