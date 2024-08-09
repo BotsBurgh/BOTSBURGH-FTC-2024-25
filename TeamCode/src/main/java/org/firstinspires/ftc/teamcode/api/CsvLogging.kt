@@ -7,13 +7,14 @@ import org.firstinspires.ftc.teamcode.utils.RobotConfig
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
+import java.lang.Exception
 
 /**
  * An API for creating, managing, and writing to logging files.
  */
 object CsvLogging : API() {
     private val fileHash = hashMapOf<String, BufferedWriter>()
-    private val volatileFileHash = hashMapOf<String, File>()
+    private val volatileFileHash = hashMapOf<String, FileWriter>()
 
     override fun init(opMode: OpMode) {
         super.init(opMode)
@@ -31,7 +32,8 @@ object CsvLogging : API() {
     }
 
     /**
-     * Creates new files to log to (old files are deleted after every run). File must be closed.
+     * Creates new files to log to (old files are deleted after every run).
+     * File must be closed.
      */
     fun createFile(fileName: String) {
         if (RobotConfig.debug) {
@@ -41,11 +43,13 @@ object CsvLogging : API() {
     }
 
     /**
-     * Creates new volatile files to log to (old files are deleted after every run). Only use volatile files to diagnose power issues.
+     * Creates new volatile files to log to (old files are deleted after every run).
+     * Only use volatile files to diagnose power issues.
+     * File must be closed.
      */
     fun createVolatileFile(fileName: String) {
         if (RobotConfig.debug) {
-            volatileFileHash[fileName] = File(BOTSBURGH_FOLDER, "/$fileName.csv")
+            volatileFileHash[fileName] = FileWriter(File(BOTSBURGH_FOLDER, "/$fileName.csv"))
             File(BOTSBURGH_FOLDER, "/$fileName.csv").createNewFile()
         }
     }
@@ -92,9 +96,9 @@ object CsvLogging : API() {
         data: Double,
     ) {
         if (RobotConfig.debug) {
-            fileHash[file]!!.write("$data, ")
-            fileHash[file]!!.write(opMode.runtime.toString())
-            fileHash[file]!!.newLine()
+            volatileFileHash[file]!!.write("$data, ")
+            volatileFileHash[file]!!.write(opMode.runtime.toString())
+            volatileFileHash[file]!!.write(String.format("%n"))
         }
     }
 
@@ -108,17 +112,21 @@ object CsvLogging : API() {
         data: Array<Double>,
     ) {
         if (RobotConfig.debug) {
-            for (i in data) fileHash[file]!!.write("$i, ")
+            for (i in data) volatileFileHash[file]!!.write("$i, ")
         }
-        fileHash[file]!!.write(opMode.runtime.toString())
-        fileHash[file]!!.newLine()
+        volatileFileHash[file]!!.write(opMode.runtime.toString())
+        volatileFileHash[file]!!.write(String.format("%n"))
     }
 
     /**
-     * Closes file. Only use on non-volatile files
+     * Closes file
      * @param file Name of file to close
      */
     fun close(file: String) {
-        fileHash[file]!!.close()
+        try {
+            fileHash[file]!!.close()
+        } catch (e: Exception) {
+            volatileFileHash[file]!!.close()
+        }
     }
 }
