@@ -5,6 +5,7 @@
 package org.firstinspires.ftc.teamcode.utils
 
 import com.acmerobotics.dashboard.config.Config
+import kotlin.math.PI
 
 /**
  * This is an immutable object representing robot configuration.
@@ -50,5 +51,52 @@ object RobotConfig {
         /** The amount of inches a wheel travels in a single tick. */
         @JvmField
         var INCHES_PER_TICK: Double = 1.0
+    }
+
+    @Config
+    object KiwiDrive {
+        // TODO: IMU orientation
+
+        // TODO: Do we even need drive mode parameters?
+
+        // Feedforward
+        @JvmField
+        var K_S: Double = 0.0
+
+        @JvmField
+        var K_V: Double = 0.0
+
+        @JvmField
+        var K_A: Double = 0.0
+
+        // Path profile (in inches)
+        @JvmField
+        var MAX_WHEEL_VEL: Double = 50.0
+
+        @JvmField
+        var MIN_PROFILE_ACCEL: Double = -30.0
+
+        @JvmField
+        var MAX_PROFILE_ACCEL: Double = 50.0
+
+        // Turn profile (in radians)
+        @JvmField
+        var MAX_ANG_VEL: Double = PI
+
+        @JvmField
+        var MAX_ANG_ACCEL: Double = PI
+
+        // Path controller gains
+        @JvmField
+        var AXIAL_GAIN: Double = 0.0
+
+        @JvmField
+        var HEADING_GAIN: Double = 0.0
+
+        @JvmField
+        var AXIAL_VEL_GAIN: Double = 0.0
+
+        @JvmField
+        var HEADING_VEL_GAIN: Double = 0.0
     }
 }
