@@ -31,7 +31,7 @@ object KiwiLocalizer : API() {
 
     private lateinit var imu: IMU
 
-    private lateinit var kinematics: KiwiKinematics
+    lateinit var kinematics: KiwiKinematics
 
     private var lastRedPos = 0
     private var lastGreenPos = 0
