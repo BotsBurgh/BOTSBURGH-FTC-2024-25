@@ -51,10 +51,9 @@ object KiwiLocalizer : API() {
         this.imu = this.opMode.hardwareMap.get(IMU::class.java, "imu")
         this.imu.initialize(
             IMU.Parameters(
-                // TODO: Select REV Hub orientation.
                 RevHubOrientationOnRobot(
-                    RevHubOrientationOnRobot.LogoFacingDirection.FORWARD,
-                    RevHubOrientationOnRobot.UsbFacingDirection.UP,
+                    RobotConfig.KiwiLocalizer.LOGO_FACING_DIRECTION,
+                    RobotConfig.KiwiLocalizer.USB_FACING_DIRECTION,
                 ),
             ),
         )

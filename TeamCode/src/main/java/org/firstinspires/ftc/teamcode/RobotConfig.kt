@@ -5,6 +5,7 @@
 package org.firstinspires.ftc.teamcode.utils
 
 import com.acmerobotics.dashboard.config.Config
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot
 import kotlin.math.PI
 
 /**
@@ -51,12 +52,18 @@ object RobotConfig {
         /** The amount of inches a wheel travels in a single tick. */
         @JvmField
         var INCHES_PER_TICK: Double = 1.0
+
+        @JvmField
+        var LOGO_FACING_DIRECTION: RevHubOrientationOnRobot.LogoFacingDirection =
+            RevHubOrientationOnRobot.LogoFacingDirection.FORWARD
+
+        @JvmField
+        var USB_FACING_DIRECTION: RevHubOrientationOnRobot.UsbFacingDirection =
+            RevHubOrientationOnRobot.UsbFacingDirection.UP
     }
 
     @Config
     object KiwiDrive {
-        // TODO: IMU orientation
-
         // TODO: Do we even need drive mode parameters?
 
         // Feedforward
