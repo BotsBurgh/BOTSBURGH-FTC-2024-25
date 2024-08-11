@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.teleOp
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import org.firstinspires.ftc.teamcode.api.TriWheels
-import org.firstinspires.ftc.teamcode.utils.RobotConfig
+import org.firstinspires.ftc.teamcode.RobotConfig
 import kotlin.math.PI
 import kotlin.math.atan2
 import kotlin.math.sqrt
