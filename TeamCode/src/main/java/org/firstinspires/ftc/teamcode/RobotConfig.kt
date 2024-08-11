@@ -13,7 +13,7 @@ import com.acmerobotics.dashboard.config.Config
  * are annotated with `@Config`. This designates them as FTC Dashboard configuration that can be
  * modified at runtime. **To permanently change these values, you must also modify the code!** The
  * configuration can also change during initialization depending on various build constants like
- * [debug].
+ * [DEBUG].
  */
 object RobotConfig {
     /**
@@ -21,12 +21,12 @@ object RobotConfig {
      *
      * This should be disabled for competitions.
      */
-    const val debug: Boolean = true
+    const val DEBUG: Boolean = true
 
     /**
      * Creates a string representing the current robot build constants.
      */
-    override fun toString() = "RobotConfig(debug=$debug)"
+    override fun toString() = "RobotConfig(debug=$DEBUG)"
 
     /** Configuration related to the TeleOpMain opmode. */
     @Config
