@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.api.roadrunner
 
+import com.acmerobotics.roadrunner.HolonomicController
+import com.acmerobotics.roadrunner.MotorFeedforward
 import com.acmerobotics.roadrunner.Pose2d
 import com.acmerobotics.roadrunner.PoseVelocity2d
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
@@ -11,6 +13,9 @@ object KiwiDrive : API() {
     override val dependencies = setOf(TriWheels, KiwiLocalizer, Voltage)
 
     var pose = Pose2d(0.0, 0.0, 0.0)
+
+    val controller: HolonomicController = TODO()
+    val feedforward: MotorFeedforward = TODO()
 
     fun actionBuilder(beginPose: Pose2d) = TrajectoryActionBuilder(
         ::TurnAction,
