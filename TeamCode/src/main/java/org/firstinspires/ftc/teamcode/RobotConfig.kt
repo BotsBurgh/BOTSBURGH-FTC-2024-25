@@ -40,6 +40,7 @@ object RobotConfig {
         var ROTATE_SPEED: Double = 0.3
     }
 
+    // TODO: Set robot radius and inches per tick.
     @Config
     object KiwiLocalizer {
         /** The radius of the robot, from the center to the wheel. */
