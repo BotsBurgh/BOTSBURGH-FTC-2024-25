@@ -12,7 +12,7 @@ import java.lang.Exception
 /**
  * An API for creating, managing, and writing to logging files.
  */
-object CsvLogging : API() {
+object CSVLogging : API() {
     private val fileHash = hashMapOf<String, BufferedWriter>()
     private val volatileFileHash = hashMapOf<String, FileWriter>()
 
