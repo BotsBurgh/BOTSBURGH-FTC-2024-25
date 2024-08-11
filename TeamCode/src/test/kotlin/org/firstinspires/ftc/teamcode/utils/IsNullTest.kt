@@ -6,7 +6,7 @@ import kotlin.test.assertTrue
 
 internal class IsNullTest {
     private val a: Int? = null
-    private val b: Int? = 10
+    private val b: Int = 10
 
     @Test
     fun testIsNull() {

@@ -18,7 +18,7 @@ object CsvLogging : API() {
     override fun init(opMode: OpMode) {
         super.init(opMode)
 
-        if (RobotConfig.debug) {
+        if (RobotConfig.DEBUG) {
             for (file in BOTSBURGH_FOLDER.listFiles()) if (!file.isDirectory) file.delete()
         }
     }
@@ -34,7 +34,7 @@ object CsvLogging : API() {
      * Creates new files to log to (old files are deleted after every run). File must be closed.
      */
     fun createFile(fileName: String) {
-        if (RobotConfig.debug) {
+        if (RobotConfig.DEBUG) {
             fileHash[fileName] = BufferedWriter(FileWriter(File(BOTSBURGH_FOLDER, "/$fileName.csv"), true))
             File(BOTSBURGH_FOLDER, "/$fileName.csv").createNewFile()
         }
@@ -44,7 +44,7 @@ object CsvLogging : API() {
      * Creates new volatile files to log to (old files are deleted after every run). Only use volatile files to diagnose power issues.
      */
     fun createVolatileFile(fileName: String) {
-        if (RobotConfig.debug) {
+        if (RobotConfig.DEBUG) {
             volatileFileHash[fileName] = File(BOTSBURGH_FOLDER, "/$fileName.csv")
             File(BOTSBURGH_FOLDER, "/$fileName.csv").createNewFile()
         }
@@ -59,7 +59,7 @@ object CsvLogging : API() {
         file: String,
         data: Double,
     ) {
-        if (RobotConfig.debug) {
+        if (RobotConfig.DEBUG) {
             fileHash[file]!!.write("$data, ")
             fileHash[file]!!.write(opMode.runtime.toString())
             fileHash[file]!!.newLine()
@@ -75,7 +75,7 @@ object CsvLogging : API() {
         file: String,
         data: Array<Double>,
     ) {
-        if (RobotConfig.debug) {
+        if (RobotConfig.DEBUG) {
             for (i in data) fileHash[file]!!.write("$i, ")
         }
         fileHash[file]!!.write(opMode.runtime.toString())
@@ -91,7 +91,7 @@ object CsvLogging : API() {
         file: String,
         data: Double,
     ) {
-        if (RobotConfig.debug) {
+        if (RobotConfig.DEBUG) {
             fileHash[file]!!.write("$data, ")
             fileHash[file]!!.write(opMode.runtime.toString())
             fileHash[file]!!.newLine()
@@ -107,7 +107,7 @@ object CsvLogging : API() {
         file: String,
         data: Array<Double>,
     ) {
-        if (RobotConfig.debug) {
+        if (RobotConfig.DEBUG) {
             for (i in data) fileHash[file]!!.write("$i, ")
         }
         fileHash[file]!!.write(opMode.runtime.toString())
