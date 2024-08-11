@@ -64,8 +64,6 @@ object RobotConfig {
 
     @Config
     object KiwiDrive {
-        // TODO: Do we even need drive mode parameters?
-
         // Feedforward
         @JvmField
         var K_S: Double = 0.0
