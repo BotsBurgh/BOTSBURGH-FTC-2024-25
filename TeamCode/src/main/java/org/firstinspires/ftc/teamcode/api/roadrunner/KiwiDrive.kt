@@ -21,8 +21,20 @@ object KiwiDrive : API() {
 
     var pose = Pose2d(0.0, 0.0, 0.0)
 
-    val controller: HolonomicController = TODO()
-    val feedforward: MotorFeedforward = TODO()
+    val controller = HolonomicController(
+        RobotConfig.KiwiDrive.AXIAL_GAIN,
+        RobotConfig.KiwiDrive.AXIAL_GAIN,
+        RobotConfig.KiwiDrive.HEADING_GAIN,
+        RobotConfig.KiwiDrive.AXIAL_VEL_GAIN,
+        RobotConfig.KiwiDrive.AXIAL_VEL_GAIN,
+        RobotConfig.KiwiDrive.HEADING_VEL_GAIN,
+    )
+
+    val feedforward = MotorFeedforward(
+        RobotConfig.KiwiDrive.K_S,
+        RobotConfig.KiwiDrive.K_V,
+        RobotConfig.KiwiDrive.K_A,
+    )
 
     // This was taken directly from `MecanumDrive`. It shouldn't be changed unless you know what
     // you're doing.
