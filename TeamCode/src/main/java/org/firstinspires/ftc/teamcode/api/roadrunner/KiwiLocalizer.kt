@@ -31,7 +31,7 @@ object KiwiLocalizer : API() {
 
     private lateinit var imu: IMU
 
-    private lateinit var kinematics: KiwiKinematics
+    lateinit var kinematics: KiwiKinematics
 
     private var lastRedPos = 0
     private var lastGreenPos = 0
@@ -51,10 +51,9 @@ object KiwiLocalizer : API() {
         this.imu = this.opMode.hardwareMap.get(IMU::class.java, "imu")
         this.imu.initialize(
             IMU.Parameters(
-                // TODO: Select REV Hub orientation.
                 RevHubOrientationOnRobot(
-                    RevHubOrientationOnRobot.LogoFacingDirection.FORWARD,
-                    RevHubOrientationOnRobot.UsbFacingDirection.UP,
+                    RobotConfig.KiwiLocalizer.LOGO_FACING_DIRECTION,
+                    RobotConfig.KiwiLocalizer.USB_FACING_DIRECTION,
                 ),
             ),
         )
