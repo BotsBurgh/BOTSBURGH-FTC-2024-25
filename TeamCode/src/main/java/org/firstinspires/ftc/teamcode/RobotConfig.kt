@@ -5,6 +5,8 @@
 package org.firstinspires.ftc.teamcode
 
 import com.acmerobotics.dashboard.config.Config
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot
+import kotlin.math.PI
 
 /**
  * This is an immutable object representing robot configuration.
@@ -13,7 +15,7 @@ import com.acmerobotics.dashboard.config.Config
  * are annotated with `@Config`. This designates them as FTC Dashboard configuration that can be
  * modified at runtime. **To permanently change these values, you must also modify the code!** The
  * configuration can also change during initialization depending on various build constants like
- * [debug].
+ * [DEBUG].
  */
 object RobotConfig {
     /**
@@ -21,12 +23,12 @@ object RobotConfig {
      *
      * This should be disabled for competitions.
      */
-    const val debug: Boolean = true
+    const val DEBUG: Boolean = true
 
     /**
      * Creates a string representing the current robot build constants.
      */
-    override fun toString() = "RobotConfig(debug=$debug)"
+    override fun toString() = "RobotConfig(debug=$DEBUG)"
 
     /** Configuration related to the TeleOpMain opmode. */
     @Config
@@ -38,5 +40,68 @@ object RobotConfig {
         /** A multiplier that scales the robot's rotation speed. */
         @JvmField
         var ROTATE_SPEED: Double = 0.3
+    }
+
+    // TODO: Set robot radius and inches per tick.
+    @Config
+    object KiwiLocalizer {
+        /** The radius of the robot, from the center to the wheel. */
+        @JvmField
+        var RADIUS: Double = 1.0
+
+        /** The amount of inches a wheel travels in a single tick. */
+        @JvmField
+        var INCHES_PER_TICK: Double = 1.0
+
+        @JvmField
+        var LOGO_FACING_DIRECTION: RevHubOrientationOnRobot.LogoFacingDirection =
+            RevHubOrientationOnRobot.LogoFacingDirection.FORWARD
+
+        @JvmField
+        var USB_FACING_DIRECTION: RevHubOrientationOnRobot.UsbFacingDirection =
+            RevHubOrientationOnRobot.UsbFacingDirection.UP
+    }
+
+    @Config
+    object KiwiDrive {
+        // Feedforward
+        @JvmField
+        var K_S: Double = 0.0
+
+        @JvmField
+        var K_V: Double = 0.0
+
+        @JvmField
+        var K_A: Double = 0.0
+
+        // Path profile (in inches)
+        @JvmField
+        var MAX_WHEEL_VEL: Double = 50.0
+
+        @JvmField
+        var MIN_PROFILE_ACCEL: Double = -30.0
+
+        @JvmField
+        var MAX_PROFILE_ACCEL: Double = 50.0
+
+        // Turn profile (in radians)
+        @JvmField
+        var MAX_ANG_VEL: Double = PI
+
+        @JvmField
+        var MAX_ANG_ACCEL: Double = PI
+
+        // Path controller gains
+        @JvmField
+        var AXIAL_GAIN: Double = 0.0
+
+        @JvmField
+        var HEADING_GAIN: Double = 0.0
+
+        @JvmField
+        var AXIAL_VEL_GAIN: Double = 0.0
+
+        @JvmField
+        var HEADING_VEL_GAIN: Double = 0.0
     }
 }
