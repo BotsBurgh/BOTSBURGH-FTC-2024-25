@@ -15,7 +15,7 @@ import com.qualcomm.robotcore.hardware.IMU
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit
 import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.core.API
-import org.firstinspires.ftc.teamcode.utils.RobotConfig
+import org.firstinspires.ftc.teamcode.RobotConfig
 
 /**
  * An [API] used to detect where the robot is and how much it has moved.
