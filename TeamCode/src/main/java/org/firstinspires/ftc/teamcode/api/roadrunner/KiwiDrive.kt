@@ -11,10 +11,10 @@ import com.acmerobotics.roadrunner.ProfileParams
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
 import com.acmerobotics.roadrunner.TrajectoryBuilderParams
 import com.acmerobotics.roadrunner.TurnConstraints
+import org.firstinspires.ftc.teamcode.RobotConfig
 import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.api.Voltage
 import org.firstinspires.ftc.teamcode.core.API
-import org.firstinspires.ftc.teamcode.utils.RobotConfig
 
 object KiwiDrive : API() {
     override val dependencies = setOf(TriWheels, KiwiLocalizer, Voltage)

@@ -2,7 +2,7 @@
 // SCREAMING_SNAKE_CASE for them instead of `ktlint`'s desired lowerCamelCase.
 @file:Suppress("ktlint:standard:property-naming")
 
-package org.firstinspires.ftc.teamcode.utils
+package org.firstinspires.ftc.teamcode
 
 import com.acmerobotics.dashboard.config.Config
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot
