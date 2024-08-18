@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.teleop.tuning
 
+import com.acmerobotics.dashboard.FtcDashboard
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry
 import com.acmerobotics.roadrunner.DualNum
 import com.acmerobotics.roadrunner.Time
 import com.qualcomm.robotcore.eventloop.opmode.Disabled
@@ -14,6 +16,8 @@ import org.firstinspires.ftc.teamcode.RobotConfig
 @Disabled
 class BRotateTest : LinearOpMode() {
     override fun runOpMode() {
+        val telemetry = MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().telemetry)
+
         TriWheels.init(this)
 
         // Make the wheels float so that they spin freely. They're being pushed!
@@ -21,7 +25,7 @@ class BRotateTest : LinearOpMode() {
             wheel.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
         }
 
-        this.telemetry.apply {
+        telemetry.apply {
             addData("Status", "Initialized")
             update()
         }
@@ -56,7 +60,7 @@ class BRotateTest : LinearOpMode() {
 
             val angle = twist.angle.value()
 
-            this.telemetry.apply {
+            telemetry.apply {
                 addData("Status", "Running")
                 addData("Angle", angle)
                 update()

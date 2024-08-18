@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.teleop.tuning
 
+import com.acmerobotics.dashboard.FtcDashboard
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry
 import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
@@ -34,6 +36,8 @@ class AForwardPushTest : LinearOpMode() {
         get() = TriWheels.red
 
     override fun runOpMode() {
+        val telemetry = MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().telemetry)
+
         TriWheels.init(this)
 
         // Make the wheels float so that they spin freely. They're being pushed!
@@ -41,7 +45,7 @@ class AForwardPushTest : LinearOpMode() {
             wheel.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
         }
 
-        this.telemetry.apply {
+        telemetry.apply {
             addData("Status", "Initialized")
             update()
         }
@@ -53,7 +57,7 @@ class AForwardPushTest : LinearOpMode() {
         while (opModeIsActive()) {
             val currentPosition = this.trackedWheel.currentPosition - initialPosition
 
-            this.telemetry.apply {
+            telemetry.apply {
                 addData("Status", "Running")
                 addData("Ticks traveled", currentPosition)
                 addData("Inches per tick", RobotConfig.KiwiLocalizer.INCHES_PER_TICK)
