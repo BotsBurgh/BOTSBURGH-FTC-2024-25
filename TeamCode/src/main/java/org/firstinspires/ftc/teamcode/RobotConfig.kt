@@ -51,7 +51,7 @@ object RobotConfig {
 
         /** The amount of inches a wheel travels in a single tick. */
         @JvmField
-        var INCHES_PER_TICK: Double = 1.0
+        var INCHES_PER_TICK: Double = 0.082191780821918
 
         @JvmField
         var LOGO_FACING_DIRECTION: RevHubOrientationOnRobot.LogoFacingDirection =
