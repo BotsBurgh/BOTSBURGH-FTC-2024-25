@@ -47,7 +47,7 @@ object RobotConfig {
     object KiwiLocalizer {
         /** The radius of the robot, from the center to the wheel. */
         @JvmField
-        var RADIUS: Double = 1.0
+        var RADIUS: Double = 6.0
 
         /** The amount of inches a wheel travels in a single tick. */
         @JvmField
