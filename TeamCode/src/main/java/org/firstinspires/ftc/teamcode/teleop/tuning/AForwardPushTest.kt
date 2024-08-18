@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
 import org.firstinspires.ftc.teamcode.api.TriWheels
-import org.firstinspires.ftc.teamcode.utils.RobotConfig
+import org.firstinspires.ftc.teamcode.RobotConfig
 
 /**
  * # Step A: Forward Push Test

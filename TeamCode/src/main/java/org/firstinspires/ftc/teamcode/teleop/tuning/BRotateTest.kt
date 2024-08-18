@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
 import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.api.roadrunner.KiwiKinematics
-import org.firstinspires.ftc.teamcode.utils.RobotConfig
+import org.firstinspires.ftc.teamcode.RobotConfig
 
 @TeleOp(name = "Rotate Test", group = GROUP)
 @Disabled
