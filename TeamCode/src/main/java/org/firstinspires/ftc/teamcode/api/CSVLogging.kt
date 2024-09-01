@@ -87,10 +87,10 @@ object CSVLogging : API() {
     }
 
     /**
-     * Closes file
+     * Closes all open files
      * @param file Name of file to close
      */
-    fun closeAllFiles() {
+    fun close() {
         for ((file, stream) in fileHash) {
             try {
                 stream.close()
