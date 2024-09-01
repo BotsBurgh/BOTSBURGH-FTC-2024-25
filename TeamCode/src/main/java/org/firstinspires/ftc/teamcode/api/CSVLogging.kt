@@ -36,7 +36,8 @@ object CSVLogging : API() {
      */
     fun createFile(fileName: String) {
         if (RobotConfig.debug) {
-            fileHash[fileName] = BufferedWriter(FileWriter(File(BOTSBURGH_FOLDER, "/$fileName.csv"), true))
+            fileHash[fileName] =
+                BufferedWriter(FileWriter(File(BOTSBURGH_FOLDER, "/$fileName.csv"), true))
             File(BOTSBURGH_FOLDER, "/$fileName.csv").createNewFile()
         }
     }
@@ -89,11 +90,13 @@ object CSVLogging : API() {
      * Closes file
      * @param file Name of file to close
      */
-    fun close(file: String) {
-        try {
-            fileHash[file]!!.close()
-        } catch (e: IOException) {
-            throw IllegalArgumentException("The file $file does not exist")
+    fun closeAllFiles() {
+        for ((file, stream) in fileHash) {
+            try {
+                stream.close()
+            } catch (e: IOException) {
+                throw IllegalArgumentException("The file $file does not exist")
+            }
         }
     }
 }
