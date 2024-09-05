@@ -2,28 +2,27 @@ package org.firstinspires.ftc.teamcode.teleop.demos
 
 import com.acmerobotics.dashboard.FtcDashboard
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket
+import com.acmerobotics.roadrunner.DualNum
 import com.acmerobotics.roadrunner.Rotation2d
-import com.acmerobotics.roadrunner.Twist2d
+import com.acmerobotics.roadrunner.Time
 import com.acmerobotics.roadrunner.Vector2d
 import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import org.firstinspires.ftc.teamcode.api.TriWheels
-import org.firstinspires.ftc.teamcode.api.TriWheels.RED_ANGLE
-import org.firstinspires.ftc.teamcode.api.TriWheels.GREEN_ANGLE
-import org.firstinspires.ftc.teamcode.api.TriWheels.BLUE_ANGLE
-import org.firstinspires.ftc.teamcode.utils.PI_2
+import org.firstinspires.ftc.teamcode.api.roadrunner.KiwiKinematics
 import org.firstinspires.ftc.teamcode.utils.Polar2d
-import kotlin.math.PI
 
 @TeleOp(name = "Encoder Localization Demo", group = "Demo")
-//@Disabled
+@Disabled
 class EncoderLocalizationDemo : OpMode() {
     private val driveSpeed = 0.3
     private val wheelDiameter = 12.0
     private val inchesPerTick = 0.082191780821918
 
     private val wheelRadius = this.wheelDiameter / 2.0
+
+    private val kinematics = KiwiKinematics(this.wheelRadius)
 
     override fun init() {
         TriWheels.init(this)
@@ -44,22 +43,22 @@ class EncoderLocalizationDemo : OpMode() {
 
         // Find positions of each wheel, converting to distance traveled in inches.
         val wheelPositions =
-            Triple(
-                TriWheels.red.currentPosition.toDouble() * this.inchesPerTick,
-                TriWheels.green.currentPosition.toDouble() * this.inchesPerTick,
-                TriWheels.blue.currentPosition.toDouble() * this.inchesPerTick,
+            KiwiKinematics.WheelTicks<Time>(
+                DualNum.constant(TriWheels.red.currentPosition.toDouble() * this.inchesPerTick, 1),
+                DualNum.constant(TriWheels.green.currentPosition.toDouble() * this.inchesPerTick, 1),
+                DualNum.constant(TriWheels.blue.currentPosition.toDouble() * this.inchesPerTick, 1),
             )
 
         // Find position of the entire robot.
-        val (robotPosition, robotRotation) = this.inverse(wheelPositions)
+        val (robotPosition, robotRotation) = this.kinematics.forward(wheelPositions).value()
 
         val packet = TelemetryPacket()
 
         // Log information to both FTC Dashboard and telemetry.
         for (f in listOf(packet::put, telemetry::addData)) {
-            f("Red", wheelPositions.first)
-            f("Green", wheelPositions.second)
-            f("Blue", wheelPositions.third)
+            f("Red", wheelPositions.red)
+            f("Green", wheelPositions.green)
+            f("Blue", wheelPositions.blue)
 
             f("X", robotPosition.x)
             f("Y", robotPosition.y)
@@ -86,16 +85,5 @@ class EncoderLocalizationDemo : OpMode() {
         FtcDashboard.getInstance().sendTelemetryPacket(packet)
 
         telemetry.addData("Status", "Running")
-    }
-
-    private fun inverse(ticks: Triple<Double, Double, Double>): Twist2d {
-        val rxy = Polar2d(RED_ANGLE - PI_2, ticks.first).toCartesian()
-        val gxy = Polar2d(GREEN_ANGLE - PI_2, ticks.second).toCartesian()
-        val bxy = Polar2d(BLUE_ANGLE - PI_2, ticks.third).toCartesian()
-
-        return Twist2d(
-            (rxy + gxy + bxy) / 1.5,
-            (ticks.first + ticks.second + ticks.third) / this.wheelRadius / 3.0,
-        )
     }
 }
