@@ -9,6 +9,7 @@ import com.acmerobotics.roadrunner.Vector2d
 import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import org.firstinspires.ftc.teamcode.RobotConfig
 import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.api.roadrunner.KiwiKinematics
 import org.firstinspires.ftc.teamcode.utils.Polar2d
@@ -17,12 +18,7 @@ import org.firstinspires.ftc.teamcode.utils.Polar2d
 @Disabled
 class EncoderLocalizationDemo : OpMode() {
     private val driveSpeed = 0.3
-    private val wheelDiameter = 12.0
-    private val inchesPerTick = 0.082191780821918
-
-    private val wheelRadius = this.wheelDiameter / 2.0
-
-    private val kinematics = KiwiKinematics(this.wheelRadius)
+    private val kinematics = KiwiKinematics(RobotConfig.KiwiLocalizer.RADIUS)
 
     override fun init() {
         TriWheels.init(this)
@@ -44,9 +40,9 @@ class EncoderLocalizationDemo : OpMode() {
         // Find positions of each wheel, converting to distance traveled in inches.
         val wheelPositions =
             KiwiKinematics.WheelTicks<Time>(
-                DualNum.constant(TriWheels.red.currentPosition.toDouble() * this.inchesPerTick, 1),
-                DualNum.constant(TriWheels.green.currentPosition.toDouble() * this.inchesPerTick, 1),
-                DualNum.constant(TriWheels.blue.currentPosition.toDouble() * this.inchesPerTick, 1),
+                DualNum.constant(TriWheels.red.currentPosition.toDouble() * RobotConfig.KiwiLocalizer.INCHES_PER_TICK, 1),
+                DualNum.constant(TriWheels.green.currentPosition.toDouble() * RobotConfig.KiwiLocalizer.INCHES_PER_TICK, 1),
+                DualNum.constant(TriWheels.blue.currentPosition.toDouble() * RobotConfig.KiwiLocalizer.INCHES_PER_TICK, 1),
             )
 
         // Find position of the entire robot.
@@ -73,9 +69,9 @@ class EncoderLocalizationDemo : OpMode() {
             val pos = Vector2d(robotPosition.y, -robotPosition.x)
 
             // Swap X and Y because field coordinate is
-            strokeCircle(pos.x, pos.y, this@EncoderLocalizationDemo.wheelRadius)
+            strokeCircle(pos.x, pos.y, RobotConfig.KiwiLocalizer.RADIUS)
 
-            val halfv = Rotation2d.exp(robotRotation).vec().times(0.5 * this@EncoderLocalizationDemo.wheelRadius)
+            val halfv = Rotation2d.exp(robotRotation).vec().times(0.5 * RobotConfig.KiwiLocalizer.RADIUS)
             val p1 = pos + halfv
             val p2 = p1 + halfv
 
