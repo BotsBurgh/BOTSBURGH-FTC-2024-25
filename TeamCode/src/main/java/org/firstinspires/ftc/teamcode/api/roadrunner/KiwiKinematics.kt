@@ -23,6 +23,8 @@ import kotlin.math.abs
  * This was based off of [MecanumKinematics] and [TankKinematics].
  */
 class KiwiKinematics(private val radius: Double) {
+    private val thirdRadius = this.radius / 3.0
+
     /**
      * Represents the amount of ticks each wheel on the drive rotated.
      */
@@ -45,8 +47,8 @@ class KiwiKinematics(private val radius: Double) {
         return Twist2dDual(
             // Sum the cartesian coordinates and divide by 1.5 coefficient.
             (rxy + gxy + bxy) / 1.5,
-            // Find rotation by summing linear distance and dividing by radius.
-            (w.red + w.green + w.blue) / this.radius,
+            // Find rotation by averaging linear distance and dividing by radius.
+            (w.red + w.green + w.blue) / this.thirdRadius,
         )
     }
 
@@ -80,7 +82,7 @@ class KiwiKinematics(private val radius: Double) {
         val greenAngle = DualNum.constant<Param>(GREEN_ANGLE, polar.theta.size())
         val blueAngle = DualNum.constant<Param>(BLUE_ANGLE, polar.theta.size())
 
-        val wheelLinVel = t.angVel * this.radius / 3.0
+        val wheelLinVel = t.angVel * this.thirdRadius
 
         return WheelVelocities(
             polar.radius * (redAngle - polar.theta).sin() + wheelLinVel,
