@@ -28,7 +28,6 @@ internal class DependenciesTest {
         Dependencies.registerAPI(apiC)
         Dependencies.registerAPI(apiA)
 
-
         val expected = "No exception thrown"
         val actual = try {
             Dependencies.checkDependencies()
