@@ -5,9 +5,7 @@ import kotlin.test.assertEquals
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 
-
 internal class DependenciesTest {
-
     // API to test Dependencies
     class TestAPI(
         val name: String,
