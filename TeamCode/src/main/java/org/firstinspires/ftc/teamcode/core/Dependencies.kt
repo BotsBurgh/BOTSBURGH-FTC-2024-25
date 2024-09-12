@@ -40,6 +40,7 @@ object Dependencies : OpModeManagerNotifier.Notifications {
     internal fun registerAPI(api: API) {
         this.initializedAPIs.add(api)
     }
+
     internal fun checkDependencies() {
         for (api in this.initializedAPIs) {
             for (dep in api.dependencies) {
