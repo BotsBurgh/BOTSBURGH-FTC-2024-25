@@ -18,7 +18,7 @@ internal class DependenciesTest {
 
     // This test should pass as everything is initialized
     @Test
-    fun DependencesTest1() {
+    fun dependencesTest1() {
         val apiA = TestAPI("A")
         val apiB = TestAPI("B", setOf(apiA))
         val apiC = TestAPI("C", setOf(apiB))
@@ -40,7 +40,7 @@ internal class DependenciesTest {
 
     // This test throws a MissingDependency
     @Test
-    fun DependencesTest2() {
+    fun dependencesTest2() {
         val apiA = TestAPI("A")
         val apiB = TestAPI("B", setOf(apiA))
         Dependencies.registerAPI(apiB)
