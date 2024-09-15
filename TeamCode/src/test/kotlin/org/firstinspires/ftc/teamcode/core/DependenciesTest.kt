@@ -9,7 +9,6 @@ import kotlin.test.assertFailsWith
 internal class DependenciesTest {
     // API to test dependencies
     private class TestAPI(
-        val name: String,
         override val dependencies: Set<API> = emptySet(),
     ) : API()
 
@@ -17,9 +16,9 @@ internal class DependenciesTest {
     @Test
     fun dependenciesFulfilled() =
         withReset {
-            val apiA = TestAPI("A")
-            val apiB = TestAPI("B", setOf(apiA))
-            val apiC = TestAPI("C", setOf(apiB))
+            val apiA = TestAPI()
+            val apiB = TestAPI(setOf(apiA))
+            val apiC = TestAPI(setOf(apiB))
 
             Dependencies.registerAPI(apiB)
             Dependencies.registerAPI(apiC)
@@ -33,8 +32,8 @@ internal class DependenciesTest {
     @Test
     fun missingDependency() =
         withReset {
-            val apiA = TestAPI("A")
-            val apiB = TestAPI("B", setOf(apiA))
+            val apiA = TestAPI()
+            val apiB = TestAPI(setOf(apiA))
 
             // Note how apiA is not registered.
             Dependencies.registerAPI(apiB)
@@ -46,7 +45,7 @@ internal class DependenciesTest {
 
     @Test
     fun registerAddsToDependencyList() = withReset {
-        val apiA = TestAPI("A")
+        val apiA = TestAPI()
 
         Dependencies.registerAPI(apiA)
 
@@ -55,7 +54,7 @@ internal class DependenciesTest {
 
     @Test
     fun initAPIAddsToDependencyList() = withReset {
-        val apiA = TestAPI("A")
+        val apiA = TestAPI()
 
         apiA.init(object : OpMode() {
             override fun init() {}
