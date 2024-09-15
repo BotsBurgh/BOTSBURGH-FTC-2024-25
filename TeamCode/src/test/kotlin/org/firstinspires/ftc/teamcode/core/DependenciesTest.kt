@@ -44,23 +44,28 @@ internal class DependenciesTest {
         }
 
     @Test
-    fun registerAddsToDependencyList() = withReset {
-        val apiA = TestAPI()
+    fun registerAddsToDependencyList() =
+        withReset {
+            val apiA = TestAPI()
 
-        Dependencies.registerAPI(apiA)
+            Dependencies.registerAPI(apiA)
 
-        assertContains(Dependencies.initializedAPIs, apiA)
-    }
+            assertContains(Dependencies.initializedAPIs, apiA)
+        }
 
     @Test
-    fun initAPIAddsToDependencyList() = withReset {
-        val apiA = TestAPI()
+    fun initAPIAddsToDependencyList() =
+        withReset {
+            val apiA = TestAPI()
 
-        apiA.init(object : OpMode() {
-            override fun init() {}
-            override fun loop() {}
-        })
+            apiA.init(
+                object : OpMode() {
+                    override fun init() {}
 
-        assertContains(Dependencies.initializedAPIs, apiA)
-    }
+                    override fun loop() {}
+                },
+            )
+
+            assertContains(Dependencies.initializedAPIs, apiA)
+        }
 }
