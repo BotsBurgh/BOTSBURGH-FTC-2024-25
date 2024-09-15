@@ -11,7 +11,7 @@ import org.firstinspires.ftc.ftccommon.external.OnCreateEventLoop
  * pressed.
  */
 object Dependencies : OpModeManagerNotifier.Notifications {
-    private val initializedAPIs: MutableSet<API> by Resettable { mutableSetOf() }
+    internal val initializedAPIs: MutableSet<API> by Resettable { mutableSetOf() }
 
     override fun onOpModePreInit(opMode: OpMode) {}
 

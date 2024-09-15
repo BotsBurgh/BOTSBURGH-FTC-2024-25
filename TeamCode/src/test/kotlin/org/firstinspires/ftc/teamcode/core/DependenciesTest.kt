@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.core
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import org.firstinspires.ftc.teamcode.withReset
 import kotlin.test.Test
+import kotlin.test.assertContains
 import kotlin.test.assertFailsWith
 
 internal class DependenciesTest {
@@ -41,4 +43,25 @@ internal class DependenciesTest {
                 Dependencies.checkDependencies()
             }
         }
+
+    @Test
+    fun registerAddsToDependencyList() = withReset {
+        val apiA = TestAPI("A")
+
+        Dependencies.registerAPI(apiA)
+
+        assertContains(Dependencies.initializedAPIs, apiA)
+    }
+
+    @Test
+    fun initAPIAddsToDependencyList() = withReset {
+        val apiA = TestAPI("A")
+
+        apiA.init(object : OpMode() {
+            override fun init() {}
+            override fun loop() {}
+        })
+
+        assertContains(Dependencies.initializedAPIs, apiA)
+    }
 }
