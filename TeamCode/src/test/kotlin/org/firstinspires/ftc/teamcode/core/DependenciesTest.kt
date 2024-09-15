@@ -1,52 +1,44 @@
 package org.firstinspires.ftc.teamcode.core
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode
+import org.firstinspires.ftc.teamcode.withReset
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 internal class DependenciesTest {
-    // API to test Dependencies
-    class TestAPI(
+    // API to test dependencies
+    private class TestAPI(
         val name: String,
         override val dependencies: Set<API> = emptySet(),
-    ) : API() {
-        override fun init(opMode: OpMode) {
-            super.init(opMode)
-        }
-    }
+    ) : API()
 
     // This test should pass as everything is initialized
     @Test
-    fun dependencesTest1() {
-        val apiA = TestAPI("A")
-        val apiB = TestAPI("B", setOf(apiA))
-        val apiC = TestAPI("C", setOf(apiB))
-        Dependencies.registerAPI(apiB)
-        Dependencies.registerAPI(apiC)
-        Dependencies.registerAPI(apiA)
+    fun dependenciesFulfilled() =
+        withReset {
+            val apiA = TestAPI("A")
+            val apiB = TestAPI("B", setOf(apiA))
+            val apiC = TestAPI("C", setOf(apiB))
 
-        val expected = "No exception thrown"
-        val actual =
-            try {
-                Dependencies.checkDependencies()
-                "No exception thrown"
-            } catch (e: Exception) {
-                "Exception thrown: ${e.message}"
-            }
+            Dependencies.registerAPI(apiB)
+            Dependencies.registerAPI(apiC)
+            Dependencies.registerAPI(apiA)
 
-        assertEquals(expected, actual)
-    }
+            // If this fails, it will throw an exception that will cause the test to fail.
+            Dependencies.checkDependencies()
+        }
 
     // This test throws a MissingDependency
     @Test
-    fun dependencesTest2() {
-        val apiA = TestAPI("A")
-        val apiB = TestAPI("B", setOf(apiA))
-        Dependencies.registerAPI(apiB)
+    fun missingDependency() =
+        withReset {
+            val apiA = TestAPI("A")
+            val apiB = TestAPI("B", setOf(apiA))
 
-        assertFailsWith<MissingDependency> {
-            Dependencies.checkDependencies()
+            // Note how apiA is not registered.
+            Dependencies.registerAPI(apiB)
+
+            assertFailsWith<MissingDependency> {
+                Dependencies.checkDependencies()
+            }
         }
-    }
 }
