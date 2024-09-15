@@ -55,7 +55,7 @@ object RobotConfig {
 
         @JvmField
         var LOGO_FACING_DIRECTION: RevHubOrientationOnRobot.LogoFacingDirection =
-            RevHubOrientationOnRobot.LogoFacingDirection.FORWARD
+            RevHubOrientationOnRobot.LogoFacingDirection.BACKWARD
 
         @JvmField
         var USB_FACING_DIRECTION: RevHubOrientationOnRobot.UsbFacingDirection =
