@@ -106,7 +106,7 @@ object TriWheels : API() {
     fun stopAndResetMotors() {
         stop()
 
-        for (motor in arrayOf(red, green, blue)) {
+        for (motor in this.wheels()) {
             motor.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
             motor.mode = DcMotor.RunMode.RUN_USING_ENCODER
             motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
@@ -141,4 +141,7 @@ object TriWheels : API() {
         // For some reason there's a coefficient of 1.5 that needs to be divided out.
         return (r + g + b) / 1.5
     }
+
+    /** Returns an array containing [red], [green], and [blue]. */
+    fun wheels() = arrayOf(this.red, this.green, this.blue)
 }

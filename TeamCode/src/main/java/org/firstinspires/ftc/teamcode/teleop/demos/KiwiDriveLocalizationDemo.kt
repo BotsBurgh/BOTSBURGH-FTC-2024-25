@@ -25,7 +25,7 @@ class KiwiDriveLocalizationDemo : OpMode() {
         KiwiDrive.init(this)
 
         // Make wheels spin freely when moved, instead of resisting it.
-        for (motor in arrayOf(TriWheels.red, TriWheels.green, TriWheels.blue)) {
+        for (motor in TriWheels.wheels()) {
             motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
         }
     }
