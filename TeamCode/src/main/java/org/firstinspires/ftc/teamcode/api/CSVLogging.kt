@@ -34,8 +34,7 @@ object CSVLogging : API() {
      * Creates new files to log to (old files are deleted after every run).
      * File must be closed.
      */
-    fun createFile(fileName: String) {
-        if (RobotConfig.debug) {
+    fun createFile(fileName: String) = if (RobotConfig.debug) {
             fileHash[fileName] =
                 BufferedWriter(FileWriter(File(BOTSBURGH_FOLDER, "/$fileName.csv"), true))
             File(BOTSBURGH_FOLDER, "/$fileName.csv").createNewFile()
