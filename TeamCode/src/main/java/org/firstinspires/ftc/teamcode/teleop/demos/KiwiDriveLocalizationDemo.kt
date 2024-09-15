@@ -12,11 +12,13 @@ import org.firstinspires.ftc.teamcode.api.Voltage
 import org.firstinspires.ftc.teamcode.api.roadrunner.KiwiDrive
 import org.firstinspires.ftc.teamcode.api.roadrunner.KiwiLocalizer
 import org.firstinspires.ftc.teamcode.utils.Polar2d
+import kotlin.math.PI
 
 @TeleOp(name = "Kiwi Drive Localization", group = "Demo")
 @Disabled
 class KiwiDriveLocalizationDemo : OpMode() {
     private val driveSpeed = 0.3
+    private val rotationSpeed = 0.2
 
     override fun init() {
         TriWheels.init(this)
@@ -34,14 +36,22 @@ class KiwiDriveLocalizationDemo : OpMode() {
         // Drive robot with left joystick, spin it with right joystick.
         TriWheels.drive(
             Polar2d.fromCartesian(gamepad1.left_stick_x.toDouble() * this.driveSpeed, -gamepad1.left_stick_y.toDouble() * this.driveSpeed),
-            gamepad1.right_stick_x.toDouble(),
+            gamepad1.right_stick_x.toDouble() * this.rotationSpeed,
         )
+
+        // Reset position of left and right bumpers are pressed.
+        if (gamepad1.left_bumper && gamepad1.right_bumper) {
+            TriWheels.stopAndResetMotors()
+        }
 
         // Update our currently tracked position and rotation. This function does most of the
         // work in this opmode.
         KiwiDrive.updatePoseEstimates()
 
-        val (pos, rotation) = KiwiDrive.pose
+        var (pos, rotation) = KiwiDrive.pose
+
+        // The logical front and physical front are offset by 90 degrees, let's fix that.
+        rotation += PI / 2.0
 
         val packet = TelemetryPacket()
 
