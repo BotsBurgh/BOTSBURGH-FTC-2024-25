@@ -25,9 +25,9 @@ import org.firstinspires.ftc.teamcode.core.API
 object KiwiLocalizer : API() {
     override val dependencies = setOf(TriWheels)
 
-    private lateinit var red: Encoder
-    private lateinit var green: Encoder
-    private lateinit var blue: Encoder
+    lateinit var red: Encoder
+    lateinit var green: Encoder
+    lateinit var blue: Encoder
 
     private lateinit var imu: IMU
 
