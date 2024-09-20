@@ -8,13 +8,12 @@ import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1
 import org.firstinspires.ftc.teamcode.api.TriWheels.stop
 import org.firstinspires.ftc.teamcode.core.API
 
-
-object QuadWheels: API() {
+object QuadWheels : API() {
     lateinit var bl: DcMotorEx
         private set
     lateinit var br: DcMotorEx
         private set
-    lateinit var  fr: DcMotorEx
+    lateinit var fr: DcMotorEx
         private set
     lateinit var fl: DcMotorEx
         private set
@@ -23,8 +22,7 @@ object QuadWheels: API() {
     val x = gamepad1.left_stick_x.toDouble()
     val rx = gamepad1.right_stick_x.toDouble()
 
-
-    override fun init(opMode:OpMode) {
+    override fun init(opMode: OpMode) {
         super.init(opMode)
 
         bl = this.opMode.hardwareMap.get(DcMotorEx::class.java, "backLeft")

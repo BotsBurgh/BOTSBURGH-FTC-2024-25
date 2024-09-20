@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import org.firstinspires.ftc.teamcode.api.QuadWheels
 
-
 @TeleOp(name = "Main Quad")
 class TeleOpMainQuad : OpMode() {
     override fun init() {
