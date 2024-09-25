@@ -12,6 +12,11 @@ import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.api.Voltage
 import org.firstinspires.ftc.teamcode.api.roadrunner.KiwiLocalizer
 
+/**
+ * An opmode used to tune the kS, kV, and kA values of [RobotConfig.KiwiDrive].
+ *
+ * This is adapted from [ManualFeedforwardTuner](https://github.com/acmerobotics/road-runner-ftc/blob/c9f0be75158276c5dfcd82ccabb639a15a200f98/RoadRunner/src/main/java/com/acmerobotics/roadrunner/ftc/Tuning.kt#L465).
+ */
 @TeleOp(name = "Feedforward Tuner", group = "Tuner")
 class FeedforwardTuner : LinearOpMode() {
     /** Distance in inches the robot will travel. */
@@ -34,22 +39,24 @@ class FeedforwardTuner : LinearOpMode() {
                 ).baseProfile,
             )
 
+        val encoders =
+            mapOf(
+                "vRed" to KiwiLocalizer.red,
+                "vGreen" to KiwiLocalizer.green,
+                "vBlue" to KiwiLocalizer.blue,
+            )
+
         telemetry.apply {
             addData("Status", "Initialized")
             update()
         }
-
-        val encoders = mapOf(
-            "vRed" to KiwiLocalizer.red,
-            "vGreen" to KiwiLocalizer.green,
-            "vBlue" to KiwiLocalizer.blue,
-        )
 
         waitForStart()
 
         var movingForward = true
         var startTs = System.nanoTime() / 1e9
 
+        // We avoid `opModeIsActive()` because it calls `Thread.yield()`.
         while (!isStopRequested) {
             telemetry.addData("Status", "Running")
 
@@ -58,27 +65,28 @@ class FeedforwardTuner : LinearOpMode() {
                 telemetry.addData(name, v)
             }
 
-            val ts = System.nanoTime() / 1e9
-            val t = ts - startTs
+            val currentTs = System.nanoTime() / 1e9
+            val deltaTs = currentTs - startTs
 
-            if (t > profile.duration) {
+            if (deltaTs > profile.duration) {
                 movingForward = !movingForward
-                startTs = ts
+                startTs = currentTs
             }
 
-            var v = profile[t].drop(1)
+            var v = profile[deltaTs].drop(1)
 
             if (!movingForward) {
                 v = v.unaryMinus()
             }
 
-            telemetry.addData("vref", v[0])
-
             val power = MotorFeedforward(RobotConfig.KiwiDrive.K_S, RobotConfig.KiwiDrive.K_V, RobotConfig.KiwiDrive.K_A).compute(v) / Voltage.get()
 
             TriWheels.drive(0.0, power)
 
-            telemetry.update()
+            telemetry.apply {
+                addData("vRef", v[0])
+                update()
+            }
         }
     }
 }
