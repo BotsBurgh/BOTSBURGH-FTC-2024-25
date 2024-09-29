@@ -11,7 +11,7 @@ import org.firstinspires.ftc.ftccommon.external.OnCreateEventLoop
  * pressed.
  */
 object Dependencies : OpModeManagerNotifier.Notifications {
-    private val initializedAPIs: MutableSet<API> by Resettable { mutableSetOf() }
+    internal val initializedAPIs: MutableSet<API> by Resettable { mutableSetOf() }
 
     override fun onOpModePreInit(opMode: OpMode) {}
 
@@ -41,7 +41,7 @@ object Dependencies : OpModeManagerNotifier.Notifications {
         this.initializedAPIs.add(api)
     }
 
-    private fun checkDependencies() {
+    internal fun checkDependencies() {
         for (api in this.initializedAPIs) {
             for (dep in api.dependencies) {
                 if (!this.initializedAPIs.contains(dep)) {

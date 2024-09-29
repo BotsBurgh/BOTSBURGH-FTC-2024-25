@@ -2,7 +2,11 @@
 // SCREAMING_SNAKE_CASE for them instead of `ktlint`'s desired lowerCamelCase.
 @file:Suppress("ktlint:standard:property-naming")
 
-package org.firstinspires.ftc.teamcode.utils
+package org.firstinspires.ftc.teamcode
+
+import com.acmerobotics.dashboard.config.Config
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot
+import kotlin.math.PI
 
 /**
  * This is an immutable object representing robot configuration.
@@ -11,7 +15,7 @@ package org.firstinspires.ftc.teamcode.utils
  * are annotated with `@Config`. This designates them as FTC Dashboard configuration that can be
  * modified at runtime. **To permanently change these values, you must also modify the code!** The
  * configuration can also change during initialization depending on various build constants like
- * [debug].
+ * [DEBUG].
  */
 object RobotConfig {
     /**
@@ -25,14 +29,79 @@ object RobotConfig {
      * Creates a string representing the current robot build constants.
      */
     override fun toString() = "RobotConfig(debug=$DEBUG)"
-    /** Example on how to set up a Config Variable.
-     @Config
-     object NameOfObject {
-     /**
-     * This is what the variable does.
-     */
-     @JvmField
-     var NAME_OF_VARIABLE: Double = 145.1
-     }
-     */
+
+    /** Configuration related to the TeleOpMain opmode. */
+    @Config
+    object TeleOpMain {
+        /** A multiplier that scales that robot's driving / strafing speed. */
+        @JvmField
+        var DRIVE_SPEED: Double = 0.6
+
+        /** A multiplier that scales the robot's rotation speed. */
+        @JvmField
+        var ROTATE_SPEED: Double = 0.3
+    }
+
+    // TODO: Set robot radius and inches per tick.
+    @Config
+    object KiwiLocalizer {
+        /** The radius of the robot, from the center to the wheel. */
+        @JvmField
+        var RADIUS: Double = 6.0
+
+        /** The amount of inches a wheel travels in a single tick. */
+        @JvmField
+        var INCHES_PER_TICK: Double = 0.082191780821918
+
+        @JvmField
+        var LOGO_FACING_DIRECTION: RevHubOrientationOnRobot.LogoFacingDirection =
+            RevHubOrientationOnRobot.LogoFacingDirection.BACKWARD
+
+        @JvmField
+        var USB_FACING_DIRECTION: RevHubOrientationOnRobot.UsbFacingDirection =
+            RevHubOrientationOnRobot.UsbFacingDirection.UP
+    }
+
+    @Config
+    object KiwiDrive {
+        // Feedforward
+        @JvmField
+        var K_S: Double = 0.0
+
+        @JvmField
+        var K_V: Double = 0.0
+
+        @JvmField
+        var K_A: Double = 0.0
+
+        // Path profile (in inches)
+        @JvmField
+        var MAX_WHEEL_VEL: Double = 50.0
+
+        @JvmField
+        var MIN_PROFILE_ACCEL: Double = -30.0
+
+        @JvmField
+        var MAX_PROFILE_ACCEL: Double = 50.0
+
+        // Turn profile (in radians)
+        @JvmField
+        var MAX_ANG_VEL: Double = PI
+
+        @JvmField
+        var MAX_ANG_ACCEL: Double = PI
+
+        // Path controller gains
+        @JvmField
+        var AXIAL_GAIN: Double = 0.0
+
+        @JvmField
+        var HEADING_GAIN: Double = 0.0
+
+        @JvmField
+        var AXIAL_VEL_GAIN: Double = 0.0
+
+        @JvmField
+        var HEADING_VEL_GAIN: Double = 0.0
+    }
 }
