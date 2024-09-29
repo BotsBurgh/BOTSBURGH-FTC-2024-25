@@ -12,22 +12,21 @@ import java.io.FileWriter
  * An API for creating, managing, and writing to logging files.
  */
 object CsvLogging : API() {
+    // Accessible at `/sdcard/BotsBurgh`.
+    private val BOTSBURGH_FOLDER = File(AppUtil.ROOT_FOLDER, "/BotsBurgh")
+
     private val fileHash = hashMapOf<String, BufferedWriter>()
     private val volatileFileHash = hashMapOf<String, File>()
 
     override fun init(opMode: OpMode) {
         super.init(opMode)
 
+        // Create the folder, if it does not exist already.
+        this.BOTSBURGH_FOLDER.mkdirs()
+
         if (RobotConfig.DEBUG) {
             for (file in BOTSBURGH_FOLDER.listFiles()!!) if (!file.isDirectory) file.delete()
         }
-    }
-
-    // root folder is /storage/emulated/0/BotsBurgh
-    private val BOTSBURGH_FOLDER: File by lazy {
-        val res = File(AppUtil.ROOT_FOLDER, "/BotsBurgh/")
-        res.mkdirs()
-        res
     }
 
     /**
