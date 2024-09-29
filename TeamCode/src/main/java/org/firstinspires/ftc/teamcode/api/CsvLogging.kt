@@ -48,8 +48,8 @@ object CsvLogging : API() {
         data: Double,
     ) {
         if (RobotConfig.DEBUG) {
-            fileHash[file]!!.write("$data, ")
-            fileHash[file]!!.write(opMode.runtime.toString())
+            fileHash[file]!!.write("${opMode.runtime}, ")
+            fileHash[file]!!.write(data.toString())
             fileHash[file]!!.newLine()
         }
     }
@@ -64,10 +64,10 @@ object CsvLogging : API() {
         data: Array<Double>,
     ) {
         if (RobotConfig.DEBUG) {
-            for (i in data) fileHash[file]!!.write("$i, ")
+            fileHash[file]!!.write("${opMode.runtime}")
+            for (i in data) fileHash[file]!!.write(", $i")
+            fileHash[file]!!.newLine()
         }
-        fileHash[file]!!.write(opMode.runtime.toString())
-        fileHash[file]!!.newLine()
     }
 
     fun flush(file: String) {
