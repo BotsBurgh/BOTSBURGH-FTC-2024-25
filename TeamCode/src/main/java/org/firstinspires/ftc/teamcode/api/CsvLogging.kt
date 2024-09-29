@@ -19,7 +19,7 @@ object CsvLogging : API() {
         super.init(opMode)
 
         if (RobotConfig.DEBUG) {
-            for (file in BOTSBURGH_FOLDER.listFiles()) if (!file.isDirectory) file.delete()
+            for (file in BOTSBURGH_FOLDER.listFiles()!!) if (!file.isDirectory) file.delete()
         }
     }
 
