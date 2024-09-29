@@ -70,12 +70,16 @@ object CsvLogging : API() {
         fileHash[file]!!.newLine()
     }
 
+    fun flush(file: String) {
+        this.fileHash[file]!!.flush()
+    }
+
     /**
-     * Closes file.
-     *
-     * @param file Name of file to close
+     * Closes all open files.
      */
-    fun close(file: String) {
-        fileHash[file]!!.close()
+    fun close() {
+        for (writer in this.fileHash.values) {
+            writer.close()
+        }
     }
 }
