@@ -1,16 +1,16 @@
-package org.firstinspires.ftc.teamcode.api.roadrunner
+package org.firstinspires.ftc.teamcode.api.roadrunner.kiwi
 
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket
 import com.acmerobotics.roadrunner.Action
-import com.acmerobotics.roadrunner.TimeTurn
+import com.acmerobotics.roadrunner.TimeTrajectory
 import com.acmerobotics.roadrunner.now
 import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.api.Voltage
 
 /**
- * An [Action] used to turn a [KiwiDrive].
+ * An [Action] used to make a [KiwiDrive] follow a trajectory.
  */
-class TurnAction(private val turn: TimeTurn) : Action {
+class FollowTrajectoryAction(private val timeTrajectory: TimeTrajectory) : Action {
     private var start = -1.0
 
     override fun run(p: TelemetryPacket): Boolean {
@@ -23,13 +23,13 @@ class TurnAction(private val turn: TimeTurn) : Action {
                 now() - start
             }
 
-        if (elapsed >= this.turn.duration) {
+        if (elapsed >= this.timeTrajectory.duration) {
             TriWheels.stop()
             return false
         }
 
         // Find where the robot should be for the current time.
-        val targetPose = this.turn[elapsed]
+        val targetPose = this.timeTrajectory[elapsed]
 
         // Update the actual position and velocity.
         val actualVel = KiwiDrive.updatePoseEstimates()

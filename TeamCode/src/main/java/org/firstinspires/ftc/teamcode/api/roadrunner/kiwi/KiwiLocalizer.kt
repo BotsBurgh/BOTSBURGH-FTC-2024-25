@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.api.roadrunner
+package org.firstinspires.ftc.teamcode.api.roadrunner.kiwi
 
 import com.acmerobotics.roadrunner.DualNum
 import com.acmerobotics.roadrunner.Rotation2d
@@ -44,12 +44,12 @@ object KiwiLocalizer : API() {
     override fun init(opMode: OpMode) {
         super.init(opMode)
 
-        this.red = OverflowEncoder(RawEncoder(TriWheels.red))
-        this.green = OverflowEncoder(RawEncoder(TriWheels.green))
-        this.blue = OverflowEncoder(RawEncoder(TriWheels.blue))
+        red = OverflowEncoder(RawEncoder(TriWheels.red))
+        green = OverflowEncoder(RawEncoder(TriWheels.green))
+        blue = OverflowEncoder(RawEncoder(TriWheels.blue))
 
-        this.imu = this.opMode.hardwareMap.get(IMU::class.java, "imu")
-        this.imu.initialize(
+        imu = this.opMode.hardwareMap.get(IMU::class.java, "imu")
+        imu.initialize(
             IMU.Parameters(
                 RevHubOrientationOnRobot(
                     RobotConfig.KiwiLocalizer.LOGO_FACING_DIRECTION,
@@ -57,9 +57,9 @@ object KiwiLocalizer : API() {
                 ),
             ),
         )
-        this.imu.resetYaw()
+        imu.resetYaw()
 
-        this.kinematics = KiwiKinematics(RobotConfig.KiwiLocalizer.RADIUS)
+        kinematics = KiwiKinematics(RobotConfig.KiwiLocalizer.RADIUS)
     }
 
     /**
@@ -68,23 +68,23 @@ object KiwiLocalizer : API() {
      */
     fun update(): Twist2dDual<Time> {
         // Find position and velocity of each wheel.
-        val redPosVel = this.red.getPositionAndVelocity()
-        val greenPosVel = this.green.getPositionAndVelocity()
-        val bluePosVel = this.blue.getPositionAndVelocity()
+        val redPosVel = red.getPositionAndVelocity()
+        val greenPosVel = green.getPositionAndVelocity()
+        val bluePosVel = blue.getPositionAndVelocity()
 
         // Find heading of IMU.
-        val angles = this.imu.robotYawPitchRollAngles
+        val angles = imu.robotYawPitchRollAngles
         val heading = Rotation2d.fromDouble(angles.getYaw(AngleUnit.RADIANS))
 
-        if (this.firstUpdate) {
-            this.firstUpdate = false
+        if (firstUpdate) {
+            firstUpdate = false
 
             // Initialize last position and heading as current values.
-            this.lastRedPos = redPosVel.position
-            this.lastGreenPos = greenPosVel.position
-            this.lastBluePos = bluePosVel.position
+            lastRedPos = redPosVel.position
+            lastGreenPos = greenPosVel.position
+            lastBluePos = bluePosVel.position
 
-            this.lastHeading = heading
+            lastHeading = heading
 
             // Return a zeroed twist, equivalent no change.
             return Twist2dDual(
@@ -94,28 +94,28 @@ object KiwiLocalizer : API() {
         }
 
         // Find the change in heading.
-        val headingDelta = heading - this.lastHeading
+        val headingDelta = heading - lastHeading
 
         // Calculate the twist: how much the robot has moved between the current and previous call
         // to `update()`.
         val twist =
-            this.kinematics.forward(
+            kinematics.forward(
                 KiwiKinematics.WheelTicks(
                     DualNum<Time>(
                         doubleArrayOf(
-                            (redPosVel.position - this.lastRedPos).toDouble(),
+                            (redPosVel.position - lastRedPos).toDouble(),
                             redPosVel.velocity.toDouble(),
                         ),
                     ) * RobotConfig.KiwiLocalizer.INCHES_PER_TICK,
                     DualNum<Time>(
                         doubleArrayOf(
-                            (greenPosVel.position - this.lastGreenPos).toDouble(),
+                            (greenPosVel.position - lastGreenPos).toDouble(),
                             greenPosVel.velocity.toDouble(),
                         ),
                     ) * RobotConfig.KiwiLocalizer.INCHES_PER_TICK,
                     DualNum<Time>(
                         doubleArrayOf(
-                            (bluePosVel.position - this.lastBluePos).toDouble(),
+                            (bluePosVel.position - lastBluePos).toDouble(),
                             bluePosVel.velocity.toDouble(),
                         ),
                     ) * RobotConfig.KiwiLocalizer.INCHES_PER_TICK,
@@ -123,11 +123,11 @@ object KiwiLocalizer : API() {
             )
 
         // Update last position and heading to current values.
-        this.lastRedPos = redPosVel.position
-        this.lastGreenPos = greenPosVel.position
-        this.lastBluePos = bluePosVel.position
+        lastRedPos = redPosVel.position
+        lastGreenPos = greenPosVel.position
+        lastBluePos = bluePosVel.position
 
-        this.lastHeading = heading
+        lastHeading = heading
 
         // Return the calculated twist, but replace the calculated angle with the one from the IMU.
         return Twist2dDual(twist.line, DualNum.cons(headingDelta, twist.angle.drop(1)))

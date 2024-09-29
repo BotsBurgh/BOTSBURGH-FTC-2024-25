@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.hardware.DcMotor
 import org.firstinspires.ftc.teamcode.RobotConfig
 import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.api.Voltage
-import org.firstinspires.ftc.teamcode.api.roadrunner.KiwiDrive
-import org.firstinspires.ftc.teamcode.api.roadrunner.KiwiLocalizer
+import org.firstinspires.ftc.teamcode.api.roadrunner.kiwi.KiwiDrive
+import org.firstinspires.ftc.teamcode.api.roadrunner.kiwi.KiwiLocalizer
 import org.firstinspires.ftc.teamcode.utils.Polar2d
 import kotlin.math.PI
 

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.api.roadrunner
+package org.firstinspires.ftc.teamcode.api.roadrunner.kiwi
 
 import com.acmerobotics.roadrunner.AngularVelConstraint
 import com.acmerobotics.roadrunner.HolonomicController
@@ -76,19 +76,19 @@ object KiwiDrive : API() {
         TrajectoryActionBuilder(
             ::TurnAction,
             ::FollowTrajectoryAction,
-            this.trajectoryBuilderParams,
+            trajectoryBuilderParams,
             beginPose,
             // Robot should end stopped.
             beginEndVel = 0.0,
-            this.turnConstraint,
-            this.velConstraint,
-            this.accelConstraint,
+            turnConstraint,
+            velConstraint,
+            accelConstraint,
         )
 
     /** Updates the currently tracked [pose] using [KiwiLocalizer]. */
     fun updatePoseEstimates(): PoseVelocity2d {
         val twist = KiwiLocalizer.update()
-        this.pose += twist.value()
+        pose += twist.value()
         return twist.velocity().value()
     }
 }
