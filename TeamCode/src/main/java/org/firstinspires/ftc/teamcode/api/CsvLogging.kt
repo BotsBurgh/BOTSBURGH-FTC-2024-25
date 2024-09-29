@@ -47,9 +47,11 @@ object CsvLogging : API() {
         data: Double,
     ) {
         if (RobotConfig.DEBUG) {
-            fileHash[file]!!.write("${opMode.runtime}, ")
-            fileHash[file]!!.write(data.toString())
-            fileHash[file]!!.newLine()
+            val writer = this.fileHash[file]!!
+
+            writer.write("${opMode.runtime}, ")
+            writer.write(data.toString())
+            writer.newLine()
         }
     }
 
@@ -63,9 +65,11 @@ object CsvLogging : API() {
         data: Array<Double>,
     ) {
         if (RobotConfig.DEBUG) {
-            fileHash[file]!!.write("${opMode.runtime}")
+            val writer = this.fileHash[file]!!
+
+            writer.write("${opMode.runtime}")
             for (i in data) fileHash[file]!!.write(", $i")
-            fileHash[file]!!.newLine()
+            writer.newLine()
         }
     }
 
