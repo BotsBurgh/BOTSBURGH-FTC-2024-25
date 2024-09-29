@@ -34,7 +34,6 @@ object CsvLogging : API() {
     fun createFile(fileName: String) {
         if (RobotConfig.DEBUG) {
             fileHash[fileName] = BufferedWriter(FileWriter(File(BOTSBURGH_FOLDER, "/$fileName.csv"), true))
-            File(BOTSBURGH_FOLDER, "/$fileName.csv").createNewFile()
         }
     }
 
