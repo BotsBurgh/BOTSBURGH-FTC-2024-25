@@ -62,7 +62,7 @@ object ScanAPI : API() {
         //builder.setCameraResolution(new Size(640, 480));
 
         // Enable the RC preview (LiveView).  Set "false" to omit camera monitoring.
-        builder.enableLiveView(false);
+        builder.enableLiveView(false)
 
         // Set the stream format; MJPEG uses less bandwidth than default YUY2.
         //builder.setStreamFormat(VisionPortal.StreamFormat.YUY2);
@@ -124,5 +124,8 @@ object ScanAPI : API() {
 
     fun scan(){
         visionPortal!!.setProcessorEnabled(tfod, true);
+    }
+    fun stopScan(){
+        visionPortal!!.setProcessorEnabled(tfod, false);
     }
 } // end class
