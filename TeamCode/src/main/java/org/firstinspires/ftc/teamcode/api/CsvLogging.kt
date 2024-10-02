@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.api
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
-import org.firstinspires.ftc.robotcore.internal.system.AppUtil
 import org.firstinspires.ftc.teamcode.RobotConfig
 import org.firstinspires.ftc.teamcode.core.API
 import java.io.BufferedWriter
@@ -12,19 +11,16 @@ import java.io.FileWriter
  * An API for creating, managing, and writing to logging files.
  */
 object CsvLogging : API() {
-    // Accessible at `/sdcard/BotsBurgh`.
-    private val BOTSBURGH_FOLDER = File(AppUtil.ROOT_FOLDER, "/BotsBurgh")
-
     private val fileHash = hashMapOf<String, BufferedWriter>()
 
     override fun init(opMode: OpMode) {
         super.init(opMode)
 
         // Create the folder, if it does not exist already.
-        this.BOTSBURGH_FOLDER.mkdirs()
+        RobotConfig.CsvLogging.BOTSBURGH_FOLDER.mkdirs()
 
         if (RobotConfig.DEBUG) {
-            for (file in BOTSBURGH_FOLDER.listFiles()!!) if (!file.isDirectory) file.delete()
+            for (file in RobotConfig.CsvLogging.BOTSBURGH_FOLDER.listFiles()!!) if (!file.isDirectory) file.delete()
         }
     }
 
@@ -33,7 +29,7 @@ object CsvLogging : API() {
      */
     fun createFile(fileName: String) {
         if (RobotConfig.DEBUG) {
-            fileHash[fileName] = BufferedWriter(FileWriter(File(BOTSBURGH_FOLDER, "/$fileName.csv"), true))
+            fileHash[fileName] = BufferedWriter(FileWriter(File(RobotConfig.CsvLogging.BOTSBURGH_FOLDER, "/$fileName.csv"), true))
         }
     }
 
