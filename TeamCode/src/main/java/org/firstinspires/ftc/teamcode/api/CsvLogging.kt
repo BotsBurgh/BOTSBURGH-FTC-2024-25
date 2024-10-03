@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.api
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
-import org.firstinspires.ftc.robotcore.internal.system.AppUtil
 import org.firstinspires.ftc.teamcode.RobotConfig
 import org.firstinspires.ftc.teamcode.core.API
 import java.io.BufferedWriter
@@ -13,21 +12,16 @@ import java.io.FileWriter
  */
 object CsvLogging : API() {
     private val fileHash = hashMapOf<String, BufferedWriter>()
-    private val volatileFileHash = hashMapOf<String, File>()
 
     override fun init(opMode: OpMode) {
         super.init(opMode)
 
-        if (RobotConfig.DEBUG) {
-            for (file in BOTSBURGH_FOLDER.listFiles()) if (!file.isDirectory) file.delete()
-        }
-    }
+        // Create the folder, if it does not exist already.
+        RobotConfig.CsvLogging.BOTSBURGH_FOLDER.mkdirs()
 
-    // root folder is /storage/emulated/0/BotsBurgh
-    private val BOTSBURGH_FOLDER: File by lazy {
-        val res = File(AppUtil.ROOT_FOLDER, "/BotsBurgh/")
-        res.mkdirs()
-        res
+        if (RobotConfig.DEBUG) {
+            for (file in RobotConfig.CsvLogging.BOTSBURGH_FOLDER.listFiles()!!) if (!file.isDirectory) file.delete()
+        }
     }
 
     /**
@@ -35,18 +29,7 @@ object CsvLogging : API() {
      */
     fun createFile(fileName: String) {
         if (RobotConfig.DEBUG) {
-            fileHash[fileName] = BufferedWriter(FileWriter(File(BOTSBURGH_FOLDER, "/$fileName.csv"), true))
-            File(BOTSBURGH_FOLDER, "/$fileName.csv").createNewFile()
-        }
-    }
-
-    /**
-     * Creates new volatile files to log to (old files are deleted after every run). Only use volatile files to diagnose power issues.
-     */
-    fun createVolatileFile(fileName: String) {
-        if (RobotConfig.DEBUG) {
-            volatileFileHash[fileName] = File(BOTSBURGH_FOLDER, "/$fileName.csv")
-            File(BOTSBURGH_FOLDER, "/$fileName.csv").createNewFile()
+            fileHash[fileName] = BufferedWriter(FileWriter(File(RobotConfig.CsvLogging.BOTSBURGH_FOLDER, "/$fileName.csv"), true))
         }
     }
 
@@ -60,9 +43,11 @@ object CsvLogging : API() {
         data: Double,
     ) {
         if (RobotConfig.DEBUG) {
-            fileHash[file]!!.write("$data, ")
-            fileHash[file]!!.write(opMode.runtime.toString())
-            fileHash[file]!!.newLine()
+            val writer = this.fileHash[file]!!
+
+            writer.write("${opMode.runtime}, ")
+            writer.write(data.toString())
+            writer.newLine()
         }
     }
 
@@ -76,49 +61,24 @@ object CsvLogging : API() {
         data: Array<Double>,
     ) {
         if (RobotConfig.DEBUG) {
-            for (i in data) fileHash[file]!!.write("$i, ")
-        }
-        fileHash[file]!!.write(opMode.runtime.toString())
-        fileHash[file]!!.newLine()
-    }
+            val writer = this.fileHash[file]!!
 
-    /**
-     * Writes Double data to the targeted volatile file
-     * @param file Name of the file that is being logged to
-     * @param data Double data that is being logged
-     */
-    fun writeVolatileFile(
-        file: String,
-        data: Double,
-    ) {
-        if (RobotConfig.DEBUG) {
-            fileHash[file]!!.write("$data, ")
-            fileHash[file]!!.write(opMode.runtime.toString())
-            fileHash[file]!!.newLine()
+            writer.write("${opMode.runtime}")
+            for (i in data) fileHash[file]!!.write(", $i")
+            writer.newLine()
         }
     }
 
-    /**
-     * Writes Array Double data to the targeted volatile file
-     * @param file Name of the file that is being logged to
-     * @param data Array Double data that is being logged
-     */
-    fun writeVolatileFile(
-        file: String,
-        data: Array<Double>,
-    ) {
-        if (RobotConfig.DEBUG) {
-            for (i in data) fileHash[file]!!.write("$i, ")
-        }
-        fileHash[file]!!.write(opMode.runtime.toString())
-        fileHash[file]!!.newLine()
+    fun flush(file: String) {
+        this.fileHash[file]!!.flush()
     }
 
     /**
-     * Closes file. Only use on non-volatile files
-     * @param file Name of file to close
+     * Closes all open files.
      */
-    fun close(file: String) {
-        fileHash[file]!!.close()
+    fun close() {
+        for (writer in this.fileHash.values) {
+            writer.close()
+        }
     }
 }
