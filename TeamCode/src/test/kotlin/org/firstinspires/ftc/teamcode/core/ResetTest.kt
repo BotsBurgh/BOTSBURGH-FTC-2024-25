@@ -7,7 +7,7 @@ internal class ResetTest {
     // This test creates a resettable and
     // the test should pass as nothing is changed
     @Test
-    fun DefaultTest() {
+    fun defaultTest() {
         // The starting value of someState is 5.
         var someState: Int by Resettable { 5 }
 
@@ -39,7 +39,7 @@ internal class ResetTest {
     // This test creates a resettable then modifies
     // then resets to original state the test should pass
     @Test
-    fun ResetAllTest() {
+    fun resetAllTest() {
         // The starting value of someState is 20.
         var someState: Int by Resettable { 20 }
 
