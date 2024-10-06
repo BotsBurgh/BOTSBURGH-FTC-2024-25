@@ -4,57 +4,36 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 internal class ResetTest {
-    // This test creates a resettable and
-    // the test should pass as nothing is changed
+    // This test verifies that `Resettable`s start with the value of their default constructor.
     @Test
-    fun defaultTest() {
-        // The starting value of someState is 5.
-        var someState: Int by Resettable { 5 }
+    fun testInitializer() {
+        // The starting value of `someState` is 5.
+        val actual: Int by Resettable { 2 + 3 }
 
-        val expected = 5
-        val actual = someState
-        assertEquals(expected, actual)
+        assertEquals(5, actual)
     }
 
-    // This test creates a resettable and
-    // modifies it and the test should pass
+    // This test ensures that modifying `Resettable`s actually updates their value.
     @Test
-    fun modifyingTest() {
-        // The starting value of someState is 10.
-        var someState: Int by Resettable { 10 }
+    fun testMutation() {
+        var actual: Int by Resettable { 10 }
 
-        fun mutateState() {
-            // `Resettable` variables can be mutated as normal.
-            someState = 15
-            assert(someState == 15)
-        }
+        actual = 15
 
-        // modifying
-        mutateState()
-        val expected = 15
-        val actual = someState
-        assertEquals(expected, actual)
+        assertEquals(15, actual)
     }
 
-    // This test creates a resettable then modifies
-    // then resets to original state the test should pass
+    // This test verifies that calling `ResetListener.resetAll()` resets `Resettable`s to their
+    // default value.
     @Test
-    fun resetAllTest() {
+    fun testReset() {
         // The starting value of someState is 20.
-        var someState: Int by Resettable { 20 }
+        var actual: Int by Resettable { 20 }
 
-        fun mutateState() {
-            // `Resettable` variables can be mutated as normal.
-            someState = 25
-            assert(someState == 25)
-        }
+        actual = 25
+        assertEquals(25, actual)
 
-        // modifying
-        mutateState()
-        // resetting all values
         ResetListener.resetAll()
-        val expected = 20
-        val actual = someState
-        assertEquals(expected, actual)
+        assertEquals(20, actual)
     }
 }
