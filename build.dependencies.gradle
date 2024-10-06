@@ -8,18 +8,14 @@ dependencies {
     // FTC Libraries
     implementation libs.ftc.inspection
     implementation libs.ftc.blocks
-    implementation libs.ftc.tfod
     implementation libs.ftc.robotcore
     implementation libs.ftc.robotserver
     implementation libs.ftc.onbotjava
     implementation libs.ftc.hardware
     implementation libs.ftc.common
     implementation libs.ftc.vision
-    implementation libs.ftc.gameassets.centerstage
 
     // FTC Associated Libraries
-    implementation libs.tensorflowLite.taskVision
-    runtimeOnly libs.tensorflowLite
     implementation libs.appcompat
 
     // Test framework

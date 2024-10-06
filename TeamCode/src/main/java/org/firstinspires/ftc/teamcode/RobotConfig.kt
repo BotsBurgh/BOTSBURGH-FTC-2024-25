@@ -6,6 +6,8 @@ package org.firstinspires.ftc.teamcode
 
 import com.acmerobotics.dashboard.config.Config
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot
+import org.firstinspires.ftc.robotcore.internal.system.AppUtil
+import java.io.File
 import kotlin.math.PI
 
 /**
@@ -103,5 +105,12 @@ object RobotConfig {
 
         @JvmField
         var HEADING_VEL_GAIN: Double = 0.0
+    }
+
+    @Config
+    object CsvLogging {
+        // Accessible at `/sdcard/BotsBurgh`.
+        @JvmField
+        var BOTSBURGH_FOLDER = File(AppUtil.ROOT_FOLDER, "/BotsBurgh")
     }
 }
