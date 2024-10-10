@@ -51,6 +51,11 @@ object QuadWheels : API() {
         power((-y + r), (y + r), (y + r), (-y + r))
     }
 
+    fun stop() {
+        power(0.0, 0.0, 0.0, 0.0)
+    }
+
+
     fun stopAndResetMotors() {
         stop()
 
