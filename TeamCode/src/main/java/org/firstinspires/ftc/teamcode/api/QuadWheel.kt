@@ -26,9 +26,9 @@ object QuadWheels : API() {
         super.init(opMode)
 
         bl = this.opMode.hardwareMap.get(DcMotorEx::class.java, "backLeft")
-        br = this.opMode.hardwareMap.get(DcMotorEx::class.java, "backLeft")
-        fr = this.opMode.hardwareMap.get(DcMotorEx::class.java, "backLeft")
-        fl = this.opMode.hardwareMap.get(DcMotorEx::class.java, "backLeft")
+        br = this.opMode.hardwareMap.get(DcMotorEx::class.java, "backRight")
+        fr = this.opMode.hardwareMap.get(DcMotorEx::class.java, "frontLeft")
+        fl = this.opMode.hardwareMap.get(DcMotorEx::class.java, "frontRight")
 
         stopAndResetMotors()
     }
