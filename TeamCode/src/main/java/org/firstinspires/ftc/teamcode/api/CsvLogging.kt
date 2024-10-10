@@ -69,6 +69,24 @@ object CsvLogging : API() {
         }
     }
 
+    /**
+     * Writes String data to the targeted file
+     * @param file Name of the file that is being logged to
+     * @param data String data that is being logged
+     */
+    fun writeFile(
+        file: String,
+        data: String,
+    ) {
+        if (RobotConfig.DEBUG) {
+            val writer = this.fileHash[file]!!
+
+            writer.write("${opMode.runtime}, ")
+            writer.write(data.toString())
+            writer.newLine()
+        }
+    }
+
     fun flush(file: String) {
         this.fileHash[file]!!.flush()
     }
