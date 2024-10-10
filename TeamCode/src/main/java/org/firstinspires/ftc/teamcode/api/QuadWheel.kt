@@ -18,10 +18,8 @@ object QuadWheels : API() {
 
     private val y
         get() = -opMode.gamepad1.left_stick_y.toDouble()
-    private val x
+    private val r
         get() = opMode.gamepad1.left_stick_x.toDouble()
-    private val rx
-        get() = opMode.gamepad1.right_stick_x.toDouble()
 
     override fun init(opMode: OpMode) {
         super.init(opMode)
@@ -50,7 +48,7 @@ object QuadWheels : API() {
     }
 
     fun drive() {
-        power((y - x + rx), (y + x - rx), (y - x - rx), (y + x + rx))
+        power((-y + r), (y + r), (y + r), (-y + r))
     }
 
     fun stopAndResetMotors() {
