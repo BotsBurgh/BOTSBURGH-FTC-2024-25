@@ -1,10 +1,8 @@
 package org.firstinspires.ftc.teamcode.api
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
-import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1
 import org.firstinspires.ftc.teamcode.api.TriWheels.stop
 import org.firstinspires.ftc.teamcode.core.API
 
@@ -18,9 +16,12 @@ object QuadWheels : API() {
     lateinit var fl: DcMotorEx
         private set
 
-    val y = -gamepad1.left_stick_y.toDouble()
-    val x = gamepad1.left_stick_x.toDouble()
-    val rx = gamepad1.right_stick_x.toDouble()
+    private val y
+        get() = -opMode.gamepad1.left_stick_y.toDouble()
+    private val x
+        get() = opMode.gamepad1.left_stick_x.toDouble()
+    private val rx
+        get() = opMode.gamepad1.right_stick_x.toDouble()
 
     override fun init(opMode: OpMode) {
         super.init(opMode)
