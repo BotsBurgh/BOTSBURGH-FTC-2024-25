@@ -34,6 +34,15 @@ object CsvLogging : API() {
     }
 
     /**
+     * Creates new files to log to (old files are deleted after every run). File must be closed.
+     */
+    fun createFileLog(fileName: String) {
+        if (RobotConfig.DEBUG) {
+            fileHash[fileName] = BufferedWriter(FileWriter(File(RobotConfig.CsvLogging.BOTSBURGH_FOLDER, "/$fileName.log"), true))
+        }
+    }
+
+    /**
      * Writes Double data to the targeted file
      * @param file Name of the file that is being logged to
      * @param data Double data that is being logged
@@ -65,6 +74,24 @@ object CsvLogging : API() {
 
             writer.write("${opMode.runtime}")
             for (i in data) fileHash[file]!!.write(", $i")
+            writer.newLine()
+        }
+    }
+
+    /**
+     * Writes String data to the targeted file
+     * @param file Name of the file that is being logged to
+     * @param data String data that is being logged
+     */
+    fun writeFile(
+        file: String,
+        data: String,
+    ) {
+        if (RobotConfig.DEBUG) {
+            val writer = this.fileHash[file]!!
+
+            writer.write("${opMode.runtime}, ")
+            writer.write(data.toString())
             writer.newLine()
         }
     }
