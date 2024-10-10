@@ -34,6 +34,15 @@ object CsvLogging : API() {
     }
 
     /**
+     * Creates new files to log to (old files are deleted after every run). File must be closed.
+     */
+    fun createFileLog(fileName: String) {
+        if (RobotConfig.DEBUG) {
+            fileHash[fileName] = BufferedWriter(FileWriter(File(RobotConfig.CsvLogging.BOTSBURGH_FOLDER, "/$fileName.log"), true))
+        }
+    }
+
+    /**
      * Writes Double data to the targeted file
      * @param file Name of the file that is being logged to
      * @param data Double data that is being logged
