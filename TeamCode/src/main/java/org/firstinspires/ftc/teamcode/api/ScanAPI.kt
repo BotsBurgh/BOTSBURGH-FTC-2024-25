@@ -8,7 +8,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDir
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName
 import org.firstinspires.ftc.vision.VisionPortal
 import org.firstinspires.ftc.vision.tfod.TfodProcessor
-import tensorflow.ScanAPI.Define.USE_WEBCAM
+import org.firstinspires.ftc.teamcode.api.ScanAPI.Define.USE_WEBCAM
 
 
 
