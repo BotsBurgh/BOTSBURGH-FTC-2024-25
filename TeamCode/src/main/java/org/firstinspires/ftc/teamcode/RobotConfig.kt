@@ -113,4 +113,10 @@ object RobotConfig {
         @JvmField
         var BOTSBURGH_FOLDER = File(AppUtil.ROOT_FOLDER, "/BotsBurgh")
     }
+
+    @Config
+    object StringLogging {
+        @JvmField
+        var BOTSBURGH_FOLDER = File(AppUtil.ROOT_FOLDER, "/BotsBurgh")
+    }
 }

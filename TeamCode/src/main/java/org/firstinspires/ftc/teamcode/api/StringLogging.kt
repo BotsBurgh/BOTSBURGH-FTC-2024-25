@@ -10,17 +10,17 @@ import java.io.FileWriter
 /**
  * An API for creating, managing, and writing to logging files.
  */
-object CsvLogging : API() {
+object StringLogging : API() {
     private val fileHash = hashMapOf<String, BufferedWriter>()
 
     override fun init(opMode: OpMode) {
         super.init(opMode)
 
         // Create the folder, if it does not exist already.
-        RobotConfig.CsvLogging.BOTSBURGH_FOLDER.mkdirs()
+        RobotConfig.StringLogging.BOTSBURGH_FOLDER.mkdirs()
 
         if (RobotConfig.DEBUG) {
-            for (file in RobotConfig.CsvLogging.BOTSBURGH_FOLDER.listFiles()!!) if (!file.isDirectory) file.delete()
+            for (file in RobotConfig.StringLogging.BOTSBURGH_FOLDER.listFiles()!!) if (!file.isDirectory) file.delete()
         }
     }
 
@@ -29,7 +29,7 @@ object CsvLogging : API() {
      */
     fun createFile(fileName: String) {
         if (RobotConfig.DEBUG) {
-            fileHash[fileName] = BufferedWriter(FileWriter(File(RobotConfig.CsvLogging.BOTSBURGH_FOLDER, "/$fileName.csv"), true))
+            fileHash[fileName] = BufferedWriter(FileWriter(File(RobotConfig.StringLogging.BOTSBURGH_FOLDER, "/$fileName.log"), true))
         }
     }
 
@@ -64,7 +64,25 @@ object CsvLogging : API() {
             val writer = this.fileHash[file]!!
 
             writer.write("${opMode.runtime}")
-            for (i in data) CsvLogging.fileHash[file]!!.write(", $i")
+            for (i in data) fileHash[file]!!.write(", $i")
+            writer.newLine()
+        }
+    }
+
+    /**
+     * Writes String data to the targeted file
+     * @param file Name of the file that is being logged to
+     * @param data String data that is being logged
+     */
+    fun writeFile(
+        file: String,
+        data: String,
+    ) {
+        if (RobotConfig.DEBUG) {
+            val writer = this.fileHash[file]!!
+
+            writer.write("${opMode.runtime}, ")
+            writer.write(data.toString())
             writer.newLine()
         }
     }
