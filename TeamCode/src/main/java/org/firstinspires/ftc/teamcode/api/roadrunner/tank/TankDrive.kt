@@ -51,6 +51,7 @@ import org.firstinspires.ftc.teamcode.messages.TankLocalizerInputsMessage
 import java.util.Arrays
 import java.util.Collections
 import java.util.LinkedList
+import kotlin.math.PI
 import kotlin.math.ceil
 import kotlin.math.max
 
@@ -60,40 +61,40 @@ class TankDrive(hardwareMap: HardwareMap, var pose: Pose2d) {
         // IMU orientation
         // TODO: fill in these values based on
         //   see https://ftc-docs.firstinspires.org/en/latest/programming_resources/imu/imu.html?highlight=imu#physical-hub-mounting
-        var logoFacingDirection: RevHubOrientationOnRobot.LogoFacingDirection =
+        var logoFacingDirection =
             RevHubOrientationOnRobot.LogoFacingDirection.UP
-        var usbFacingDirection: UsbFacingDirection = UsbFacingDirection.FORWARD
+        var usbFacingDirection = UsbFacingDirection.FORWARD
 
         // drive model parameters
-        var inPerTick: Double = 0.0
-        var trackWidthTicks: Double = 0.0
+        var inPerTick = 0.0
+        var trackWidthTicks = 0.0
 
         // feedforward parameters (in tick units)
-        var kS: Double = 0.0
-        var kV: Double = 0.0
-        var kA: Double = 0.0
+        var kS = 0.0
+        var kV = 0.0
+        var kA = 0.0
 
         // path profile parameters (in inches)
-        var maxWheelVel: Double = 50.0
-        var minProfileAccel: Double = -30.0
-        var maxProfileAccel: Double = 50.0
+        var maxWheelVel = 50.0
+        var minProfileAccel = -30.0
+        var maxProfileAccel = 50.0
 
         // turn profile parameters (in radians)
-        var maxAngVel: Double = Math.PI // shared with path
-        var maxAngAccel: Double = Math.PI
+        var maxAngVel = PI // shared with path
+        var maxAngAccel = PI
 
         // path controller gains
-        var ramseteZeta: Double = 0.7 // in the range (0, 1)
-        var ramseteBBar: Double = 2.0 // positive
+        var ramseteZeta = 0.7 // in the range (0, 1)
+        var ramseteBBar = 2.0 // positive
 
         // turn controller gains
-        var turnGain: Double = 0.0
-        var turnVelGain: Double = 0.0
+        var turnGain = 0.0
+        var turnVelGain = 0.0
     }
 
-    val kinematics: TankKinematics = TankKinematics(PARAMS.inPerTick * PARAMS.trackWidthTicks)
+    val kinematics = TankKinematics(PARAMS.inPerTick * PARAMS.trackWidthTicks)
 
-    val defaultTurnConstraints: TurnConstraints =
+    val defaultTurnConstraints =
         TurnConstraints(
             PARAMS.maxAngVel,
             -PARAMS.maxAngVel,
@@ -135,6 +136,7 @@ class TankDrive(hardwareMap: HardwareMap, var pose: Pose2d) {
         private var initialized = false
 
         init {
+            // TODO: Switch to iterators.
             val leftEncs: MutableList<Encoder> =
                 ArrayList()
             for (m in leftMotors) {
@@ -147,6 +149,7 @@ class TankDrive(hardwareMap: HardwareMap, var pose: Pose2d) {
                     leftEncs,
                 )
 
+            // TODO: Switch to iterators.
             val rightEncs: MutableList<Encoder> =
                 ArrayList()
             for (m in rightMotors) {
@@ -205,8 +208,8 @@ class TankDrive(hardwareMap: HardwareMap, var pose: Pose2d) {
                 )
             }
 
-            val twist: TankKinematics.WheelIncrements<Time> =
-                TankKinematics.WheelIncrements<Time>(
+            val twist =
+                TankKinematics.WheelIncrements(
                     DualNum<Time>(
                         doubleArrayOf(
                             meanLeftPos - lastLeftPos,
@@ -238,8 +241,8 @@ class TankDrive(hardwareMap: HardwareMap, var pose: Pose2d) {
         // TODO: make sure your config has motors with these names (or change them)
         //   add additional motors on each side if you have them
         //   see https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/index.html
-        leftMotors = Arrays.asList(hardwareMap.get(DcMotorEx::class.java, "left"))
-        rightMotors = Arrays.asList(hardwareMap.get(DcMotorEx::class.java, "right"))
+        leftMotors = listOf(hardwareMap.get(DcMotorEx::class.java, "left"))
+        rightMotors = listOf(hardwareMap.get(DcMotorEx::class.java, "right"))
 
         for (m in leftMotors) {
             m.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
