@@ -6,6 +6,7 @@ import com.acmerobotics.roadrunner.Pose2d
 object Drawing {
     private const val ROBOT_RADIUS = 9.0
 
+    @JvmStatic
     fun drawRobot(
         c: Canvas,
         t: Pose2d,
