@@ -17,10 +17,10 @@ object CsvLogging : API() {
         super.init(opMode)
 
         // Create the folder, if it does not exist already.
-        RobotConfig.CsvLogging.BOTSBURGH_FOLDER.mkdirs()
+        RobotConfig.Logging.BOTSBURGH_FOLDER.mkdirs()
 
         if (RobotConfig.DEBUG) {
-            for (file in RobotConfig.CsvLogging.BOTSBURGH_FOLDER.listFiles()!!) if (!file.isDirectory) file.delete()
+            for (file in RobotConfig.Logging.BOTSBURGH_FOLDER.listFiles()!!) if (!file.isDirectory) file.delete()
         }
     }
 
@@ -29,7 +29,7 @@ object CsvLogging : API() {
      */
     fun createFile(fileName: String) {
         if (RobotConfig.DEBUG) {
-            fileHash[fileName] = BufferedWriter(FileWriter(File(RobotConfig.CsvLogging.BOTSBURGH_FOLDER, "/$fileName.csv"), true))
+            fileHash[fileName] = BufferedWriter(FileWriter(File(RobotConfig.Logging.BOTSBURGH_FOLDER, "/$fileName.csv"), true))
         }
     }
 

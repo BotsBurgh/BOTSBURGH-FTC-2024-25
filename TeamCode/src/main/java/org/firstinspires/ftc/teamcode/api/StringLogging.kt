@@ -17,10 +17,10 @@ object StringLogging : API() {
         super.init(opMode)
 
         // Create the folder, if it does not exist already.
-        RobotConfig.StringLogging.BOTSBURGH_FOLDER.mkdirs()
+        RobotConfig.Logging.BOTSBURGH_FOLDER.mkdirs()
 
         if (RobotConfig.DEBUG) {
-            for (file in RobotConfig.StringLogging.BOTSBURGH_FOLDER.listFiles()!!) if (!file.isDirectory) file.delete()
+            for (file in RobotConfig.Logging.BOTSBURGH_FOLDER.listFiles()!!) if (!file.isDirectory) file.delete()
         }
     }
 
@@ -29,54 +29,18 @@ object StringLogging : API() {
      */
     fun createFile(fileName: String) {
         if (RobotConfig.DEBUG) {
-            fileHash[fileName] = BufferedWriter(FileWriter(File(RobotConfig.StringLogging.BOTSBURGH_FOLDER, "/$fileName.log"), true))
+            fileHash[fileName] = BufferedWriter(FileWriter(File(RobotConfig.Logging.BOTSBURGH_FOLDER, "/$fileName.log"), true))
         }
     }
 
     /**
      * Writes Double data to the targeted file
      * @param file Name of the file that is being logged to
-     * @param data Double data that is being logged
+     * @param data data that is being logged
      */
     fun writeFile(
         file: String,
-        data: Double,
-    ) {
-        if (RobotConfig.DEBUG) {
-            val writer = this.fileHash[file]!!
-
-            writer.write("${opMode.runtime}, ")
-            writer.write(data.toString())
-            writer.newLine()
-        }
-    }
-
-    /**
-     * Writes Array Double data to the targeted file
-     * @param file Name of the file that is being logged to
-     * @param data Array Double data that is being logged
-     */
-    fun writeFile(
-        file: String,
-        data: Array<Double>,
-    ) {
-        if (RobotConfig.DEBUG) {
-            val writer = this.fileHash[file]!!
-
-            writer.write("${opMode.runtime}")
-            for (i in data) fileHash[file]!!.write(", $i")
-            writer.newLine()
-        }
-    }
-
-    /**
-     * Writes String data to the targeted file
-     * @param file Name of the file that is being logged to
-     * @param data String data that is being logged
-     */
-    fun writeFile(
-        file: String,
-        data: String,
+        data: Any,
     ) {
         if (RobotConfig.DEBUG) {
             val writer = this.fileHash[file]!!
