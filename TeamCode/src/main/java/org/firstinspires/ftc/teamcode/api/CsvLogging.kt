@@ -64,7 +64,7 @@ object CsvLogging : API() {
             val writer = this.fileHash[file]!!
 
             writer.write("${opMode.runtime}")
-            for (i in data) CsvLogging.fileHash[file]!!.write(", $i")
+            for (i in data) fileHash[file]!!.write(", $i")
             writer.newLine()
         }
     }
