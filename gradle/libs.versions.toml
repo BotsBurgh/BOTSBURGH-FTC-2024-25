@@ -1,6 +1,6 @@
 [versions]
 # Do not modify this unless you want to have a really bad time.
-androidGradlePlugin = "7.4.2"
+androidGradlePlugin = "8.7.0"
 
 # Kotlin language version.
 kotlin = "2.0.0"
@@ -9,7 +9,7 @@ kotlin = "2.0.0"
 kotlinter = "4.1.1"
 
 # FTC libraries.
-ftc = "10.1.0"
+ftc = "10.1.1"
 
 # FTC associated libraries.
 androidxAppCompat = "1.3.1"
