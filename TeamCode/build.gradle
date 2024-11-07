@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 //
 // build.gradle in TeamCode
 //
@@ -24,6 +26,12 @@ android {
 
     packagingOptions {
         jniLibs.useLegacyPackaging = true
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_1_8)
     }
 }
 
