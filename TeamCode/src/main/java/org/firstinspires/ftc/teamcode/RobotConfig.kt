@@ -108,7 +108,7 @@ object RobotConfig {
     }
 
     @Config
-    object CsvLogging {
+    object Logging {
         // Accessible at `/sdcard/BotsBurgh`.
         @JvmField
         var BOTSBURGH_FOLDER = File(AppUtil.ROOT_FOLDER, "/BotsBurgh")
