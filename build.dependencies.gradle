@@ -14,9 +14,14 @@ dependencies {
     implementation libs.ftc.hardware
     implementation libs.ftc.common
     implementation libs.ftc.vision
+    implementation libs.ftc.tfod
+    implementation libs.ftc.gameassets.centerstage
+
 
     // FTC Associated Libraries
     implementation libs.appcompat
+    implementation libs.tensorflowLite.taskVision
+    runtimeOnly libs.tensorflowLite
 
     // Test framework
     testImplementation libs.kotlinTest
