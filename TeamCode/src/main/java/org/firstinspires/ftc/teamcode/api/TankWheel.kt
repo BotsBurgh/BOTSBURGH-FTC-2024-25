@@ -3,17 +3,12 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
-import org.firstinspires.ftc.teamcode.api.TriWheels.stop
 import org.firstinspires.ftc.teamcode.core.API
 
-object QuadWheels : API() {
-    lateinit var bl: DcMotorEx
+object TankWheel : API() {
+    lateinit var left: DcMotorEx
         private set
-    lateinit var br: DcMotorEx
-        private set
-    lateinit var fr: DcMotorEx
-        private set
-    lateinit var fl: DcMotorEx
+    lateinit var right: DcMotorEx
         private set
 
     private val y
@@ -24,11 +19,8 @@ object QuadWheels : API() {
     override fun init(opMode: OpMode) {
         super.init(opMode)
 
-        bl = this.opMode.hardwareMap.get(DcMotorEx::class.java, "backLeft")
-        br = this.opMode.hardwareMap.get(DcMotorEx::class.java, "backRight")
-        fr = this.opMode.hardwareMap.get(DcMotorEx::class.java, "frontLeft")
-        fl = this.opMode.hardwareMap.get(DcMotorEx::class.java, "frontRight")
-
+        left = this.opMode.hardwareMap.get(DcMotorEx::class.java, "LEFT")
+        right = this.opMode.hardwareMap.get(DcMotorEx::class.java, "RIGHT")
         stopAndResetMotors()
     }
 
@@ -36,30 +28,25 @@ object QuadWheels : API() {
      * Sets the power of each wheel respectively.
      */
     fun power(
-        blPower: Double,
-        brPower: Double,
-        frPower: Double,
-        flPower: Double,
+        leftPower: Double,
+        rightPower: Double,
     ) {
-        bl.power = blPower
-        br.power = brPower
-        fr.power = frPower
-        fl.power = flPower
+        left.power = leftPower
+        right.power = rightPower
     }
 
     fun drive() {
-        power((-y - r), (y - r), (-y - r), (y - r))
+        power((-y - r), (y - r))
     }
 
     fun stop() {
-        power(0.0, 0.0, 0.0, 0.0)
+        power(0.0, 0.0)
     }
-
 
     fun stopAndResetMotors() {
         stop()
 
-        for (motor in arrayOf(bl, br, fr, fl)) {
+        for (motor in arrayOf(left, right)) {
             motor.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
             motor.mode = DcMotor.RunMode.RUN_USING_ENCODER
             motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
