@@ -72,6 +72,26 @@ object Logging : API() {
      */
     fun close() = this.compressedStream.close()
 
+    /**
+     * A logger tagged to a specific API.
+     *
+     * # Example
+     *
+     * ```
+     * object MyAPI : API() {
+     *     // Tag is the name of the class, in this case "MyAPI".
+     *     val log = Logging.Logger(this::class)
+     *
+     *     // Alternatively, specify the tag yourself.
+     *     val log = Logging.Logger("MyTag")
+     *
+     *     fun myMethod() {
+     *         this.log.warning("Be careful!")
+     *         // ...
+     *     }
+     * }
+     * ```
+     */
     class Logger(private val tag: String) {
         constructor(clazz: KClass<*>) : this(clazz.simpleName ?: "Unknown")
 
@@ -95,5 +115,8 @@ object Logging : API() {
             Log.e(this.tag, msg.toString())
             write("[${Instant.now()} ERROR ${this.tag}] $msg")
         }
+
+        /** See [Logging.flush] for what this does. */
+        fun flush() = Logging.flush()
     }
 }
