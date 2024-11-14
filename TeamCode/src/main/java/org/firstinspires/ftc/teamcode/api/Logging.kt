@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.api
 
 import android.util.Log
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
+import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.RobotConfig
 import org.firstinspires.ftc.teamcode.core.API
 import org.threeten.bp.Instant
@@ -15,8 +16,10 @@ import kotlin.reflect.KClass
  * An API for creating, managing, and writing to logging files.
  */
 object Logging : API() {
-    private lateinit var currentFile: File
+    private lateinit var compressedFile: File
     private lateinit var compressedStream: OutputStream
+
+    private lateinit var telemetryLog: Telemetry.Log
 
     override fun init(opMode: OpMode) {
         super.init(opMode)
@@ -24,26 +27,17 @@ object Logging : API() {
         // Create the log folder, if it does not exist already.
         RobotConfig.Logging.LOG_FOLDER.mkdirs()
 
-        this.currentFile = File(RobotConfig.Logging.LOG_FOLDER, "${Instant.now()}.txt.gz")
-        this.currentFile.createNewFile()
+        // Create compressed file.
+        this.compressedFile = File(RobotConfig.Logging.LOG_FOLDER, "${Instant.now()}.txt.gz")
+        this.compressedFile.createNewFile()
 
-        this.compressedStream = GZIPOutputStream(FileOutputStream(this.currentFile)).buffered()
-    }
+        // Create stream for compressed file.
+        this.compressedStream = GZIPOutputStream(FileOutputStream(this.compressedFile)).buffered()
 
-    /**
-     * Utility method that writes a piece of text to the [compressedStream].
-     *
-     * Note that this does not formatting whatsoever. You will need to manually insert newlines
-     * `\n`, and add the time and log levels yourself.
-     *
-     * # Example
-     *
-     * ```
-     * StringLogging.write("${Instant.now()} My cool message!\n")
-     * ```
-     */
-    private fun write(text: String) {
-        this.compressedStream.write(text.toByteArray())
+        // Configure telemetry log.
+        this.telemetryLog = this.opMode.telemetry.log()
+        this.telemetryLog.capacity = RobotConfig.Logging.TELEMETRY_CAPACITY
+        this.telemetryLog.displayOrder = RobotConfig.Logging.TELEMETRY_ORDER
     }
 
     /**
@@ -62,7 +56,10 @@ object Logging : API() {
      * StringLogging.flush()
      * ```
      */
-    fun flush() = this.compressedStream.flush()
+    fun flush() {
+        this.compressedStream.flush()
+        this.opMode.telemetry.update()
+    }
 
     /**
      * Flush the buffer and close the file stream.
@@ -71,6 +68,20 @@ object Logging : API() {
      * recorded.
      */
     fun close() = this.compressedStream.close()
+
+    /**
+     * Utility method that writes a piece of text to the [compressedStream].
+     *
+     * Note that this does not formatting whatsoever. You will need to manually insert newlines
+     * `\n`, and add the time and log levels yourself.
+     *
+     * # Example
+     *
+     * ```
+     * StringLogging.write("${Instant.now()} My cool message!\n")
+     * ```
+     */
+    private fun write(text: String) = this.compressedStream.write(text.toByteArray())
 
     /**
      * A logger tagged to a specific API.
@@ -97,23 +108,38 @@ object Logging : API() {
 
         fun debug(msg: Any) {
             val msg = msg.toString()
+            val formattedMessage = "[${Instant.now()} DEBUG ${this.tag}] $msg\n"
+
             Log.d(this.tag, msg)
-            write("[${Instant.now()} DEBUG ${this.tag}] $msg")
+            write(formattedMessage)
+            telemetryLog.add(formattedMessage)
         }
 
         fun info(msg: Any) {
-            Log.i(this.tag, msg.toString())
-            write("[${Instant.now()} INFO ${this.tag}] $msg")
+            val msg = msg.toString()
+            val formattedMessage = "[${Instant.now()} INFO ${this.tag}] $msg\n"
+
+            Log.i(this.tag, msg)
+            write(formattedMessage)
+            telemetryLog.add(formattedMessage)
         }
 
         fun warn(msg: Any) {
-            Log.w(this.tag, msg.toString())
-            write("[${Instant.now()} WARN ${this.tag}] $msg")
+            val msg = msg.toString()
+            val formattedMessage = "[${Instant.now()} WARN ${this.tag}] $msg\n"
+
+            Log.w(this.tag, msg)
+            write(formattedMessage)
+            telemetryLog.add(formattedMessage)
         }
 
         fun error(msg: Any) {
-            Log.e(this.tag, msg.toString())
-            write("[${Instant.now()} ERROR ${this.tag}] $msg")
+            val msg = msg.toString()
+            val formattedMessage = "[${Instant.now()} ERROR ${this.tag}] $msg\n"
+
+            Log.e(this.tag, msg)
+            write(formattedMessage)
+            telemetryLog.add(formattedMessage)
         }
 
         /** See [Logging.flush] for what this does. */
