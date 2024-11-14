@@ -126,5 +126,8 @@ object RobotConfig {
 
         @JvmField
         var TELEMETRY_ORDER = Telemetry.Log.DisplayOrder.OLDEST_FIRST
+
+        @JvmField
+        var FILTER_LEVEL = org.firstinspires.ftc.teamcode.api.Logging.Level.Debug
     }
 }

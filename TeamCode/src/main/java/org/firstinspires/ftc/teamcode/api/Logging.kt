@@ -112,7 +112,10 @@ object Logging : API() {
 
             Log.d(this.tag, msg)
             write(formattedMessage)
-            telemetryLog.add(formattedMessage)
+
+            if (RobotConfig.Logging.FILTER_LEVEL.ordinal <= Level.Debug.ordinal) {
+                telemetryLog.add(formattedMessage)
+            }
         }
 
         fun info(msg: Any) {
@@ -121,7 +124,10 @@ object Logging : API() {
 
             Log.i(this.tag, msg)
             write(formattedMessage)
-            telemetryLog.add(formattedMessage)
+
+            if (RobotConfig.Logging.FILTER_LEVEL.ordinal <= Level.Info.ordinal) {
+                telemetryLog.add(formattedMessage)
+            }
         }
 
         fun warn(msg: Any) {
@@ -130,7 +136,10 @@ object Logging : API() {
 
             Log.w(this.tag, msg)
             write(formattedMessage)
-            telemetryLog.add(formattedMessage)
+
+            if (RobotConfig.Logging.FILTER_LEVEL.ordinal <= Level.Warn.ordinal) {
+                telemetryLog.add(formattedMessage)
+            }
         }
 
         fun error(msg: Any) {
@@ -139,10 +148,20 @@ object Logging : API() {
 
             Log.e(this.tag, msg)
             write(formattedMessage)
-            telemetryLog.add(formattedMessage)
+
+            if (RobotConfig.Logging.FILTER_LEVEL.ordinal <= Level.Error.ordinal) {
+                telemetryLog.add(formattedMessage)
+            }
         }
 
         /** See [Logging.flush] for what this does. */
         fun flush() = Logging.flush()
+    }
+
+    enum class Level {
+        Debug,
+        Info,
+        Warn,
+        Error,
     }
 }
