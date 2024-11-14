@@ -72,8 +72,7 @@ object Logging : API() {
     /**
      * Utility method that writes a piece of text to the [compressedStream].
      *
-     * Note that this does not formatting whatsoever. You will need to manually insert newlines
-     * `\n`, and add the time and log levels yourself.
+     * Note that this does not formatting beyond adding a newline to the end of the message.
      *
      * # Example
      *
@@ -81,7 +80,7 @@ object Logging : API() {
      * StringLogging.write("${Instant.now()} My cool message!\n")
      * ```
      */
-    private fun write(text: String) = this.compressedStream.write(text.toByteArray())
+    private fun write(text: String) = this.compressedStream.write((text + '\n').toByteArray())
 
     /**
      * A logger tagged to a specific API.
@@ -108,7 +107,7 @@ object Logging : API() {
 
         fun debug(msg: Any) {
             val msg = msg.toString()
-            val formattedMessage = "[${Instant.now()} DEBUG ${this.tag}] $msg\n"
+            val formattedMessage = "[${Instant.now()} DEBUG ${this.tag}] $msg"
 
             Log.d(this.tag, msg)
             write(formattedMessage)
@@ -120,7 +119,7 @@ object Logging : API() {
 
         fun info(msg: Any) {
             val msg = msg.toString()
-            val formattedMessage = "[${Instant.now()} INFO ${this.tag}] $msg\n"
+            val formattedMessage = "[${Instant.now()} INFO ${this.tag}] $msg"
 
             Log.i(this.tag, msg)
             write(formattedMessage)
@@ -132,7 +131,7 @@ object Logging : API() {
 
         fun warn(msg: Any) {
             val msg = msg.toString()
-            val formattedMessage = "[${Instant.now()} WARN ${this.tag}] $msg\n"
+            val formattedMessage = "[${Instant.now()} WARN ${this.tag}] $msg"
 
             Log.w(this.tag, msg)
             write(formattedMessage)
@@ -144,7 +143,7 @@ object Logging : API() {
 
         fun error(msg: Any) {
             val msg = msg.toString()
-            val formattedMessage = "[${Instant.now()} ERROR ${this.tag}] $msg\n"
+            val formattedMessage = "[${Instant.now()} ERROR ${this.tag}] $msg"
 
             Log.e(this.tag, msg)
             write(formattedMessage)
