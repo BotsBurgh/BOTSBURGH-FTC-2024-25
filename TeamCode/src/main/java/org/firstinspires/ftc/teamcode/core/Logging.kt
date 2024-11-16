@@ -1,7 +1,11 @@
 package org.firstinspires.ftc.teamcode.core
 
+import android.content.Context
 import android.util.Log
+import com.qualcomm.ftccommon.FtcEventLoop
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
+import com.qualcomm.robotcore.eventloop.opmode.OpModeManagerNotifier
+import org.firstinspires.ftc.ftccommon.external.OnCreateEventLoop
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.RobotConfig
 import org.threeten.bp.Instant
@@ -14,6 +18,8 @@ import kotlin.reflect.KClass
 /**
  * An API for logging information to the telemetry, a compressed log file, and Android's standard
  * logger.
+ *
+ * This API is automatically initialized by [LoggingRegistrant].
  */
 object Logging : API() {
     private lateinit var compressedFile: File
@@ -162,5 +168,27 @@ object Logging : API() {
         Info,
         Warn,
         Error,
+    }
+}
+
+private object LoggingRegistrant : OpModeManagerNotifier.Notifications {
+    override fun onOpModePreInit(opMode: OpMode) {
+        Logging.init(opMode)
+    }
+
+    override fun onOpModePreStart(opMode: OpMode) {}
+
+    override fun onOpModePostStop(opMode: OpMode) {
+        Logging.close()
+    }
+
+    @OnCreateEventLoop
+    @JvmStatic
+    fun register(
+        @Suppress("UNUSED_PARAMETER")
+        context: Context,
+        ftcEventLoop: FtcEventLoop,
+    ) {
+        ftcEventLoop.opModeManager.registerListener(this)
     }
 }
