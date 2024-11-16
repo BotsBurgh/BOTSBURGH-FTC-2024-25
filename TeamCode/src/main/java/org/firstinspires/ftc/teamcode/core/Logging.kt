@@ -170,25 +170,3 @@ object Logging : API() {
         Error,
     }
 }
-
-private object LoggingRegistrant : OpModeManagerNotifier.Notifications {
-    override fun onOpModePreInit(opMode: OpMode) {
-        Logging.init(opMode)
-    }
-
-    override fun onOpModePreStart(opMode: OpMode) {}
-
-    override fun onOpModePostStop(opMode: OpMode) {
-        Logging.close()
-    }
-
-    @OnCreateEventLoop
-    @JvmStatic
-    fun register(
-        @Suppress("UNUSED_PARAMETER")
-        context: Context,
-        ftcEventLoop: FtcEventLoop,
-    ) {
-        ftcEventLoop.opModeManager.registerListener(this)
-    }
-}

@@ -10,26 +10,8 @@ import org.firstinspires.ftc.ftccommon.external.OnCreateEventLoop
  * A listener that ensures API dependencies are properly initialized when the start button is
  * pressed.
  */
-object Dependencies : OpModeManagerNotifier.Notifications {
+object Dependencies {
     internal val initializedAPIs: MutableSet<API> by Resettable { mutableSetOf() }
-
-    override fun onOpModePreInit(opMode: OpMode) {}
-
-    override fun onOpModePreStart(opMode: OpMode) {
-        this.checkDependencies()
-    }
-
-    override fun onOpModePostStop(opMode: OpMode) {}
-
-    @OnCreateEventLoop
-    @JvmStatic
-    fun register(
-        @Suppress("UNUSED_PARAMETER")
-        context: Context,
-        ftcEventLoop: FtcEventLoop,
-    ) {
-        ftcEventLoop.opModeManager.registerListener(this)
-    }
 
     /**
      * Registers an API as initialized.
@@ -41,7 +23,7 @@ object Dependencies : OpModeManagerNotifier.Notifications {
         this.initializedAPIs.add(api)
     }
 
-    internal fun checkDependencies() {
+    fun checkDependencies() {
         for (api in this.initializedAPIs) {
             for (dep in api.dependencies) {
                 if (!this.initializedAPIs.contains(dep)) {
