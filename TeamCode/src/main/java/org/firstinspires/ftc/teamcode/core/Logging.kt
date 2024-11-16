@@ -1,10 +1,9 @@
-package org.firstinspires.ftc.teamcode.api
+package org.firstinspires.ftc.teamcode.core
 
 import android.util.Log
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.RobotConfig
-import org.firstinspires.ftc.teamcode.core.API
 import org.threeten.bp.Instant
 import java.io.File
 import java.io.FileOutputStream
@@ -13,7 +12,8 @@ import java.util.zip.GZIPOutputStream
 import kotlin.reflect.KClass
 
 /**
- * An API for creating, managing, and writing to logging files.
+ * An API for logging information to the telemetry, a compressed log file, and Android's standard
+ * logger.
  */
 object Logging : API() {
     private lateinit var compressedFile: File
@@ -28,16 +28,16 @@ object Logging : API() {
         RobotConfig.Logging.LOG_FOLDER.mkdirs()
 
         // Create compressed file.
-        this.compressedFile = File(RobotConfig.Logging.LOG_FOLDER, "${Instant.now()}.txt.gz")
-        this.compressedFile.createNewFile()
+        compressedFile = File(RobotConfig.Logging.LOG_FOLDER, "${Instant.now()}.txt.gz")
+        compressedFile.createNewFile()
 
         // Create stream for compressed file.
-        this.compressedStream = GZIPOutputStream(FileOutputStream(this.compressedFile)).buffered()
+        compressedStream = GZIPOutputStream(FileOutputStream(compressedFile)).buffered()
 
         // Configure telemetry log.
-        this.telemetryLog = this.opMode.telemetry.log()
-        this.telemetryLog.capacity = RobotConfig.Logging.TELEMETRY_CAPACITY
-        this.telemetryLog.displayOrder = RobotConfig.Logging.TELEMETRY_ORDER
+        telemetryLog = this.opMode.telemetry.log()
+        telemetryLog.capacity = RobotConfig.Logging.TELEMETRY_CAPACITY
+        telemetryLog.displayOrder = RobotConfig.Logging.TELEMETRY_ORDER
     }
 
     /**
@@ -57,7 +57,7 @@ object Logging : API() {
      * ```
      */
     fun flush() {
-        this.compressedStream.flush()
+        compressedStream.flush()
         this.opMode.telemetry.update()
     }
 
@@ -67,7 +67,7 @@ object Logging : API() {
      * You should call this method before a program exits. Text logged after the fact will not be
      * recorded.
      */
-    fun close() = this.compressedStream.close()
+    fun close() = compressedStream.close()
 
     /**
      * Utility method that writes a piece of text to the [compressedStream].
@@ -80,7 +80,7 @@ object Logging : API() {
      * StringLogging.write("${Instant.now()} My cool message!\n")
      * ```
      */
-    private fun write(text: String) = this.compressedStream.write((text + '\n').toByteArray())
+    private fun write(text: String) = compressedStream.write((text + '\n').toByteArray())
 
     /**
      * A logger tagged to a specific API.
