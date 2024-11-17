@@ -48,10 +48,13 @@ object Logging : API() {
     /**
      * Flushes any buffered text, writing it to the log file.
      *
-     * Because repeatedly writing to a file can be expensive, this APIs stores text in a buffer and
-     * writes it all at once after a certain amount of bytes has been logged. As a side-effect some
-     * text may not be written when a program exits. Consider calling [flush] frequently to avoid
-     * data loss.
+     * Logged text is not guaranteed to be written to the [compressedStream] until the end of the
+     * opmode, when [close] is called. If the program crashes, though, the logged messages may be
+     * lost. This method lets you force all logged messages to be written to the file, at the cost
+     * of a small performance hit.
+     *
+     * Call this after information critical to diagnosing an issue has been logged, but else try to
+     * avoid it.
      *
      * # Example
      *
@@ -69,8 +72,8 @@ object Logging : API() {
     /**
      * Flush the buffer and close the file stream.
      *
-     * You should call this method before a program exits. Text logged after the fact will not be
-     * recorded.
+     * This is automatically called when an opmode exits by [CoreRegistrant]. Text logged after this
+     * is called will not be recorded.
      */
     fun close() {
         this.log.debug("Closing log file.")
@@ -85,10 +88,10 @@ object Logging : API() {
      * # Example
      *
      * ```
-     * StringLogging.write("${Instant.now()} My cool message!\n")
+     * StringLogging.writeToStream("${Instant.now()} My cool message!\n")
      * ```
      */
-    private fun write(text: String) = compressedStream.write((text + '\n').toByteArray())
+    private fun writeToStream(text: String) = compressedStream.write((text + '\n').toByteArray())
 
     /**
      * A logger tagged to a specific API.
@@ -98,7 +101,7 @@ object Logging : API() {
      * ```
      * object MyAPI : API() {
      *     // Tag is the name of the class, in this case "MyAPI".
-     *     val log = Logging.Logger(this::class)
+     *     val log = Logging.Logger(this)
      *
      *     // Alternatively, specify the tag yourself.
      *     val log = Logging.Logger("MyTag")
@@ -113,62 +116,36 @@ object Logging : API() {
     class Logger(private val tag: String) {
         constructor(clazz: Any) : this(clazz::class.simpleName ?: "Unknown")
 
-        fun debug(msg: Any) {
-            val msg = msg.toString()
-            val formattedMessage = "[${Instant.now()} DEBUG ${this.tag}] $msg"
+        fun debug(msg: Any) = this.log(Level.Debug, msg.toString())
+        fun info(msg: Any) = this.log(Level.Info, msg.toString())
+        fun warn(msg: Any) = this.log(Level.Warn, msg.toString())
+        fun error(msg: Any) = this.log(Level.Error, msg.toString())
 
-            Log.d(this.tag, msg)
-            write(formattedMessage)
+        private fun log(
+            level: Level,
+            msg: String,
+        ) {
+            val formattedMessage = "[${Instant.now()} ${level.name} ${this.tag}] $msg"
 
-            if (RobotConfig.Logging.FILTER_LEVEL.ordinal <= Level.Debug.ordinal) {
+            // Log message to Android's logger, accessible through Android Studio.
+            Log.println(level.priority, this.tag, msg)
+
+            // Write formatted message to the compressed log file.
+            writeToStream(formattedMessage)
+
+            // Log the message to the driver station if its level is not filtered out. (For example,
+            // debug (priority of 3) messages are skipped when the filter is set to warn (priority
+            // of 5), but warn and error (priority of 6) messages are still displayed.
+            if (RobotConfig.Logging.FILTER_LEVEL.priority <= level.priority) {
                 telemetryLog.add(formattedMessage)
             }
         }
-
-        fun info(msg: Any) {
-            val msg = msg.toString()
-            val formattedMessage = "[${Instant.now()} INFO ${this.tag}] $msg"
-
-            Log.i(this.tag, msg)
-            write(formattedMessage)
-
-            if (RobotConfig.Logging.FILTER_LEVEL.ordinal <= Level.Info.ordinal) {
-                telemetryLog.add(formattedMessage)
-            }
-        }
-
-        fun warn(msg: Any) {
-            val msg = msg.toString()
-            val formattedMessage = "[${Instant.now()} WARN ${this.tag}] $msg"
-
-            Log.w(this.tag, msg)
-            write(formattedMessage)
-
-            if (RobotConfig.Logging.FILTER_LEVEL.ordinal <= Level.Warn.ordinal) {
-                telemetryLog.add(formattedMessage)
-            }
-        }
-
-        fun error(msg: Any) {
-            val msg = msg.toString()
-            val formattedMessage = "[${Instant.now()} ERROR ${this.tag}] $msg"
-
-            Log.e(this.tag, msg)
-            write(formattedMessage)
-
-            if (RobotConfig.Logging.FILTER_LEVEL.ordinal <= Level.Error.ordinal) {
-                telemetryLog.add(formattedMessage)
-            }
-        }
-
-        /** See [Logging.flush] for what this does. */
-        fun flush() = Logging.flush()
     }
 
-    enum class Level {
-        Debug,
-        Info,
-        Warn,
-        Error,
+    enum class Level(val priority: Int) {
+        Debug(Log.DEBUG),
+        Info(Log.INFO),
+        Warn(Log.WARN),
+        Error(Log.ERROR),
     }
 }
