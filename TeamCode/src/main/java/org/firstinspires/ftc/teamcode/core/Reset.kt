@@ -1,10 +1,5 @@
 package org.firstinspires.ftc.teamcode.core
 
-import android.content.Context
-import com.qualcomm.ftccommon.FtcEventLoop
-import com.qualcomm.robotcore.eventloop.opmode.OpMode
-import com.qualcomm.robotcore.eventloop.opmode.OpModeManagerNotifier
-import org.firstinspires.ftc.ftccommon.external.OnCreateEventLoop
 import kotlin.reflect.KProperty
 
 /**

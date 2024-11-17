@@ -1,11 +1,7 @@
 package org.firstinspires.ftc.teamcode.core
 
-import android.content.Context
 import android.util.Log
-import com.qualcomm.ftccommon.FtcEventLoop
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
-import com.qualcomm.robotcore.eventloop.opmode.OpModeManagerNotifier
-import org.firstinspires.ftc.ftccommon.external.OnCreateEventLoop
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.RobotConfig
 import org.threeten.bp.Instant
@@ -13,19 +9,20 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 import java.util.zip.GZIPOutputStream
-import kotlin.reflect.KClass
 
 /**
  * An API for logging information to the telemetry, a compressed log file, and Android's standard
  * logger.
  *
- * This API is automatically initialized by [LoggingRegistrant].
+ * This API is automatically initialized by [CoreRegistrant].
  */
 object Logging : API() {
     private lateinit var compressedFile: File
     private lateinit var compressedStream: OutputStream
 
     private lateinit var telemetryLog: Telemetry.Log
+
+    private val log = Logger(this)
 
     override fun init(opMode: OpMode) {
         super.init(opMode)
@@ -44,6 +41,8 @@ object Logging : API() {
         telemetryLog = this.opMode.telemetry.log()
         telemetryLog.capacity = RobotConfig.Logging.TELEMETRY_CAPACITY
         telemetryLog.displayOrder = RobotConfig.Logging.TELEMETRY_ORDER
+
+        this.log.debug("Logging initialized.")
     }
 
     /**
@@ -73,7 +72,10 @@ object Logging : API() {
      * You should call this method before a program exits. Text logged after the fact will not be
      * recorded.
      */
-    fun close() = compressedStream.close()
+    fun close() {
+        this.log.debug("Closing log file.")
+        compressedStream.close()
+    }
 
     /**
      * Utility method that writes a piece of text to the [compressedStream].
@@ -109,7 +111,7 @@ object Logging : API() {
      * ```
      */
     class Logger(private val tag: String) {
-        constructor(clazz: KClass<*>) : this(clazz.simpleName ?: "Unknown")
+        constructor(clazz: Any) : this(clazz::class.simpleName ?: "Unknown")
 
         fun debug(msg: Any) {
             val msg = msg.toString()
