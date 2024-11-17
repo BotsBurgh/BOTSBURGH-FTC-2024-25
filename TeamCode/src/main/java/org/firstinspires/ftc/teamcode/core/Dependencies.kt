@@ -6,6 +6,7 @@ package org.firstinspires.ftc.teamcode.core
  */
 object Dependencies {
     internal val initializedAPIs: MutableSet<API> by Resettable { mutableSetOf() }
+    private val log = Logging.Logger(this)
 
     /**
      * Registers an API as initialized.
@@ -14,10 +15,13 @@ object Dependencies {
      * manually.
      */
     internal fun registerAPI(api: API) {
+        log.debug("Registered API ${api::class.simpleName}.")
         this.initializedAPIs.add(api)
     }
 
     fun checkDependencies() {
+        log.debug("Checking API dependencies.")
+
         for (api in this.initializedAPIs) {
             for (dep in api.dependencies) {
                 if (!this.initializedAPIs.contains(dep)) {

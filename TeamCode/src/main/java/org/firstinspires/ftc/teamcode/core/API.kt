@@ -90,5 +90,11 @@ abstract class API {
         this.nullableOpMode = opMode
 
         Dependencies.registerAPI(this)
+
+        log.debug("Initialized API ${this::class.simpleName}.")
+    }
+
+    companion object {
+        private val log = Logging.Logger(this)
     }
 }

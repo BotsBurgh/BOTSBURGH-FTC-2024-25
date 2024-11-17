@@ -117,8 +117,11 @@ object Logging : API() {
         constructor(clazz: Any) : this(clazz::class.simpleName ?: "Unknown")
 
         fun debug(msg: Any) = this.log(Level.Debug, msg.toString())
+
         fun info(msg: Any) = this.log(Level.Info, msg.toString())
+
         fun warn(msg: Any) = this.log(Level.Warn, msg.toString())
+
         fun error(msg: Any) = this.log(Level.Error, msg.toString())
 
         private fun log(
