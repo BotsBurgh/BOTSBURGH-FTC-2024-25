@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.api
 
 
 import com.google.blocks.ftcrobotcontroller.util.CurrentGame.TFOD_MODEL_ASSET
+import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName
@@ -11,7 +12,7 @@ import org.firstinspires.ftc.vision.VisionPortal
 import org.firstinspires.ftc.vision.tfod.TfodProcessor
 
 
-object TensorFlowObjectDetectionAPI : API() {
+object TensorflowScanning : API() {
     /**
      * The variable to store our instance of the TensorFlow Object Detection processor.
      */
@@ -29,7 +30,7 @@ object TensorFlowObjectDetectionAPI : API() {
     /**
      * Initialize the TensorFlow Object Detection processor.
      */
-    private fun initTfod() {
+    override fun init(opMode: OpMode) {
         // Create the TensorFlow processor by using a builder.
 
         tfod =
@@ -82,7 +83,13 @@ object TensorFlowObjectDetectionAPI : API() {
 
         // Disable or re-enable the TFOD processor at any time.
         //visionPortal.setProcessorEnabled(tfod, true);
-    } // end method initTfod()
+    }
+    fun scan(){
+        visionPortal!!.setProcessorEnabled(tfod, true);
+    }
+    fun stopScan(){
+        visionPortal!!.setProcessorEnabled(tfod, false);
+    }
 
 
 
