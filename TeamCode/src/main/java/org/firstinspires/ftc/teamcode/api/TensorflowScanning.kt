@@ -1,12 +1,10 @@
 package org.firstinspires.ftc.teamcode.api
 
 
-import com.google.blocks.ftcrobotcontroller.util.CurrentGame.TFOD_MODEL_ASSET
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName
-import org.firstinspires.ftc.robotcore.external.tfod.TfodParameters.CurrentGame.LABELS
 import org.firstinspires.ftc.teamcode.core.API
 import org.firstinspires.ftc.vision.VisionPortal
 import org.firstinspires.ftc.vision.tfod.TfodProcessor
@@ -27,9 +25,19 @@ object TensorflowScanning : API() {
      */
     private const val USE_WEBCAM = true // true for webcam, false for phone camera
 
+    // TFOD_MODEL_ASSET points to a model file stored in the project Asset location,
+    private const val TFOD_MODEL_ASSET = "CenterStage.tflite"
+
+    // TFOD_MODEL_FILE points to a model file stored onboard the Robot Controller's storage,
+    // this is used when uploading models directly to the RC using the model upload interface.
+    // Define the labels recognized in the model for TFOD (must be in training order!)
+    private val LABELS = arrayOf(
+        "Pixel",
+    )
     /**
      * Initialize the TensorFlow Object Detection processor.
      */
+
     override fun init(opMode: OpMode) {
         // Create the TensorFlow processor by using a builder.
 
@@ -85,10 +93,10 @@ object TensorflowScanning : API() {
         //visionPortal.setProcessorEnabled(tfod, true);
     }
     fun scan(){
-        visionPortal!!.setProcessorEnabled(tfod, true);
+        visionPortal!!.setProcessorEnabled(tfod, true)
     }
     fun stopScan(){
-        visionPortal!!.setProcessorEnabled(tfod, false);
+        visionPortal!!.setProcessorEnabled(tfod, false)
     }
 
 
