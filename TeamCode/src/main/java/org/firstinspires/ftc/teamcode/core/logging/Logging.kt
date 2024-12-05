@@ -22,7 +22,7 @@ object Logging : API() {
 
     internal lateinit var telemetryLog: Telemetry.Log
 
-    private val log = Logger(this)
+    private val log = FTCLogger(this)
 
     override fun init(opMode: OpMode) {
         super.init(opMode)

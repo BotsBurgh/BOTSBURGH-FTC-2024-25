@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.core
 
-import org.firstinspires.ftc.teamcode.core.logging.Logger
+import org.firstinspires.ftc.teamcode.core.logging.FTCLogger
 
 /**
  * A listener that ensures API dependencies are properly initialized when the start button is
@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.core.logging.Logger
  */
 object Dependencies {
     internal val initializedAPIs: MutableSet<API> by Resettable { mutableSetOf() }
-    private val log = Logger(this)
+    private val log = FTCLogger(this)
 
     /**
      * Registers an API as initialized.
