@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.core
 
+import org.firstinspires.ftc.teamcode.core.logging.Logger
+
 /**
  * A listener that ensures API dependencies are properly initialized when the start button is
  * pressed.
  */
 object Dependencies {
     internal val initializedAPIs: MutableSet<API> by Resettable { mutableSetOf() }
-    private val log = Logging.Logger(this)
+    private val log = Logger(this)
 
     /**
      * Registers an API as initialized.
