@@ -6,7 +6,10 @@ abstract class Logger(protected val tag: String) {
      *
      * There are various shorthand functions for this, such as [info] and [warn].
      */
-    abstract fun log(level: Level, msg: String)
+    abstract fun log(
+        level: Level,
+        msg: String,
+    )
 
     /**
      * Logs a debugging message.

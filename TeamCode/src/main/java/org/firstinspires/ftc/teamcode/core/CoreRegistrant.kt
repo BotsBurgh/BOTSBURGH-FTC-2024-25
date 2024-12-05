@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManagerImpl
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManagerNotifier
 import org.firstinspires.ftc.ftccommon.external.OnCreateEventLoop
+import org.firstinspires.ftc.teamcode.core.logging.FTCLogger
 import org.firstinspires.ftc.teamcode.core.logging.Logging
 
 /**
@@ -40,9 +41,9 @@ object CoreRegistrant : OpModeManagerNotifier.Notifications {
 
     override fun onOpModePostStop(opMode: OpMode) {
         // Close and save the log file when running a user-defined opmode. This will crash if run
-        // for `DefaultOpMode`, as `Logging.close()` assumes a log file has already been created.
+        // for `DefaultOpMode`, as `FTCLogger.close()` assumes a log file has already been created.
         if (opMode !is OpModeManagerImpl.DefaultOpMode) {
-            Logging.close()
+            FTCLogger.close()
         }
     }
 
