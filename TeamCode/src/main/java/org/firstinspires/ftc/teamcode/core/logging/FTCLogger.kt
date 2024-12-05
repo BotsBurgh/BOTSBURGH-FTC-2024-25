@@ -16,8 +16,6 @@ import java.util.zip.GZIPOutputStream
  * @see UnitTestLogger
  */
 class FTCLogger(tag: String) : Logger(tag) {
-    constructor(clazz: Any) : this(clazz::class.simpleName ?: "Unknown")
-
     override fun log(
         level: Level,
         msg: String,

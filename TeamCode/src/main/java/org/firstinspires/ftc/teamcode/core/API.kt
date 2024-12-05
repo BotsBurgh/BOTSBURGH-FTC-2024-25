@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.core
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
-import org.firstinspires.ftc.teamcode.core.logging.FTCLogger
+import org.firstinspires.ftc.teamcode.core.logging.Logging
 import org.firstinspires.ftc.teamcode.utils.isNotNull
 
 /**
@@ -96,6 +96,6 @@ abstract class API {
     }
 
     companion object {
-        private val log = FTCLogger(this)
+        private val log = Logging.logger(this)
     }
 }
