@@ -2,8 +2,8 @@ package org.firstinspires.ftc.teamcode.core.logging
 
 import android.util.Log
 import org.firstinspires.ftc.teamcode.RobotConfig
-import org.firstinspires.ftc.teamcode.core.Logging.telemetryLog
-import org.firstinspires.ftc.teamcode.core.Logging.writeToStream
+import org.firstinspires.ftc.teamcode.core.logging.Logging.telemetryLog
+import org.firstinspires.ftc.teamcode.core.logging.Logging.writeToStream
 import org.threeten.bp.Instant
 
 /**

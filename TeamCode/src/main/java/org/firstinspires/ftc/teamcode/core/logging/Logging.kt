@@ -1,10 +1,9 @@
-package org.firstinspires.ftc.teamcode.core
+package org.firstinspires.ftc.teamcode.core.logging
 
-import android.util.Log
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.RobotConfig
-import org.firstinspires.ftc.teamcode.core.logging.Logger
+import org.firstinspires.ftc.teamcode.core.API
 import org.threeten.bp.Instant
 import java.io.File
 import java.io.FileOutputStream
