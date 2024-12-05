@@ -8,6 +8,7 @@ import com.acmerobotics.dashboard.config.Config
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil
+import org.firstinspires.ftc.teamcode.core.logging.Level
 import java.io.File
 import kotlin.math.PI
 
@@ -128,6 +129,6 @@ object RobotConfig {
         var TELEMETRY_ORDER = Telemetry.Log.DisplayOrder.OLDEST_FIRST
 
         @JvmField
-        var FILTER_LEVEL = org.firstinspires.ftc.teamcode.core.Logging.Level.Debug
+        var FILTER_LEVEL = Level.Debug
     }
 }

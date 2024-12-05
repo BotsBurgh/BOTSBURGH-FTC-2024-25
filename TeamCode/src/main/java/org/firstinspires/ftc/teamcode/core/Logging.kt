@@ -4,6 +4,7 @@ import android.util.Log
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.RobotConfig
+import org.firstinspires.ftc.teamcode.core.logging.Level
 import org.threeten.bp.Instant
 import java.io.File
 import java.io.FileOutputStream
@@ -143,12 +144,5 @@ object Logging : API() {
                 telemetryLog.add(formattedMessage)
             }
         }
-    }
-
-    enum class Level(val priority: Int) {
-        Debug(Log.DEBUG),
-        Info(Log.INFO),
-        Warn(Log.WARN),
-        Error(Log.ERROR),
     }
 }
