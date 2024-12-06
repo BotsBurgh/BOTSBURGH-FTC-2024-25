@@ -113,4 +113,19 @@ object RobotConfig {
         @JvmField
         var BOTSBURGH_FOLDER = File(AppUtil.ROOT_FOLDER, "/BotsBurgh")
     }
+
+    @Config
+    object ClipMagazine {
+        @JvmField
+        var LATCH_MIN: Double = 0.0
+
+        @JvmField
+        var LATCH_MAX: Double = 1.0
+
+        @JvmField
+        var EJECTOR_MIN: Double = 0.0
+
+        @JvmField
+        var EJECTOR_MAX: Double = 1.0
+    }
 }
