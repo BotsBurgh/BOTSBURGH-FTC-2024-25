@@ -27,26 +27,6 @@ object Encoders : API() {
 
     private fun degreesToTick(degrees: Double): Int = (RobotConfig.Encoders.TICKS_PER_DEGREE * degrees).toInt()
 
-    /**
-     * Drives the robot in a given [direction] a certain amount of [inches].
-     *
-     * This function will take full control of the robot, and has a few side-effects. All wheel
-     * motors will be reset with [TriWheels.stopAndResetMotors]. Furthermore, this function will not
-     * return until the robot has finished moving.
-     *
-     * Due to current restrictions, [inches] cannot be a negative number.
-     */
-
-    /**
-     * Spins the robot a certain number of [degrees].
-     *
-     * Like [driveTo], this function will not return until the robot has finished moving. It will
-     * also reset all wheel motors' configuration, including rotation and encoders.
-     *
-     * Unlike [driveTo], [degrees] can be a negative or positive number. Positive moves the robot
-     * **counter-clockwise**, negative moves the robot **clockwise**.
-     */
-
     fun driveTo(
         direction: Direction,
         inches: Double,
