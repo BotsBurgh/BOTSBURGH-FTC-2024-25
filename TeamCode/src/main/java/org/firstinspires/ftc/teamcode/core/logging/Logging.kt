@@ -16,12 +16,13 @@ import org.firstinspires.ftc.teamcode.core.CoreRegistrant
 object Logging {
     private val log = this.logger(this)
 
-    private val androidLogAvailable = try {
-        Log.d("Logging", "Detecting if the Android logger is available.")
-        true
-    } catch (_: RuntimeException) {
-        false
-    }
+    private val androidLogAvailable =
+        try {
+            Log.d("Logging", "Detecting if the Android logger is available.")
+            true
+        } catch (_: RuntimeException) {
+            false
+        }
 
     fun init(opMode: OpMode) {
         if (this.androidLogAvailable) {
@@ -31,11 +32,12 @@ object Logging {
         this.log.debug("Logging initialized.")
     }
 
-    fun logger(tag: String): Logger = if (this.androidLogAvailable) {
-        FTCLogger(tag)
-    } else {
-        UnitTestLogger(tag)
-    }
+    fun logger(tag: String): Logger =
+        if (this.androidLogAvailable) {
+            FTCLogger(tag)
+        } else {
+            UnitTestLogger(tag)
+        }
 
     /**
      * Creates a new [Logger] where the tag is the name of the class.
