@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 /**
  * This is the main code for the autonomous segment of the game.
  */
-@Autonomous(name = "Main")
+@Autonomous(name = "AutoMain")
 class AutoMain : LinearOpMode() {
     // This function is the entrypoint into our code. It is run when the "Init" button is pressed.
     override fun runOpMode() {
