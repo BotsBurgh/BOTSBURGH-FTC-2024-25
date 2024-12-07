@@ -13,6 +13,11 @@ import java.util.zip.GZIPOutputStream
 /**
  * A general-purpose [Logger] used when running on the robot.
  *
+ * This emits log messages to the Android Logger (see [android.util.Log]), the `BotsBurgh` folder on
+ * the file system, and the driver station telemetry. The driver station telemetry is filtered based
+ * on the log level.
+ *
+ * @see RobotConfig.Logging
  * @see SimpleLogger
  */
 class FTCLogger(tag: String) : Logger(tag) {
