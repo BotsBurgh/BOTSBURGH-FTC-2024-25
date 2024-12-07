@@ -22,6 +22,6 @@ class AutoMain : LinearOpMode() {
 
         waitForStart()
         // Start
-        Encoders.driveTo2(forward, 100.0)
+        Encoders.driveTo(forward, 50.0)
     }
 }

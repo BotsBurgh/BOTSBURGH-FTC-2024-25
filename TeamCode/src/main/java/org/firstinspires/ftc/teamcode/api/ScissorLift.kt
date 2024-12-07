@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.api
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
+import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.TouchSensor
 import org.firstinspires.ftc.teamcode.core.API
 
@@ -16,6 +17,7 @@ object ScissorLift : API() {
         this.motor = this.opMode.hardwareMap.get(DcMotor::class.java, "liftMotor")
         this.leftLimit = this.opMode.hardwareMap.get(TouchSensor::class.java, "liftLeftLimit")
         this.rightLimit = this.opMode.hardwareMap.get(TouchSensor::class.java, "liftRightLimit")
+        this.motor.direction = DcMotorSimple.Direction.REVERSE
     }
 
     /**

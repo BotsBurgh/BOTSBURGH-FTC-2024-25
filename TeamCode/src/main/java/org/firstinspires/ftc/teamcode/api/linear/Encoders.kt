@@ -41,74 +41,6 @@ object Encoders : API() {
      *
      * Due to current restrictions, [inches] cannot be a negative number.
      */
-    @Deprecated(
-        message = "driveTo is slower than driveTo2",
-        replaceWith = ReplaceWith("Encoders.driveTo2(direction, inches)"),
-        level = DeprecationLevel.WARNING,
-    )
-    fun driveTo(
-        direction: Direction,
-        inches: Double,
-    ) {
-        TriWheels.stopAndResetMotors()
-
-        val (left, right, _) = this.defineWheels(direction)
-        val ticks = this.inchesToTick(inches)
-
-        val leftTarget = left.currentPosition + ticks
-        val rightTarget = right.currentPosition + ticks
-
-        // Set left direction to reverse, undoing it at the end even if an exception is thrown
-        try {
-            right.direction = DcMotorSimple.Direction.REVERSE
-
-            val runtime = ElapsedTime()
-
-            while (
-                abs(leftTarget - left.currentPosition) > RobotConfig.Encoders.ENCODER_ERROR &&
-                abs(rightTarget - right.currentPosition) > RobotConfig.Encoders.ENCODER_ERROR &&
-                linearOpMode.opModeIsActive()
-            ) {
-                // Accelerate the longer the robot has been running
-                val timeSpeed = runtime.seconds() * RobotConfig.Encoders.TIME_GAIN
-
-                left.power =
-                    min(
-                        min(
-                            (leftTarget - left.currentPosition) * RobotConfig.Encoders.ENCODER_GAIN,
-                            timeSpeed,
-                        ),
-                        RobotConfig.Encoders.MAX_DRIVE_SPEED,
-                    )
-                right.power =
-                    min(
-                        min(
-                            (rightTarget - right.currentPosition) * RobotConfig.Encoders.ENCODER_GAIN,
-                            timeSpeed,
-                        ),
-                        RobotConfig.Encoders.MAX_DRIVE_SPEED,
-                    )
-
-                with(linearOpMode.telemetry) {
-                    addData("Status", "Encoder Driving")
-
-                    addData("Left Power", left.power)
-                    addData("Right Power", right.power)
-
-                    addData("Left Target", leftTarget)
-                    addData("Right Target", rightTarget)
-
-                    addData("Left Current", left.currentPosition)
-                    addData("Right Current", right.currentPosition)
-
-                    update()
-                }
-            }
-        } finally {
-            // This reset encoders but also changes the right motor direction back to forward
-            TriWheels.stopAndResetMotors()
-        }
-    }
 
     /**
      * Spins the robot a certain number of [degrees].
@@ -119,73 +51,10 @@ object Encoders : API() {
      * Unlike [driveTo], [degrees] can be a negative or positive number. Positive moves the robot
      * **counter-clockwise**, negative moves the robot **clockwise**.
      */
-    @Deprecated(
-        message = "spinTo is slower than spinTo2",
-        replaceWith = ReplaceWith("Encoders.spinTo2(degrees)"),
-        level = DeprecationLevel.WARNING,
-    )
-    fun spinTo(degrees: Double) {
-        TriWheels.stopAndResetMotors()
 
-        // Reverse direction since unit circle goes in opposite direction from degrees
-        val ticks = -this.degreesToTick(degrees)
 
-        TriWheels.red.mode = DcMotor.RunMode.RUN_TO_POSITION
-        TriWheels.green.mode = DcMotor.RunMode.RUN_TO_POSITION
-        TriWheels.blue.mode = DcMotor.RunMode.RUN_TO_POSITION
 
-        TriWheels.red.targetPosition = ticks
-        TriWheels.green.targetPosition = ticks
-        TriWheels.blue.targetPosition = ticks
-
-        try {
-            val runtime = ElapsedTime()
-
-            while (
-                TriWheels.red.isBusy &&
-                TriWheels.green.isBusy &&
-                TriWheels.blue.isBusy &&
-                linearOpMode.opModeIsActive()
-            ) {
-                // Accelerate the longer the robot has been running
-                val timeSpeed = runtime.seconds() * RobotConfig.Encoders.TIME_GAIN
-
-                TriWheels.rotate(
-                    min(
-                        min(
-                            abs(TriWheels.red.currentPosition - TriWheels.red.targetPosition) * RobotConfig.Encoders.ENCODER_GAIN,
-                            timeSpeed,
-                        ),
-                        RobotConfig.Encoders.MAX_SPIN_SPEED,
-                    ),
-                )
-
-                with(linearOpMode.telemetry) {
-                    addData("Status", "Encoder Rotating")
-
-                    addData(
-                        "Power",
-                        Triple(TriWheels.red.power, TriWheels.green.power, TriWheels.blue.power),
-                    )
-                    addData(
-                        "Current",
-                        Triple(
-                            TriWheels.red.currentPosition,
-                            TriWheels.green.currentPosition,
-                            TriWheels.blue.currentPosition,
-                        ),
-                    )
-                    addData("Target", ticks)
-
-                    update()
-                }
-            }
-        } finally {
-            TriWheels.stopAndResetMotors()
-        }
-    }
-
-    fun driveTo2(
+    fun driveTo(
         direction: Direction,
         inches: Double,
     ) {
@@ -235,7 +104,7 @@ object Encoders : API() {
         }
     }
 
-    fun spinTo2(degrees: Double) {
+    fun spinTo(degrees: Double) {
         TriWheels.stopAndResetMotors()
 
         val ticks = -this.degreesToTick(degrees)
