@@ -3,16 +3,11 @@ package org.firstinspires.ftc.teamcode.api.linear
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.PIDCoefficients
-import com.qualcomm.robotcore.util.ElapsedTime
-import org.firstinspires.ftc.teamcode.core.API
+import org.firstinspires.ftc.teamcode.RobotConfig
 import org.firstinspires.ftc.teamcode.api.TriWheels
-import org.firstinspires.ftc.teamcode.api.linear.Encoders.driveTo
-import org.firstinspires.ftc.teamcode.api.linear.Encoders.spinTo
+import org.firstinspires.ftc.teamcode.core.API
 import org.firstinspires.ftc.teamcode.utils.MotorController
 import org.firstinspires.ftc.teamcode.utils.MotorControllerGroup
-import org.firstinspires.ftc.teamcode.RobotConfig
-import kotlin.math.abs
-import kotlin.math.min
 
 /**
  * An API for manipulating wheels using encoders.
@@ -51,8 +46,6 @@ object Encoders : API() {
      * Unlike [driveTo], [degrees] can be a negative or positive number. Positive moves the robot
      * **counter-clockwise**, negative moves the robot **clockwise**.
      */
-
-
 
     fun driveTo(
         direction: Direction,

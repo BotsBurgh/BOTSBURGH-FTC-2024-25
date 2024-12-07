@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.api.linear.Encoders
-import org.firstinspires.ftc.teamcode.RobotConfig
 
 /**
  * This is the main code for the autonomous segment of the game.
@@ -14,6 +13,7 @@ import org.firstinspires.ftc.teamcode.RobotConfig
 @Autonomous(name = "Main")
 class AutoMain : LinearOpMode() {
     private var forward = Encoders.Direction.Green
+
     // This function is the entrypoint into our code. It is run when the "Init" button is pressed.
     override fun runOpMode() {
         // Initialization

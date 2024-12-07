@@ -131,6 +131,7 @@ object RobotConfig {
         @JvmField
         var FILTER_LEVEL = Level.Debug
     }
+
     @Config
     object MotorController {
         @JvmField
@@ -139,6 +140,7 @@ object RobotConfig {
         @JvmField
         var I_LIMIT = 0.1
     }
+
     @Config
     object Encoders {
         /**
@@ -192,5 +194,4 @@ object RobotConfig {
         @JvmField
         var TIME_GAIN: Double = 0.4
     }
-
 }
