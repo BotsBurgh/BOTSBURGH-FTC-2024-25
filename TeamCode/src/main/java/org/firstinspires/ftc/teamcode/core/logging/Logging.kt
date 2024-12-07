@@ -36,7 +36,7 @@ object Logging {
         if (this.androidLogAvailable) {
             FTCLogger(tag)
         } else {
-            UnitTestLogger(tag)
+            SimpleLogger(tag)
         }
 
     /**

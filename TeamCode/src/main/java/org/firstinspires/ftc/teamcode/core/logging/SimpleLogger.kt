@@ -3,11 +3,12 @@ package org.firstinspires.ftc.teamcode.core.logging
 import org.threeten.bp.Instant
 
 /**
- * A simple [Logger] used in unit tests.
+ * A simple [Logger] that prints to the standard output.
  *
- * @see FTCLogger
+ * In most cases you should prefer [FTCLogger] unless it is unavailable, such as when running unit
+ * tests.
  */
-class UnitTestLogger(tag: String) : Logger(tag) {
+class SimpleLogger(tag: String) : Logger(tag) {
     override fun log(
         level: Level,
         msg: String,

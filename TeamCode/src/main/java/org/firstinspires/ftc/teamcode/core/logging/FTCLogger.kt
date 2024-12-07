@@ -13,7 +13,7 @@ import java.util.zip.GZIPOutputStream
 /**
  * A general-purpose [Logger] used when running on the robot.
  *
- * @see UnitTestLogger
+ * @see SimpleLogger
  */
 class FTCLogger(tag: String) : Logger(tag) {
     override fun log(
