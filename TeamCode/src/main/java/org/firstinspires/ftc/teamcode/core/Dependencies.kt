@@ -1,35 +1,14 @@
 package org.firstinspires.ftc.teamcode.core
 
-import android.content.Context
-import com.qualcomm.ftccommon.FtcEventLoop
-import com.qualcomm.robotcore.eventloop.opmode.OpMode
-import com.qualcomm.robotcore.eventloop.opmode.OpModeManagerNotifier
-import org.firstinspires.ftc.ftccommon.external.OnCreateEventLoop
+import org.firstinspires.ftc.teamcode.core.logging.Logging
 
 /**
  * A listener that ensures API dependencies are properly initialized when the start button is
  * pressed.
  */
-object Dependencies : OpModeManagerNotifier.Notifications {
+object Dependencies {
     internal val initializedAPIs: MutableSet<API> by Resettable { mutableSetOf() }
-
-    override fun onOpModePreInit(opMode: OpMode) {}
-
-    override fun onOpModePreStart(opMode: OpMode) {
-        this.checkDependencies()
-    }
-
-    override fun onOpModePostStop(opMode: OpMode) {}
-
-    @OnCreateEventLoop
-    @JvmStatic
-    fun register(
-        @Suppress("UNUSED_PARAMETER")
-        context: Context,
-        ftcEventLoop: FtcEventLoop,
-    ) {
-        ftcEventLoop.opModeManager.registerListener(this)
-    }
+    private val log = Logging.logger(this)
 
     /**
      * Registers an API as initialized.
@@ -38,10 +17,13 @@ object Dependencies : OpModeManagerNotifier.Notifications {
      * manually.
      */
     internal fun registerAPI(api: API) {
+        log.debug("Registered API ${api::class.simpleName}.")
         this.initializedAPIs.add(api)
     }
 
-    internal fun checkDependencies() {
+    fun checkDependencies() {
+        log.debug("Checking API dependencies.")
+
         for (api in this.initializedAPIs) {
             for (dep in api.dependencies) {
                 if (!this.initializedAPIs.contains(dep)) {

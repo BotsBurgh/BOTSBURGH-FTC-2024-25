@@ -1,10 +1,5 @@
 package org.firstinspires.ftc.teamcode.core
 
-import android.content.Context
-import com.qualcomm.ftccommon.FtcEventLoop
-import com.qualcomm.robotcore.eventloop.opmode.OpMode
-import com.qualcomm.robotcore.eventloop.opmode.OpModeManagerNotifier
-import org.firstinspires.ftc.ftccommon.external.OnCreateEventLoop
 import kotlin.reflect.KProperty
 
 /**
@@ -60,33 +55,11 @@ class Resettable<T>(private val default: () -> T) {
     private fun reset() {
         this.inner = this.default()
     }
-}
 
-/**
- * A listener that resets all [Resettable] variables before the [OpMode] starts.
- */
-object ResetListener : OpModeManagerNotifier.Notifications {
-    override fun onOpModePreInit(opMode: OpMode) {
-        // Reset everything when init is pressed.
-        this.resetAll()
-    }
-
-    override fun onOpModePreStart(opMode: OpMode) {}
-
-    override fun onOpModePostStop(opMode: OpMode) {}
-
-    @OnCreateEventLoop
-    @JvmStatic
-    fun register(
-        @Suppress("UNUSED_PARAMETER")
-        context: Context,
-        ftcEventLoop: FtcEventLoop,
-    ) {
-        ftcEventLoop.opModeManager.registerListener(this)
-    }
-
-    internal fun resetAll() {
-        // Call each function in the global set.
-        resetFunctions.forEach { it() }
+    companion object {
+        internal fun resetAll() {
+            // Call each function in the global set.
+            resetFunctions.forEach { it() }
+        }
     }
 }
