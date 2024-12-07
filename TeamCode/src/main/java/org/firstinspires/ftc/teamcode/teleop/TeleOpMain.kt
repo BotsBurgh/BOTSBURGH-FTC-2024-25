@@ -8,7 +8,7 @@ import kotlin.math.PI
 import kotlin.math.atan2
 import kotlin.math.sqrt
 
-@TeleOp(name = "Main")
+@TeleOp(name = "TeleOpMain")
 class TeleOpMain : OpMode() {
     override fun init() {
         TriWheels.init(this)
