@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.teleop
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import org.firstinspires.ftc.teamcode.RobotConfig
+import org.firstinspires.ftc.teamcode.api.ScissorLift
 import org.firstinspires.ftc.teamcode.api.TriWheels
 import kotlin.math.PI
 import kotlin.math.atan2
@@ -12,6 +13,7 @@ import kotlin.math.sqrt
 class TeleOpMain : OpMode() {
     override fun init() {
         TriWheels.init(this)
+        ScissorLift.init(this)
     }
 
     override fun loop() {
@@ -32,5 +34,13 @@ class TeleOpMain : OpMode() {
             joyMagnitude * RobotConfig.TeleOpMain.DRIVE_SPEED,
             rotation = rotationPower * RobotConfig.TeleOpMain.ROTATE_SPEED,
         )
+        // Scissor lift stuff
+        if (this.gamepad1.a) {
+            ScissorLift.lift(0.2)
+        } else if (this.gamepad1.b) {
+            ScissorLift.lift(-0.2)
+        } else {
+            ScissorLift.lift(0.0)
+        }
     }
 }

@@ -131,4 +131,67 @@ object RobotConfig {
         @JvmField
         var FILTER_LEVEL = Level.Debug
     }
+
+    @Config
+    object MotorController {
+        @JvmField
+        var POWER_LIMIT = 1.0
+
+        @JvmField
+        var I_LIMIT = 0.1
+    }
+
+    @Config
+    object Encoders {
+        /**
+         * How many ticks a wheel needs to rotate for the robot to travel an inch when moving along
+         * one of it's three axis.
+         *
+         * This value was calculated by getting the encoder resolution and dividing by the wheels
+         * circumference.
+         */
+        @JvmField
+        var TICKS_PER_INCH: Double = 420.0 / (1.5 * 2 * Math.PI)
+
+        /**
+         * How many ticks a wheel needs to rotate for the robot to spin a single degree.
+         *
+         * This value was calculated by guessing and checking, and may be further changed to
+         * increase accuracy.
+         */
+        @JvmField
+        var TICKS_PER_DEGREE: Double = 1.82
+
+        /**
+         * A multiplier that calculates the power of the wheel relative to the amount it needs to
+         * rotate.
+         */
+        @JvmField
+        var ENCODER_GAIN: Double = 0.0003
+
+        /**
+         * How many ticks a wheel needs to be within the target to be considered finished.
+         */
+        @JvmField
+        var ENCODER_ERROR: Int = 10
+
+        /**
+         * The maximum power a wheel can spin at when the robot is driving with encoders.
+         */
+        @JvmField
+        var MAX_DRIVE_SPEED: Double = 0.3
+
+        /**
+         * The maximum power a wheel can spin at when the robot spinning with encoders.
+         */
+        @JvmField
+        var MAX_SPIN_SPEED: Double = 0.4
+
+        /**
+         * A multiplier that calculates the power of the wheel relative to the amount of time that
+         * has passed.
+         */
+        @JvmField
+        var TIME_GAIN: Double = 0.4
+    }
 }
