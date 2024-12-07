@@ -6,7 +6,9 @@ package org.firstinspires.ftc.teamcode
 
 import com.acmerobotics.dashboard.config.Config
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot
+import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil
+import org.firstinspires.ftc.teamcode.core.logging.Level
 import java.io.File
 import kotlin.math.PI
 
@@ -109,8 +111,24 @@ object RobotConfig {
 
     @Config
     object Logging {
-        // Accessible at `/sdcard/BotsBurgh`.
+        /**
+         * The root folder for all Botsburgh-specific files, accessible at `/sdcard/BotsBurgh` on
+         * the robot.
+         */
         @JvmField
         var BOTSBURGH_FOLDER = File(AppUtil.ROOT_FOLDER, "/BotsBurgh")
+
+        /** The folder where all logs are stored. */
+        @JvmField
+        var LOG_FOLDER = File(BOTSBURGH_FOLDER, "logs")
+
+        @JvmField
+        var TELEMETRY_CAPACITY = 5
+
+        @JvmField
+        var TELEMETRY_ORDER = Telemetry.Log.DisplayOrder.OLDEST_FIRST
+
+        @JvmField
+        var FILTER_LEVEL = Level.Debug
     }
 }

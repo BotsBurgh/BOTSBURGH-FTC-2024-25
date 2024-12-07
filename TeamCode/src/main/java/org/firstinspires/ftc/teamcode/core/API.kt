@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.core
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
+import org.firstinspires.ftc.teamcode.core.logging.Logging
 import org.firstinspires.ftc.teamcode.utils.isNotNull
 
 /**
@@ -90,5 +91,11 @@ abstract class API {
         this.nullableOpMode = opMode
 
         Dependencies.registerAPI(this)
+
+        log.debug("Initialized API ${this::class.simpleName}.")
+    }
+
+    companion object {
+        private val log = Logging.logger(this)
     }
 }

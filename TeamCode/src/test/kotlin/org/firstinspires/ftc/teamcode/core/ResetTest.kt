@@ -33,7 +33,7 @@ internal class ResetTest {
         actual = 25
         assertEquals(25, actual)
 
-        ResetListener.resetAll()
+        Resettable.resetAll()
         assertEquals(20, actual)
     }
 }
