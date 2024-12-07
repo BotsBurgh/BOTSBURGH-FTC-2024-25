@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.core.logging
 
+import android.util.Log
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import org.firstinspires.ftc.teamcode.core.API
 import org.firstinspires.ftc.teamcode.core.CoreRegistrant
@@ -9,21 +10,32 @@ import org.firstinspires.ftc.teamcode.core.CoreRegistrant
  * logger.
  *
  * This API is automatically initialized by [CoreRegistrant].
+ *
+ * This API purposefully does not implement [API], since [API] depends on this being initialized.
  */
-object Logging : API() {
+object Logging {
     private val log = this.logger(this)
 
-    override fun init(opMode: OpMode) {
-        super.init(opMode)
+    private val androidLogAvailable = try {
+        Log.d("Logging", "Detecting if the Android logger is available.")
+        true
+    } catch (_: RuntimeException) {
+        false
+    }
 
-        // TODO: Conditionally initialize this.
-        FTCLogger.init(this.opMode)
+    fun init(opMode: OpMode) {
+        if (this.androidLogAvailable) {
+            FTCLogger.init(opMode)
+        }
 
         this.log.debug("Logging initialized.")
     }
 
-    // TODO: Conditionally return `FTCLogger` or `UnitTestLogger`.
-    fun logger(tag: String): Logger = FTCLogger(tag)
+    fun logger(tag: String): Logger = if (this.androidLogAvailable) {
+        FTCLogger(tag)
+    } else {
+        UnitTestLogger(tag)
+    }
 
     /**
      * Creates a new [Logger] where the tag is the name of the class.
