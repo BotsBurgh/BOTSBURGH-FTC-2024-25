@@ -14,14 +14,20 @@ import org.firstinspires.ftc.teamcode.api.linear.Encoders
 class AutoMain : LinearOpMode() {
     private var forward = Encoders.Direction.Green
 
-    // This function is the entrypoint into our code. It is run when the "Init" button is pressed.
     override fun runOpMode() {
-        // Initialization
         TriWheels.init(this)
         Encoders.init(this)
 
         waitForStart()
-        // Start
-        Encoders.driveTo(forward, 50.0)
+
+        val start = this.runtime
+
+        TriWheels.drive(0.0, 0.5)
+
+        while (opModeIsActive() && this.runtime - start < 1.5) {
+            this.idle()
+        }
+
+        TriWheels.stop()
     }
 }

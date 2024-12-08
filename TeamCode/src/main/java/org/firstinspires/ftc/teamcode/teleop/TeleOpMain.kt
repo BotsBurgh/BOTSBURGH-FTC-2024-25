@@ -34,11 +34,11 @@ class TeleOpMain : OpMode() {
             joyMagnitude * RobotConfig.TeleOpMain.DRIVE_SPEED,
             rotation = rotationPower * RobotConfig.TeleOpMain.ROTATE_SPEED,
         )
-        // Scissor lift stuff
+
         if (this.gamepad1.a) {
-            ScissorLift.lift(0.2)
+            ScissorLift.lift(1.0)
         } else if (this.gamepad1.b) {
-            ScissorLift.lift(-0.2)
+            ScissorLift.lift(-1.0)
         } else {
             ScissorLift.lift(0.0)
         }

@@ -39,11 +39,11 @@ object RobotConfig {
     object TeleOpMain {
         /** A multiplier that scales that robot's driving / strafing speed. */
         @JvmField
-        var DRIVE_SPEED: Double = 0.6
+        var DRIVE_SPEED: Double = 1.0
 
         /** A multiplier that scales the robot's rotation speed. */
         @JvmField
-        var ROTATE_SPEED: Double = 0.3
+        var ROTATE_SPEED: Double = 0.5
     }
 
     // TODO: Set robot radius and inches per tick.
@@ -129,7 +129,7 @@ object RobotConfig {
         var TELEMETRY_ORDER = Telemetry.Log.DisplayOrder.OLDEST_FIRST
 
         @JvmField
-        var FILTER_LEVEL = Level.Debug
+        var FILTER_LEVEL = Level.Info
     }
 
     @Config

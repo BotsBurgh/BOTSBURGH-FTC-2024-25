@@ -47,7 +47,9 @@ object TriWheels : API() {
     ) {
         red.power = redPower
         green.power = greenPower
-        blue.power = bluePower
+        // FIXME: The blue wheel has a motor with a different wheel ratio, and thus is 3x faster
+        //        than the other two.
+        blue.power = bluePower / 3.0
     }
 
     /**
