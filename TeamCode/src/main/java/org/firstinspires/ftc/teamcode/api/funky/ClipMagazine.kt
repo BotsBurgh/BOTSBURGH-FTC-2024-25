@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.api
+package org.firstinspires.ftc.teamcode.api.funky
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
