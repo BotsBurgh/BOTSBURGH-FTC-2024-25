@@ -139,6 +139,9 @@ object RobotConfig {
 
         @JvmField
         var I_LIMIT = 0.1
+
+        @JvmField
+        var DEFAULT_THRESHOLD: Int = 10
     }
 
     @Config
