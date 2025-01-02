@@ -32,7 +32,7 @@ object TriWheels : API() {
 
         red = this.opMode.hardwareMap.get(DcMotorEx::class.java, "redWheel")
         green = this.opMode.hardwareMap.get(DcMotorEx::class.java, "greenWheel")
-        blue = this.opMode.hardwareMap.get(DcMotorEx::class.java, "blueWheel")
+        blue = this.opMode.hardwareMap.get(DcMotorEx::class.java, "blueWheel") 
 
         stopAndResetMotors()
     }
