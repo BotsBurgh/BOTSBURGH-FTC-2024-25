@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import org.firstinspires.ftc.teamcode.RobotConfig
 import org.firstinspires.ftc.teamcode.api.ScissorLift
 import org.firstinspires.ftc.teamcode.api.TriWheels
+import org.firstinspires.ftc.teamcode.api.Claw
 import kotlin.math.PI
 import kotlin.math.atan2
 import kotlin.math.sqrt
@@ -14,12 +15,20 @@ class TeleOpMain : OpMode() {
     override fun init() {
         TriWheels.init(this)
         ScissorLift.init(this)
+        Claw.init(this)
     }
 
     override fun loop() {
-        // joystick input
+        // joystick(Movement) input
         val joyX = -this.gamepad1.left_stick_x.toDouble()
         val joyY = this.gamepad1.left_stick_y.toDouble()
+
+        //joystick(Claw) input
+        val xPos = this.gamepad2.left_stick_x.toDouble()
+        val yPos = this.gamepad2.left_stick_x.toDouble()
+
+        //ColorSensor on
+        Claw.light()
 
         // PI / 3 because 0 radians is right, not forward
         val joyRadians = atan2(joyY, joyX) - (PI / 3.0) - (2.0 * PI / 3.0)
@@ -35,12 +44,34 @@ class TeleOpMain : OpMode() {
             rotation = rotationPower * RobotConfig.TeleOpMain.ROTATE_SPEED,
         )
 
-        if (this.gamepad1.a) {
-            ScissorLift.lift(1.0)
-        } else if (this.gamepad1.b) {
-            ScissorLift.lift(-1.0)
-        } else {
-            ScissorLift.lift(0.0)
+        //scissor lift
+
+        if (this.gamepad2.left_trigger < 0.5) { //Made at 0.5 so that accidental presses dont trigger
+            ScissorLift.lift()
+        }
+        if (this.gamepad2.right_trigger < 0.5) {
+            ScissorLift.unlift()
+        }
+        if (this.gamepad2.left_stick_button){ //Emergency stop
+            ScissorLift.stop()
+        }
+
+        //claw movement
+        Claw.horizontalMove(xPos)
+
+        Claw.verticalMove(yPos)
+
+        if (this.gamepad2.a){
+            Claw.grab()
+        }
+        if (this.gamepad2.b){
+            Claw.release()
+        }
+        if (this.gamepad2.left_bumper){
+            Claw.extend()
+        }
+        if (this.gamepad2.right_bumper){
+            Claw.retract()
         }
     }
 }
