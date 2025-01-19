@@ -32,7 +32,6 @@ import org.firstinspires.ftc.teamcode.api.ScissorLift
 
             waitForStart()
 
-                //FIXME: Change Values as needed + Claw Business(If komel ever finishes it)
 
                 Encoders.spinTo(-90.0)
                 Encoders.driveTo(forward, tile)

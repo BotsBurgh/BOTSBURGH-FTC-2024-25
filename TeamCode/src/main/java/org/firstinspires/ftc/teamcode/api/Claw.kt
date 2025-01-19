@@ -73,14 +73,10 @@ object Claw :API(){
     }
 
     fun scan(color:String){
-        if(color == "Red"){
-            if(CSensor.red()> CSensor.blue()){
-                grab()
-            }
-        } else if (color == "Blue"){
-            if(CSensor.red()< CSensor.blue()){
-                grab()
-            }
+        if(color == "Red" && CSensor.red()> CSensor.blue()){
+            grab()
+        } else if (color == "Blue" && CSensor.red()< CSensor.blue()){
+            grab()
         }
     }
 
