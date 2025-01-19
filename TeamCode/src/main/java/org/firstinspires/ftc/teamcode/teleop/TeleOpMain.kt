@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.teleop
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import com.qualcomm.robotcore.hardware.DcMotor
+import com.qualcomm.robotcore.hardware.Servo
 import org.firstinspires.ftc.teamcode.RobotConfig
 import org.firstinspires.ftc.teamcode.api.ScissorLift
 import org.firstinspires.ftc.teamcode.api.TriWheels
@@ -9,13 +11,23 @@ import org.firstinspires.ftc.teamcode.api.Claw
 import kotlin.math.PI
 import kotlin.math.atan2
 import kotlin.math.sqrt
+import com.qualcomm.robotcore.hardware.TouchSensor
+
+
 
 @TeleOp(name = "TeleOpMain")
+
 class TeleOpMain : OpMode() {
+    lateinit var Minlift : TouchSensor
+    lateinit var Maxlift : TouchSensor
+
     override fun init() {
         TriWheels.init(this)
         ScissorLift.init(this)
         Claw.init(this)
+
+        this.Minlift = this.hardwareMap.get(TouchSensor::class.java, "MinLift")
+        this.Maxlift = this.hardwareMap.get(TouchSensor::class.java, "MaxLift")
     }
 
     override fun loop() {
@@ -46,10 +58,11 @@ class TeleOpMain : OpMode() {
 
         //scissor lift
 
-        if (this.gamepad2.left_trigger < 0.5) { //Made at 0.5 so that accidental presses dont trigger
+
+        if (this.gamepad2.left_trigger < 0.5 && !Maxlift.isPressed) { //Made at 0.5 so that accidental presses dont trigger
             ScissorLift.lift()
         }
-        if (this.gamepad2.right_trigger < 0.5) {
+        if (this.gamepad2.right_trigger < 0.5 && !Minlift.isPressed) {
             ScissorLift.unlift()
         }
         if (this.gamepad2.left_stick_button){ //Emergency stop
