@@ -27,7 +27,7 @@ object Claw :API(){
         this.VerticalServo = this.opMode.hardwareMap.get(Servo::class.java, "VServo")
         this.HorizontalServo = this.opMode.hardwareMap.get(Servo::class.java, "HServo")
 
-        this.rackNPinion = this.opMode.hardwareMap.get(Servo::class.java, "R&P")
+        this.rackNPinion = this.opMode.hardwareMap.get(Servo::class.java, "RnP")
 
         this.CSensor = this.opMode.hardwareMap.get(ColorSensor::class.java, "CSensor")
 
@@ -59,10 +59,10 @@ object Claw :API(){
         RightWheel.position = 0.0
     }
     fun verticalMove(pwr : Double){
-        VerticalServo.position = pwr
+        VerticalServo.position += pwr
     }
     fun horizontalMove(pwr : Double){
-        HorizontalServo.position = pwr
+        HorizontalServo.position += pwr
     }
     fun extend(){
         rackNPinion.position = 1.0
