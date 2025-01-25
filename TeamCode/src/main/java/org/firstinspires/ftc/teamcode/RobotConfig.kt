@@ -179,13 +179,13 @@ object RobotConfig {
          * The maximum power a wheel can spin at when the robot is driving with encoders.
          */
         @JvmField
-        var MAX_DRIVE_SPEED: Double = 0.3 //TODO: Change as needed
+        var MAX_DRIVE_SPEED: Double = 0.4 //TODO: Change as needed
 
         /**
          * The maximum power a wheel can spin at when the robot spinning with encoders.
          */
         @JvmField
-        var MAX_SPIN_SPEED: Double = 0.4 //TODO: Change as needed
+        var MAX_SPIN_SPEED: Double = 0.5 //TODO: Change as needed
 
         /**
          * A multiplier that calculates the power of the wheel relative to the amount of time that

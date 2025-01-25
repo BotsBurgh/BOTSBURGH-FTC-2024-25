@@ -36,13 +36,13 @@ object Claw :API(){
 
     }
     fun reset(){
-        LeftWheel.position=0.0
-        RightWheel.position=0.0
+        LeftWheel.position
+        RightWheel.position
 
-        VerticalServo.position=0.0
-        HorizontalServo.position=0.0
+        VerticalServo.position
+        HorizontalServo.position
 
-        rackNPinion.position=0.0
+        rackNPinion.position
 
         CSensor.enableLed(false)
     }
@@ -52,17 +52,25 @@ object Claw :API(){
     }
     fun grab(){
         LeftWheel.position = 1.0
-        RightWheel.position = 1.0
+        RightWheel.position = 0.0
     }
     fun release(){
         LeftWheel.position = 0.0
-        RightWheel.position = 0.0
+        RightWheel.position = 1.0
     }
-    fun verticalMove(pwr : Double){
-        VerticalServo.position += pwr
+    fun verticalMovePlus(){
+        VerticalServo.position += 0.2
     }
-    fun horizontalMove(pwr : Double){
-        HorizontalServo.position += pwr
+    fun verticalMoveMinus(){
+        VerticalServo.position -= 0.2
+    }
+
+    fun horizontalMovePlus(){
+        HorizontalServo.position += 0.2
+    }
+
+    fun horizontalMoveMinus(){
+        HorizontalServo.position -= 0.2
     }
     fun extend(){
         rackNPinion.position = 1.0
