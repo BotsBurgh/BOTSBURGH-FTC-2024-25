@@ -71,6 +71,14 @@ class TeleOpMain : OpMode() {
             Claw.verticalMoveMinus()
         }
 
+        if(gamepad2.dpad_left){
+            Claw.horizontalMoveMinus()
+        }
+
+        if(gamepad2.dpad_right){
+            Claw.horizontalMoveMinus()
+        }
+
 
 
 
