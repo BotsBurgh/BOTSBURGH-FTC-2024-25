@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.teleop
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
-import com.qualcomm.robotcore.hardware.TouchSensor
 import org.firstinspires.ftc.teamcode.RobotConfig
 import org.firstinspires.ftc.teamcode.api.ScissorLift
 import org.firstinspires.ftc.teamcode.api.TriWheels
@@ -31,10 +30,6 @@ class TeleOpMain : OpMode() {
         val joyX = -this.gamepad1.left_stick_x.toDouble()
         val joyY = this.gamepad1.left_stick_y.toDouble()
 
-        //joystick(Claw) input
-        val xPos = this.gamepad2.left_stick_x.toDouble()
-        val yPos = this.gamepad2.left_stick_y.toDouble()
-
         //ColorSensor on
         Claw.light()
 
@@ -54,9 +49,9 @@ class TeleOpMain : OpMode() {
 
         //scissor lift
 
-        val liftPwr = (gamepad2.left_trigger - gamepad2.right_trigger).toDouble()
+        ScissorLift.unlift(gamepad2.left_trigger.toDouble())
 
-        ScissorLift.lift(liftPwr)
+        ScissorLift.lift(-gamepad2.right_trigger.toDouble())
 
         if (this.gamepad2.left_stick_button){ //Emergency stop
             ScissorLift.stop()
@@ -76,12 +71,8 @@ class TeleOpMain : OpMode() {
         }
 
         if(gamepad2.dpad_right){
-            Claw.horizontalMoveMinus()
+            Claw.horizontalMovePlus()
         }
-
-
-
-
 
         if (this.gamepad2.a){
             Claw.grab()

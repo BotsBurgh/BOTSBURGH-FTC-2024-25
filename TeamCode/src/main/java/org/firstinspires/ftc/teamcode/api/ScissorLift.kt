@@ -21,10 +21,17 @@ object ScissorLift : API() {
 
     fun lift(pwr: Double){
 
-        if(!maxLift.isPressed && !minLift.isPressed) {
+        if(!maxLift.isPressed) {
             this.motor.power = pwr
-        }else{
+        }
+    }
+
+    fun unlift(pwr: Double){
+
+        if(minLift.isPressed){
             this.motor.power = 0.0
+        } else{
+            this.motor.power = pwr
         }
     }
 

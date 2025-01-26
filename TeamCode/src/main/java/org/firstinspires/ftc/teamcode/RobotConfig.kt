@@ -194,4 +194,18 @@ object RobotConfig {
         @JvmField
         var TIME_GAIN: Double = 0.4
     }
+
+    @Config
+    object Claw{
+        /*How short we can make the claw*/
+
+        @JvmField
+        var CLAW_MIN_HEIGHT: Double = 0.0
+
+        /*How tall we can make the claw*/
+
+
+        @JvmField
+        var CLAW_MAX_HEIGHT: Double = 1.5
+    }
 }

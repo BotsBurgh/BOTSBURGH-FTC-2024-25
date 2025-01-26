@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
 import com.qualcomm.robotcore.hardware.ColorSensor
 import org.firstinspires.ftc.teamcode.core.API
+import org.firstinspires.ftc.teamcode.RobotConfig
 
 /* An API to Control the Claw and Color Sensor*/
 
@@ -59,19 +60,26 @@ object Claw :API(){
         RightWheel.position = 1.0
     }
     fun verticalMovePlus(){
-        VerticalServo.position += 0.2
+        HorizontalServo.position = RobotConfig.Claw.CLAW_MAX_HEIGHT
     }
     fun verticalMoveMinus(){
-        VerticalServo.position -= 0.2
+        HorizontalServo.position = RobotConfig.Claw.CLAW_MIN_HEIGHT
     }
 
-    fun horizontalMovePlus(){
-        HorizontalServo.position += 0.2
+    fun horizontalMovePlus(){  //.position doesn't like it when you += it, so you use a var to do it
+        var incriment = 0.0
+        incriment = VerticalServo.position
+        incriment += 0.2
+        VerticalServo.position = incriment
     }
 
     fun horizontalMoveMinus(){
-        HorizontalServo.position -= 0.2
+        var incriment = 0.0
+        incriment = VerticalServo.position
+        incriment -= 0.2
+        VerticalServo.position = incriment
     }
+
     fun extend(){
         rackNPinion.position = 1.0
     }
