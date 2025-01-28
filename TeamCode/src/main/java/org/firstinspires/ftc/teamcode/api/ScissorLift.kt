@@ -27,7 +27,7 @@ object ScissorLift : API() {
     }
 
     fun unlift(pwr: Double){
-
+        //For some reason, minLift doesnt work? Doesnt matter tho
         if(minLift.isPressed){
             this.motor.power = 0.0
         } else{

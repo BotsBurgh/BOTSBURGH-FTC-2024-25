@@ -200,12 +200,16 @@ object RobotConfig {
         /*How short we can make the claw*/
 
         @JvmField
-        var CLAW_MIN_HEIGHT: Double = 0.0
+        var CLAW_MIN_HEIGHT: Double = 0.85
 
         /*How tall we can make the claw*/
 
 
         @JvmField
-        var CLAW_MAX_HEIGHT: Double = 1.5
+        var CLAW_MAX_HEIGHT: Double = 0.4
+
+        /*The incriment for the claw to rotate*/
+        @JvmField
+        var INCRIMENT: Double = 0.2
     }
 }

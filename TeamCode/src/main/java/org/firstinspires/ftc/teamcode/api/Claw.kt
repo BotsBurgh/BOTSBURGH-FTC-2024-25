@@ -67,17 +67,15 @@ object Claw :API(){
     }
 
     fun horizontalMovePlus(){  //.position doesn't like it when you += it, so you use a var to do it
-        var incriment = 0.0
-        incriment = VerticalServo.position
-        incriment += 0.2
-        VerticalServo.position = incriment
+        var change = VerticalServo.position
+        change += RobotConfig.Claw.INCRIMENT
+        VerticalServo.position = change
     }
 
     fun horizontalMoveMinus(){
-        var incriment = 0.0
-        incriment = VerticalServo.position
-        incriment -= 0.2
-        VerticalServo.position = incriment
+        var change = VerticalServo.position
+        change -= RobotConfig.Claw.INCRIMENT
+        VerticalServo.position = change
     }
 
     fun extend(){
