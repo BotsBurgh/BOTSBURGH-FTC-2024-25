@@ -200,7 +200,7 @@ object RobotConfig {
         /*How short we can make the claw*/
 
         @JvmField
-        var CLAW_MIN_HEIGHT: Double = 0.85
+        var CLAW_MIN_HEIGHT: Double = 0.7
 
         /*How tall we can make the claw*/
 
