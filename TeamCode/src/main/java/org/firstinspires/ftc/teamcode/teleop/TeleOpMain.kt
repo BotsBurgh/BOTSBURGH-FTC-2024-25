@@ -27,8 +27,8 @@ class TeleOpMain : OpMode() {
 
     override fun loop() {
         // joystick(Movement) input
-        val joyX = -this.gamepad1.left_stick_x.toDouble()
-        val joyY = this.gamepad1.left_stick_y.toDouble()
+        val joyX = this.gamepad1.left_stick_x.toDouble()
+        val joyY = -this.gamepad1.left_stick_y.toDouble()
 
         //ColorSensor on
         Claw.light()
@@ -49,11 +49,11 @@ class TeleOpMain : OpMode() {
 
         //scissor lift
 
-        ScissorLift.unlift(gamepad2.left_trigger.toDouble())
+        ScissorLift.unlift(gamepad1.left_trigger.toDouble())
 
-        ScissorLift.lift(-gamepad2.right_trigger.toDouble())
+        ScissorLift.lift(-gamepad1.right_trigger.toDouble())
 
-        if (this.gamepad2.left_stick_button){ //Emergency stop
+        if (gamepad1.x && gamepad1.y){ //Emergency stop
             ScissorLift.stop()
         }
 
