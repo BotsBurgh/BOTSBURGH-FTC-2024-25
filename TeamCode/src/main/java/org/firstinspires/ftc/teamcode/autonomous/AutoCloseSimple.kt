@@ -6,6 +6,7 @@ import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.api.linear.Encoders
 import org.firstinspires.ftc.teamcode.api.Claw
 import org.firstinspires.ftc.teamcode.api.ScissorLift
+import org.firstinspires.ftc.teamcode.RobotConfig
 /**
  * This is the main code for the autonomous segment of the game.
  *
@@ -17,7 +18,7 @@ import org.firstinspires.ftc.teamcode.api.ScissorLift
  */
 @Autonomous(name = "AutoMain - CloseToBasket")
 
-    class AutoClose : LinearOpMode() {
+    class AutoCloseSimple : LinearOpMode() {
         private var forward = Encoders.Direction.Red
 
         private var tile = 24.0 //One tile in inches
@@ -33,10 +34,12 @@ import org.firstinspires.ftc.teamcode.api.ScissorLift
             waitForStart()
 
 
-                Encoders.spinTo(-90.0)
-                Encoders.driveTo(forward, tile)
+                Encoders.spinTo(RobotConfig.CloseAutonomous.FIRST_TURN)
+                Encoders.driveTo(forward, RobotConfig.CloseAutonomous.FORWARD)
+                Claw.verticalMovePlus()
+                Encoders.spinTo(-RobotConfig.CloseAutonomous.SMALL_TURN)
+                Claw.grab()
                 Claw.release()
-                Encoders.driveTo(forward, tile)
                 //Stop here ig
         }
     }

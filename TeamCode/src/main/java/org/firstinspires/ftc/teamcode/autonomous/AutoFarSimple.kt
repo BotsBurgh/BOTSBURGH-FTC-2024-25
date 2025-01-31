@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.autonomous
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+import org.firstinspires.ftc.teamcode.RobotConfig
 import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.api.linear.Encoders
 import org.firstinspires.ftc.teamcode.api.Claw
@@ -17,7 +18,7 @@ import org.firstinspires.ftc.teamcode.api.ScissorLift
  */
 @Autonomous(name = "AutoFar")
 
-class AutoFar : LinearOpMode() {
+class AutoFarSimple : LinearOpMode() {
     private var forward = Encoders.Direction.Red
 
     private var tile = 24.0 //One tile in inches
@@ -33,10 +34,12 @@ class AutoFar : LinearOpMode() {
         waitForStart()
 
 
-        Encoders.spinTo(90.0)
-        Encoders.driveTo(forward, tile)
+        Encoders.spinTo(-RobotConfig.CloseAutonomous.FIRST_TURN)
+        Encoders.driveTo(forward, RobotConfig.CloseAutonomous.FORWARD)
+        Claw.verticalMovePlus()
+        Encoders.spinTo(RobotConfig.CloseAutonomous.SMALL_TURN)
+        Claw.grab()
         Claw.release()
-        Encoders.driveTo(forward, tile)
         //Stop here ig
     }
 }

@@ -212,4 +212,18 @@ object RobotConfig {
         @JvmField
         var INCRIMENT: Double = 0.2
     }
+
+    @Config
+    object CloseAutonomous{
+        //Using variables for distances, so that it can be quickly modded by RobotConfig
+
+        @JvmField
+        var FIRST_TURN: Double = 90.0
+
+        @JvmField
+        var FORWARD: Double = 24.0
+
+        @JvmField
+        var SMALL_TURN: Double = 20.0
+    }
 }
