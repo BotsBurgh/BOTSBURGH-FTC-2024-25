@@ -211,5 +211,11 @@ object RobotConfig {
         /*The incriment for the claw to rotate*/
         @JvmField
         var INCRIMENT: Double = 0.2
+
+        @JvmField
+        var CLAW_LEFT_TURN: Double = 0.14
+
+        @JvmField
+        var CLAW_RIGHT_TURN: Double = 0.52
     }
 }
