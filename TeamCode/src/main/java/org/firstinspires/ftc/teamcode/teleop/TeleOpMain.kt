@@ -88,5 +88,16 @@ class TeleOpMain : OpMode() {
         }
 
 
+        //debug telemetry
+        telemetry.addData("Current", Triple(
+                TriWheels.red.currentPosition,
+                TriWheels.green.currentPosition,
+                TriWheels.blue.currentPosition,
+            ),
+        )
+
+        telemetry.update()
+
+
     }
 }

@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.RobotConfig
  * Drop in zone
  * REPEAT!
  */
-@Autonomous(name = "AutoMain - CloseToBasket")
+@Autonomous(name = "AutoSimple - CloseToBasket")
 
     class AutoCloseSimple : LinearOpMode() {
         private var forward = Encoders.Direction.Red
@@ -34,10 +34,10 @@ import org.firstinspires.ftc.teamcode.RobotConfig
             waitForStart()
 
 
-                Encoders.spinTo(RobotConfig.CloseAutonomous.FIRST_TURN)
-                Encoders.driveTo(forward, RobotConfig.CloseAutonomous.FORWARD)
+                Encoders.spinTo(RobotConfig.SimpleAutonomous.FIRST_TURN)
+                Encoders.driveTo(forward, RobotConfig.SimpleAutonomous.FORWARD)
                 Claw.verticalMovePlus()
-                Encoders.spinTo(-RobotConfig.CloseAutonomous.SMALL_TURN)
+                Encoders.spinTo(-RobotConfig.SimpleAutonomous.SMALL_TURN)
                 Claw.grab()
                 Claw.release()
                 //Stop here ig

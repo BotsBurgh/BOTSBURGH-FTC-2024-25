@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
+import org.firstinspires.ftc.teamcode.RobotConfig
 import org.firstinspires.ftc.teamcode.core.API
 import org.firstinspires.ftc.teamcode.utils.PI_2
 import org.firstinspires.ftc.teamcode.utils.Polar2d
@@ -47,8 +48,7 @@ object TriWheels : API() {
     ) {
         red.power = redPower
         green.power = greenPower
-        // FIXME: The blue wheel has a motor with a different wheel ratio, and thus is 3x faster
-        //        than the other two.
+        // FIXME: The blue wheel is kinda dumb
         blue.power = bluePower
     }
 

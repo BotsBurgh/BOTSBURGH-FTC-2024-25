@@ -38,4 +38,17 @@ object ScissorLift : API() {
     fun stop(){
         this.motor.power = 0.0
     }
+
+    fun liftToPos(dist: Int) {
+        if (motor.currentPosition < dist) {
+            while (motor.currentPosition < dist){
+                lift(1.0)
+            }
+        }
+        else if(motor.currentPosition > dist){
+            while (motor.currentPosition > dist){
+                unlift(1.0)
+            }
+        }
+    }
 }

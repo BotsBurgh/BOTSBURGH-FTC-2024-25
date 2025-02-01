@@ -160,7 +160,7 @@ object RobotConfig {
          * increase accuracy.
          */
         @JvmField
-        var TICKS_PER_DEGREE: Double = 1.82
+        var TICKS_PER_DEGREE: Double = 11.577
 
         /**
          * A multiplier that calculates the power of the wheel relative to the amount it needs to
@@ -206,30 +206,47 @@ object RobotConfig {
 
 
         @JvmField
-        var CLAW_MAX_HEIGHT: Double = 0.4
+        var CLAW_MAX_HEIGHT: Double = 0.25
 
         /*The incriment for the claw to rotate*/
         @JvmField
         var INCRIMENT: Double = 0.2
 
         @JvmField
-        var CLAW_LEFT_TURN: Double = 0.14
+        var CLAW_LEFT_TURN: Double = 0.5
 
         @JvmField
-        var CLAW_RIGHT_TURN: Double = 0.52
+        var CLAW_RIGHT_TURN: Double = 0.885
     }
 
     @Config
-    object CloseAutonomous{
+    object SimpleAutonomous{
         //Using variables for distances, so that it can be quickly modded by RobotConfig
 
         @JvmField
         var FIRST_TURN: Double = 90.0
 
         @JvmField
-        var FORWARD: Double = 24.0
+        var FORWARD: Double = -60.0
 
         @JvmField
         var SMALL_TURN: Double = 20.0
+    }
+
+    @Config
+    object MainAuto{
+        //Variables for the main Auto, C refers to the CloseAutos, F refers to Far
+
+        @JvmField
+        var CFIRST_TURN: Double = 90.0
+
+        @JvmField
+        var CFIRST_MOVE: Double = 6.0
+
+        @JvmField
+        var CTO_CAGE: Double = 12.0
+
+        @JvmField
+        var LIFT_UP_DIST: Int = 1
     }
 }

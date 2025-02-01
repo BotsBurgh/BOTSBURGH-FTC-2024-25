@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.api.ScissorLift
  * Drop in zone
  * REPEAT!
  */
-@Autonomous(name = "AutoFar")
+@Autonomous(name = "AutoSimple - FarFromBasket")
 
 class AutoFarSimple : LinearOpMode() {
     private var forward = Encoders.Direction.Red
@@ -34,12 +34,18 @@ class AutoFarSimple : LinearOpMode() {
         waitForStart()
 
 
-        Encoders.spinTo(-RobotConfig.CloseAutonomous.FIRST_TURN)
-        Encoders.driveTo(forward, RobotConfig.CloseAutonomous.FORWARD)
+        Encoders.driveTo(forward, RobotConfig.SimpleAutonomous.FORWARD)
+        telemetry.addLine("forward")
+        telemetry.update()
+        sleep(1000)
         Claw.verticalMovePlus()
-        Encoders.spinTo(RobotConfig.CloseAutonomous.SMALL_TURN)
+        telemetry.addLine("arm")
+        telemetry.update()
+        sleep(1000)
         Claw.grab()
-        Claw.release()
+        telemetry.addLine("eject")
+        telemetry.update()
+        sleep(1000)
         //Stop here ig
     }
 }
