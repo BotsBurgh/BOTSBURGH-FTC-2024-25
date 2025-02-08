@@ -43,7 +43,7 @@ object RobotConfig {
 
         /** A multiplier that scales the robot's rotation speed. */
         @JvmField
-        var ROTATE_SPEED: Double = 0.5
+        var ROTATE_SPEED: Double = 1.0
     }
 
     // TODO: Set robot radius and inches per tick.
@@ -200,23 +200,23 @@ object RobotConfig {
         /*How short we can make the claw*/
 
         @JvmField
-        var CLAW_MIN_HEIGHT: Double = 0.7
+        var CLAW_MIN_HEIGHT: Double = 0.25
 
         /*How tall we can make the claw*/
 
 
         @JvmField
-        var CLAW_MAX_HEIGHT: Double = 0.25
+        var CLAW_MAX_HEIGHT: Double = 0.53
 
         /*The incriment for the claw to rotate*/
         @JvmField
         var INCRIMENT: Double = 0.2
 
         @JvmField
-        var CLAW_LEFT_TURN: Double = 0.5
+        var CLAW_LEFT_TURN: Double = 0.32
 
         @JvmField
-        var CLAW_RIGHT_TURN: Double = 0.885
+        var CLAW_RIGHT_TURN: Double = 0.7
     }
 
     @Config
