@@ -6,6 +6,7 @@ package org.firstinspires.ftc.teamcode
 
 import com.acmerobotics.dashboard.config.Config
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot
+import com.qualcomm.hardware.sparkfun.SparkFunOTOS
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil
 import org.firstinspires.ftc.teamcode.core.logging.Level
@@ -231,5 +232,35 @@ object RobotConfig {
 
         @JvmField
         var SMALL_TURN: Double = 20.0
+    }
+
+    @Config
+    object OTOS {
+        @JvmField
+        var OFFSET = SparkFunOTOS.Pose2D(0.0, 0.0 ,0.0)
+
+        @JvmField
+        var LINEAR_SCALAR: Double = 1.0
+
+        @JvmField
+        var ANGULAR_SCALAR: Double = 1.0
+
+        @JvmField
+        var SPEED_GAIN: Double = 0.04
+
+        @JvmField
+        var MAX_AUTO_SPEED: Double = 0.4
+
+        @JvmField
+        var STRAFE_GAIN: Double = 0.04
+
+        @JvmField
+        var MAX_AUTO_STRAFE: Double = 0.4
+
+        @JvmField
+        var TURN_GAIN: Double = 0.04
+
+        @JvmField
+        var MAX_AUTO_TURN: Double = 0.4
     }
 }
