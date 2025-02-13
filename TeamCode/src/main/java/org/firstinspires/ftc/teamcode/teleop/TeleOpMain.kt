@@ -64,19 +64,19 @@ class TeleOpMain : OpMode() {
 
         //claw movement
         if(gamepad2.dpad_up) {
-            Claw.verticalMovePlus()
+            Claw.smallMoveUp()
         }
 
         if(gamepad2.dpad_down){
-            Claw.verticalMoveMinus()
+            Claw.smallMoveDown()
         }
 
         if(gamepad2.dpad_left){
-            Claw.horizontalMoveMinus()
+            Claw.largeMoveUp()
         }
 
         if(gamepad2.dpad_right){
-            Claw.horizontalMovePlus()
+            Claw.largeMoveDown()
         }
 
 
@@ -86,13 +86,7 @@ class TeleOpMain : OpMode() {
         if (this.gamepad2.b){
             Claw.release()
         }
-        if (this.gamepad2.left_bumper) {
-            Claw.extend()
-        }
 
-        if (this.gamepad2.right_bumper){
-            Claw.retract()
-        }
         if(this.gamepad1.b){
             RobotConfig.TeleOpMain.ROTATE_SPEED /= RobotConfig.TeleOpMain.SPEED_MODIFIER
             RobotConfig.TeleOpMain.DRIVE_SPEED /= RobotConfig.TeleOpMain.SPEED_MODIFIER
