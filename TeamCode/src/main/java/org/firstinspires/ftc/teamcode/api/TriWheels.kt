@@ -48,7 +48,6 @@ object TriWheels : API() {
     ) {
         red.power = redPower
         green.power = greenPower
-        // FIXME: The blue wheel is kinda dumb
         blue.power = bluePower
     }
 

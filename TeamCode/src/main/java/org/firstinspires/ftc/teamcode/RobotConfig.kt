@@ -44,6 +44,10 @@ object RobotConfig {
         /** A multiplier that scales the robot's rotation speed. */
         @JvmField
         var ROTATE_SPEED: Double = 1.0
+
+        /** A variable to modify the speed of the robot**/
+        @JvmField
+        var SPEED_MODIFIER : Double = 2.0
     }
 
     // TODO: Set robot radius and inches per tick.
@@ -179,13 +183,13 @@ object RobotConfig {
          * The maximum power a wheel can spin at when the robot is driving with encoders.
          */
         @JvmField
-        var MAX_DRIVE_SPEED: Double = 0.4 //TODO: Change as needed
+        var MAX_DRIVE_SPEED: Double = 1.0 //TODO: Change as needed
 
         /**
          * The maximum power a wheel can spin at when the robot spinning with encoders.
          */
         @JvmField
-        var MAX_SPIN_SPEED: Double = 0.5 //TODO: Change as needed
+        var MAX_SPIN_SPEED: Double = 0.9 //TODO: Change as needed
 
         /**
          * A multiplier that calculates the power of the wheel relative to the amount of time that
@@ -210,13 +214,8 @@ object RobotConfig {
 
         /*The incriment for the claw to rotate*/
         @JvmField
-        var INCRIMENT: Double = 0.2
+        var INCRIMENT: Double = 0.05
 
-        @JvmField
-        var CLAW_LEFT_TURN: Double = 0.32
-
-        @JvmField
-        var CLAW_RIGHT_TURN: Double = 0.7
     }
 
     @Config

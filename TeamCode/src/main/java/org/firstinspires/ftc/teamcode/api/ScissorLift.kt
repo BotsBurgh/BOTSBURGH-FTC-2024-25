@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.api
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
+import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.TouchSensor
 import org.firstinspires.ftc.teamcode.core.API
 
@@ -17,6 +18,8 @@ object ScissorLift : API() {
         this.motor = this.opMode.hardwareMap.get(DcMotor::class.java, "Lift")
         this.minLift = this.opMode.hardwareMap.get(TouchSensor::class.java, "minLift")
         this.maxLift = this.opMode.hardwareMap.get(TouchSensor::class.java, "maxLift")
+
+        stopAndResetMotor()
     }
 
     fun lift(pwr: Double){
@@ -39,16 +42,34 @@ object ScissorLift : API() {
         this.motor.power = 0.0
     }
 
-    fun liftToPos(dist: Int) {
-        if (motor.currentPosition < dist) {
-            while (motor.currentPosition < dist){
+    fun getLockPos(): Int{
+        return this.motor.currentPosition
+    }
+
+    fun goToPos(lockVal: Int){
+        if (motor.currentPosition < lockVal) {
+            while (motor.currentPosition < lockVal){
                 lift(1.0)
             }
         }
-        else if(motor.currentPosition > dist){
-            while (motor.currentPosition > dist){
+        else if(motor.currentPosition > lockVal){
+            while (motor.currentPosition > lockVal){
                 unlift(1.0)
             }
         }
+    }
+
+    fun stopAndResetMotor() {
+        stop()
+
+        motor.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
+        motor.mode = DcMotor.RunMode.RUN_USING_ENCODER
+        motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
+        motor.direction = DcMotorSimple.Direction.FORWARD
+
+    }
+
+    fun isPowered() : Boolean{
+        return motor.isBusy
     }
 }

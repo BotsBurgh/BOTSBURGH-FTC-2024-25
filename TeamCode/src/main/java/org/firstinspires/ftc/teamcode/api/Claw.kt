@@ -12,10 +12,8 @@ object Claw :API(){
     lateinit var LeftWheel : Servo
     lateinit var RightWheel : Servo
 
-    lateinit var VerticalServo : Servo
-    lateinit var HorizontalServo : Servo
-
-    lateinit var rackNPinion : Servo
+    lateinit var largeServo : Servo
+    lateinit var smallServo : Servo
 
     lateinit var CSensor : ColorSensor
 
@@ -25,10 +23,8 @@ object Claw :API(){
         this.LeftWheel = this.opMode.hardwareMap.get(Servo::class.java, "LCW")
         this.RightWheel = this.opMode.hardwareMap.get(Servo::class.java, "RCW")
 
-        this.VerticalServo = this.opMode.hardwareMap.get(Servo::class.java, "VServo")
-        this.HorizontalServo = this.opMode.hardwareMap.get(Servo::class.java, "HServo")
-
-        this.rackNPinion = this.opMode.hardwareMap.get(Servo::class.java, "RnP")
+        this.largeServo = this.opMode.hardwareMap.get(Servo::class.java, "VServo")
+        this.smallServo = this.opMode.hardwareMap.get(Servo::class.java, "HServo")
 
         this.CSensor = this.opMode.hardwareMap.get(ColorSensor::class.java, "CSensor")
 
@@ -40,10 +36,9 @@ object Claw :API(){
         LeftWheel.position
         RightWheel.position
 
-        VerticalServo.position
-        HorizontalServo.position
+        largeServo.position
+        smallServo.position
 
-        rackNPinion.position
 
         CSensor.enableLed(false)
     }
@@ -59,28 +54,30 @@ object Claw :API(){
         LeftWheel.position = 0.0
         RightWheel.position = 1.0
     }
-    fun verticalMovePlus(){
-        HorizontalServo.position = RobotConfig.Claw.CLAW_MAX_HEIGHT
-    }
-    fun verticalMoveMinus(){
-        HorizontalServo.position = RobotConfig.Claw.CLAW_MIN_HEIGHT
+    fun largeMoveUp(){
+        largeServo.position += RobotConfig.Claw.INCRIMENT
     }
 
-    fun horizontalMovePlus(){  //.position doesn't like it when you += it, so you use a var to do it
-        VerticalServo.position = RobotConfig.Claw.CLAW_RIGHT_TURN
+    fun largeMoveDown(){
+        largeServo.position -= RobotConfig.Claw.INCRIMENT
     }
 
-    fun horizontalMoveMinus(){
-        VerticalServo.position = RobotConfig.Claw.CLAW_LEFT_TURN
+    fun smallMoveUp(){
+        smallServo.position += RobotConfig.Claw.INCRIMENT
     }
 
-    fun extend(){
-        rackNPinion.position = 1.0
+    fun smallMoveDown(){
+        smallServo.position -= RobotConfig.Claw.INCRIMENT
     }
 
-    fun retract(){
-        rackNPinion.position = 0.0
+    fun largeMoveToPos(pos : Double){
+        largeServo.position = pos
     }
+
+    fun smallMoveToPos(pos : Double){
+        smallServo.position = pos
+    }
+
 
     fun scan(color:String){
         if(color == "Red" && CSensor.red()> CSensor.blue()){

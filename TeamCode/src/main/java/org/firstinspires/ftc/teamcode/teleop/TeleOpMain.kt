@@ -52,9 +52,14 @@ class TeleOpMain : OpMode() {
         ScissorLift.unlift(gamepad1.left_trigger.toDouble())
 
         ScissorLift.lift(-gamepad1.right_trigger.toDouble())
+        var liftPos = ScissorLift.getLockPos()
 
         if (gamepad1.x && gamepad1.y){ //Emergency stop
             ScissorLift.stop()
+        }
+
+        if(ScissorLift.isPowered()){
+            ScissorLift.goToPos(liftPos)
         }
 
         //claw movement
@@ -74,18 +79,30 @@ class TeleOpMain : OpMode() {
             Claw.horizontalMovePlus()
         }
 
+
         if (this.gamepad2.a){
             Claw.grab()
         }
         if (this.gamepad2.b){
             Claw.release()
         }
-        if (this.gamepad2.left_bumper){
+        if (this.gamepad2.left_bumper) {
             Claw.extend()
         }
+
         if (this.gamepad2.right_bumper){
             Claw.retract()
         }
+        if(this.gamepad1.b){
+            RobotConfig.TeleOpMain.ROTATE_SPEED /= RobotConfig.TeleOpMain.SPEED_MODIFIER
+            RobotConfig.TeleOpMain.DRIVE_SPEED /= RobotConfig.TeleOpMain.SPEED_MODIFIER
+        }
+
+        if(this.gamepad1.a){
+            RobotConfig.TeleOpMain.ROTATE_SPEED *= RobotConfig.TeleOpMain.SPEED_MODIFIER
+            RobotConfig.TeleOpMain.DRIVE_SPEED *= RobotConfig.TeleOpMain.SPEED_MODIFIER
+        }
+
 
 
         //debug telemetry
