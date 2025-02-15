@@ -8,6 +8,8 @@ import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.api.Claw
 import kotlin.math.PI
 import kotlin.math.atan2
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.sqrt
 
 
@@ -17,6 +19,8 @@ import kotlin.math.sqrt
 
 class TeleOpMain : OpMode() {
 
+    var bigPos : Double = 0.0
+    var smallPos : Double = 0.0
 
     override fun init() {
         TriWheels.init(this)
@@ -62,22 +66,34 @@ class TeleOpMain : OpMode() {
             ScissorLift.goToPos(liftPos)
         }
 
+
+
         //claw movement
         if(gamepad2.dpad_up) {
-            Claw.smallMoveUp()
+            smallPos += RobotConfig.Claw.INCRIMENT;
+            smallPos = min(smallPos, RobotConfig.Claw.CLAW_SMALL_MAX_HEIGHT);
+
+
         }
 
         if(gamepad2.dpad_down){
-            Claw.smallMoveDown()
+            smallPos -= RobotConfig.Claw.INCRIMENT;
+            smallPos = max(smallPos, RobotConfig.Claw.CLAW_SMALL_MIN_HEIGHT);
+
         }
 
+        Claw.smallMoveToPos(smallPos)
+
         if(gamepad2.dpad_left){
-            Claw.largeMoveUp()
+            bigPos += RobotConfig.Claw.INCRIMENT;
+            bigPos = min(bigPos, RobotConfig.Claw.CLAW_BIG_MAX_HEIGHT);
         }
 
         if(gamepad2.dpad_right){
-            Claw.largeMoveDown()
+            bigPos -= RobotConfig.Claw.INCRIMENT;
+            bigPos = max(bigPos, RobotConfig.Claw.CLAW_BIG_MIN_HEIGHT);
         }
+        Claw.largeMoveToPos(bigPos)
 
 
         if (this.gamepad2.a){

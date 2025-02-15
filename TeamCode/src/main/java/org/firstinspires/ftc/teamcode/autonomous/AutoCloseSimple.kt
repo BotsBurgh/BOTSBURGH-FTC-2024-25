@@ -36,7 +36,6 @@ import org.firstinspires.ftc.teamcode.RobotConfig
 
                 Encoders.spinTo(RobotConfig.SimpleAutonomous.FIRST_TURN)
                 Encoders.driveTo(forward, RobotConfig.SimpleAutonomous.FORWARD)
-                Claw.verticalMovePlus()
                 Encoders.spinTo(-RobotConfig.SimpleAutonomous.SMALL_TURN)
                 Claw.grab()
                 Claw.release()

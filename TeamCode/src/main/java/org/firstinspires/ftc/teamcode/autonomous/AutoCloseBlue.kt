@@ -40,7 +40,6 @@ import android.os.CountDownTimer
             Encoders.spinTo(-RobotConfig.MainAuto.CFIRST_TURN)
             Encoders.driveTo(forward, RobotConfig.MainAuto.CFIRST_MOVE)
             Encoders.spinTo(RobotConfig.MainAuto.CFIRST_TURN)
-            Claw.verticalMovePlus()
             ScissorLift.lift(1.0)
             Encoders.driveTo(forward, RobotConfig.MainAuto.CTO_CAGE)
 

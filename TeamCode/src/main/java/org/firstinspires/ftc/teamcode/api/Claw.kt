@@ -23,8 +23,8 @@ object Claw :API(){
         this.LeftWheel = this.opMode.hardwareMap.get(Servo::class.java, "LCW")
         this.RightWheel = this.opMode.hardwareMap.get(Servo::class.java, "RCW")
 
-        this.largeServo = this.opMode.hardwareMap.get(Servo::class.java, "VServo")
-        this.smallServo = this.opMode.hardwareMap.get(Servo::class.java, "HServo")
+        this.largeServo = this.opMode.hardwareMap.get(Servo::class.java, "largeServo")
+        this.smallServo = this.opMode.hardwareMap.get(Servo::class.java, "smallServo")
 
         this.CSensor = this.opMode.hardwareMap.get(ColorSensor::class.java, "CSensor")
 
@@ -63,6 +63,7 @@ object Claw :API(){
     }
 
     fun smallMoveUp(){
+
         smallServo.position += RobotConfig.Claw.INCRIMENT
     }
 

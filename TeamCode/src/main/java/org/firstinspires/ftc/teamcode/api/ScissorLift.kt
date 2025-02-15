@@ -30,10 +30,8 @@ object ScissorLift : API() {
     }
 
     fun unlift(pwr: Double){
-        //For some reason, minLift doesnt work? Doesnt matter tho
-        if(minLift.isPressed){
-            this.motor.power = 0.0
-        } else{
+
+        if(!minLift.isPressed){
             this.motor.power = pwr
         }
     }
@@ -64,12 +62,11 @@ object ScissorLift : API() {
 
         motor.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
         motor.mode = DcMotor.RunMode.RUN_USING_ENCODER
-        motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         motor.direction = DcMotorSimple.Direction.FORWARD
 
     }
 
     fun isPowered() : Boolean{
-        return motor.isBusy
+        return motor.power != 0.0
     }
 }

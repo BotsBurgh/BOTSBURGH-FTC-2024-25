@@ -38,7 +38,6 @@ class AutoFarSimple : LinearOpMode() {
         telemetry.addLine("forward")
         telemetry.update()
         sleep(1000)
-        Claw.verticalMovePlus()
         telemetry.addLine("arm")
         telemetry.update()
         sleep(1000)
