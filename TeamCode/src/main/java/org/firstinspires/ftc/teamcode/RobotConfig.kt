@@ -237,7 +237,7 @@ object RobotConfig {
     @Config
     object OTOS {
         @JvmField
-        var OFFSET = SparkFunOTOS.Pose2D(0.0, 0.0 ,0.0)
+        var OFFSET = SparkFunOTOS.Pose2D(0.0, 0.0 ,-42.0)
 
         @JvmField
         var LINEAR_SCALAR: Double = 1.0
@@ -262,5 +262,8 @@ object RobotConfig {
 
         @JvmField
         var MAX_AUTO_TURN: Double = 0.4
+
+        @JvmField
+        var MAGNITUDE: Double = 0.5
     }
 }

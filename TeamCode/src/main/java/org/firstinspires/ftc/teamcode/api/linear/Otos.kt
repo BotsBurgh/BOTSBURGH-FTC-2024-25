@@ -10,9 +10,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 import org.firstinspires.ftc.teamcode.RobotConfig
 import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.core.API
+import kotlin.math.atan2
 
 
 object Otos : API() {
+    override val isLinear = true
 
     lateinit var otos: SparkFunOTOS
 
@@ -24,15 +26,25 @@ object Otos : API() {
     private var yError: Double = 0.0
     private var hError: Double = 0.0
 
-    private var redWheelPower: Double = 0.0
-    private var blueWheelPower: Double = 0.0
-    private var greenWheelPower: Double = 0.0
+//    private var redWheelPower: Double = 0.0
+//    private var blueWheelPower: Double = 0.0
+//    private var greenWheelPower: Double = 0.0
 
     private var max: Double = 0.0
 
     private var drive: Double = 0.0
     private var strafe: Double = 0.0
     private var turn: Double = 0.0
+
+
+
+    override fun init(opMode: OpMode) {
+        super.init(opMode)
+
+        otos = this.opMode.hardwareMap.get(SparkFunOTOS::class.java, "OTOS")
+
+        otos.position = SparkFunOTOS.Pose2D(0.0, 0.0, 0.0)
+    }
 
     fun configureOtos() {
         linearOpMode.telemetry.addLine("OTOS Config")
@@ -104,14 +116,20 @@ object Otos : API() {
     }
 
     fun moveRobot(x: Double, y: Double, h: Double) {
-        redWheelPower = x + y + h
-        greenWheelPower = x - y - h
-        blueWheelPower = x - y + h
 
+        var rad: Double = atan2(yError, xError)
+
+        var (redWheelPower, greenWheelPower, blueWheelPower) = TriWheels.compute(rad, RobotConfig.OTOS.MAGNITUDE)
+
+        redWheelPower += h
+        greenWheelPower += h
+        blueWheelPower += h
+
+        //normalize wheel power
         max = Math.max(Math.abs(redWheelPower), Math.abs(greenWheelPower))
         max = Math.max(max, Math.abs(blueWheelPower))
 
-        if (max > 1.0) {
+        if (max > 0.75) {
             redWheelPower /= max
             greenWheelPower /= max
             blueWheelPower /= max
