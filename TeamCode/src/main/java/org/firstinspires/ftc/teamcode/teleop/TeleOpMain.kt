@@ -56,15 +56,16 @@ class TeleOpMain : OpMode() {
         ScissorLift.unlift(gamepad1.left_trigger.toDouble())
 
         ScissorLift.lift(-gamepad1.right_trigger.toDouble())
-        var liftPos = ScissorLift.getLockPos()
 
-        if (gamepad1.x && gamepad1.y){ //Emergency stop
-            ScissorLift.stop()
-        }
-
-        if(ScissorLift.isPowered()){
-            ScissorLift.goToPos(liftPos)
-        }
+//        var liftPos = ScissorLift.getLockPos()
+//
+//        if (gamepad1.x && gamepad1.y){ //Emergency stop
+//            ScissorLift.stop()
+//        }
+//
+//        if(ScissorLift.isPowered()){
+//            ScissorLift.goToPos(liftPos)
+//        }
 
 
 
@@ -111,6 +112,14 @@ class TeleOpMain : OpMode() {
         if(this.gamepad1.a){
             RobotConfig.TeleOpMain.ROTATE_SPEED *= RobotConfig.TeleOpMain.SPEED_MODIFIER
             RobotConfig.TeleOpMain.DRIVE_SPEED *= RobotConfig.TeleOpMain.SPEED_MODIFIER
+        }
+
+        if(this.gamepad2.x){
+            Claw.close()
+        }
+
+        if(this.gamepad2.y){
+            Claw.open()
         }
 
 

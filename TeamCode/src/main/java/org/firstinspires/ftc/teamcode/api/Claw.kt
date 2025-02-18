@@ -54,22 +54,6 @@ object Claw :API(){
         LeftWheel.position = 0.0
         RightWheel.position = 1.0
     }
-    fun largeMoveUp(){
-        largeServo.position += RobotConfig.Claw.INCRIMENT
-    }
-
-    fun largeMoveDown(){
-        largeServo.position -= RobotConfig.Claw.INCRIMENT
-    }
-
-    fun smallMoveUp(){
-
-        smallServo.position += RobotConfig.Claw.INCRIMENT
-    }
-
-    fun smallMoveDown(){
-        smallServo.position -= RobotConfig.Claw.INCRIMENT
-    }
 
     fun largeMoveToPos(pos : Double){
         largeServo.position = pos
@@ -86,6 +70,18 @@ object Claw :API(){
         } else if (color == "Blue" && CSensor.red()< CSensor.blue()){
             grab()
         }
+    }
+
+    //Closes the hook
+    fun close(){
+        smallMoveToPos(RobotConfig.Claw.SMALL_CLOSE_POS)
+        largeMoveToPos(RobotConfig.Claw.LARGE_CLOSE_POS)
+    }
+
+    //Extends the hook to the bar for sample scoring(Scissorlift down)
+    fun open(){
+        smallMoveToPos(RobotConfig.Claw.SMALL_OPEN_POS)
+        largeMoveToPos(RobotConfig.Claw.LARGE_OPEN_POS)
     }
 
 

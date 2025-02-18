@@ -39,11 +39,11 @@ object RobotConfig {
     object TeleOpMain {
         /** A multiplier that scales that robot's driving / strafing speed. */
         @JvmField
-        var DRIVE_SPEED: Double = 1.0
+        var DRIVE_SPEED: Double = 0.3
 
         /** A multiplier that scales the robot's rotation speed. */
         @JvmField
-        var ROTATE_SPEED: Double = 1.0
+        var ROTATE_SPEED: Double = 0.3
 
         /** A variable to modify the speed of the robot**/
         @JvmField
@@ -204,26 +204,39 @@ object RobotConfig {
         /*How short we can make the claw*/
 
         @JvmField
-        var CLAW_BIG_MIN_HEIGHT: Double = 0.25
+        var CLAW_BIG_MIN_HEIGHT: Double = 0.65
 
         /*How tall we can make the claw*/
 
         @JvmField
-        var CLAW_BIG_MAX_HEIGHT: Double = 0.53
+        var CLAW_BIG_MAX_HEIGHT: Double = 0.1
 
         /*How short we can make the claw*/
 
         @JvmField
-        var CLAW_SMALL_MIN_HEIGHT: Double = 0.25
+        var CLAW_SMALL_MIN_HEIGHT: Double = 1.0
 
         /*How tall we can make the claw*/
 
         @JvmField
-        var CLAW_SMALL_MAX_HEIGHT: Double = 0.53
+        var CLAW_SMALL_MAX_HEIGHT: Double = 0.0
 
         /*The incriment for the claw to rotate*/
         @JvmField
         var INCRIMENT: Double = 0.005 //not changing for harish
+
+        /* Experimental Vars for quick buttons*/
+        @JvmField
+        var SMALL_CLOSE_POS: Double = 0.0
+
+        @JvmField
+        var LARGE_CLOSE_POS: Double = 0.0
+
+        @JvmField
+        var SMALL_OPEN_POS: Double = 0.0
+
+        @JvmField
+        var LARGE_OPEN_POS: Double = 0.0
 
     }
 

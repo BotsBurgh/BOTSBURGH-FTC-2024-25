@@ -19,7 +19,8 @@ object ScissorLift : API() {
         this.minLift = this.opMode.hardwareMap.get(TouchSensor::class.java, "minLift")
         this.maxLift = this.opMode.hardwareMap.get(TouchSensor::class.java, "maxLift")
 
-        stopAndResetMotor()
+//        stopAndResetMotor()
+        motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
     }
 
     fun lift(pwr: Double){
