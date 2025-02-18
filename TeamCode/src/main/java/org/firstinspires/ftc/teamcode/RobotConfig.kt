@@ -6,6 +6,7 @@ package org.firstinspires.ftc.teamcode
 
 import com.acmerobotics.dashboard.config.Config
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot
+import com.qualcomm.hardware.sparkfun.SparkFunOTOS
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil
 import org.firstinspires.ftc.teamcode.core.logging.Level
@@ -39,15 +40,11 @@ object RobotConfig {
     object TeleOpMain {
         /** A multiplier that scales that robot's driving / strafing speed. */
         @JvmField
-        var DRIVE_SPEED: Double = 0.3
+        var DRIVE_SPEED: Double = 1.0
 
         /** A multiplier that scales the robot's rotation speed. */
         @JvmField
-        var ROTATE_SPEED: Double = 0.3
-
-        /** A variable to modify the speed of the robot**/
-        @JvmField
-        var SPEED_MODIFIER : Double = 2.0
+        var ROTATE_SPEED: Double = 0.5
     }
 
     // TODO: Set robot radius and inches per tick.
@@ -164,7 +161,7 @@ object RobotConfig {
          * increase accuracy.
          */
         @JvmField
-        var TICKS_PER_DEGREE: Double = 11.577
+        var TICKS_PER_DEGREE: Double = 1.82
 
         /**
          * A multiplier that calculates the power of the wheel relative to the amount it needs to
@@ -183,13 +180,13 @@ object RobotConfig {
          * The maximum power a wheel can spin at when the robot is driving with encoders.
          */
         @JvmField
-        var MAX_DRIVE_SPEED: Double = 1.0 //TODO: Change as needed
+        var MAX_DRIVE_SPEED: Double = 0.4 //TODO: Change as needed
 
         /**
          * The maximum power a wheel can spin at when the robot spinning with encoders.
          */
         @JvmField
-        var MAX_SPIN_SPEED: Double = 0.9 //TODO: Change as needed
+        var MAX_SPIN_SPEED: Double = 0.5 //TODO: Change as needed
 
         /**
          * A multiplier that calculates the power of the wheel relative to the amount of time that
@@ -204,70 +201,69 @@ object RobotConfig {
         /*How short we can make the claw*/
 
         @JvmField
-        var CLAW_BIG_MIN_HEIGHT: Double = 0.65
+        var CLAW_MIN_HEIGHT: Double = 0.7
 
         /*How tall we can make the claw*/
 
-        @JvmField
-        var CLAW_BIG_MAX_HEIGHT: Double = 0.1
-
-        /*How short we can make the claw*/
 
         @JvmField
-        var CLAW_SMALL_MIN_HEIGHT: Double = 1.0
-
-        /*How tall we can make the claw*/
-
-        @JvmField
-        var CLAW_SMALL_MAX_HEIGHT: Double = 0.0
+        var CLAW_MAX_HEIGHT: Double = 0.4
 
         /*The incriment for the claw to rotate*/
         @JvmField
-        var INCRIMENT: Double = 0.005 //not changing for harish
-
-        /* Experimental Vars for quick buttons*/
-        @JvmField
-        var SMALL_CLOSE_POS: Double = 0.0
+        var INCRIMENT: Double = 0.2
 
         @JvmField
-        var LARGE_CLOSE_POS: Double = 0.0
+        var CLAW_LEFT_TURN: Double = 0.14
 
         @JvmField
-        var SMALL_OPEN_POS: Double = 0.0
-
-        @JvmField
-        var LARGE_OPEN_POS: Double = 0.0
-
+        var CLAW_RIGHT_TURN: Double = 0.52
     }
 
     @Config
-    object SimpleAutonomous{
+    object CloseAutonomous{
         //Using variables for distances, so that it can be quickly modded by RobotConfig
 
         @JvmField
         var FIRST_TURN: Double = 90.0
 
         @JvmField
-        var FORWARD: Double = -60.0
+        var FORWARD: Double = 24.0
 
         @JvmField
         var SMALL_TURN: Double = 20.0
     }
 
     @Config
-    object MainAuto{
-        //Variables for the main Auto, C refers to the CloseAutos, F refers to Far
+    object OTOS {
+        @JvmField
+        var OFFSET = SparkFunOTOS.Pose2D(0.0, 0.0 ,-42.0)
 
         @JvmField
-        var CFIRST_TURN: Double = 90.0
+        var LINEAR_SCALAR: Double = 1.0
 
         @JvmField
-        var CFIRST_MOVE: Double = 6.0
+        var ANGULAR_SCALAR: Double = 1.0
 
         @JvmField
-        var CTO_CAGE: Double = 12.0
+        var SPEED_GAIN: Double = 0.04
 
         @JvmField
-        var LIFT_UP_DIST: Int = 1
+        var MAX_AUTO_SPEED: Double = 0.4
+
+        @JvmField
+        var STRAFE_GAIN: Double = 0.04
+
+        @JvmField
+        var MAX_AUTO_STRAFE: Double = 0.4
+
+        @JvmField
+        var TURN_GAIN: Double = 0.04
+
+        @JvmField
+        var MAX_AUTO_TURN: Double = 0.4
+
+        @JvmField
+        var MAGNITUDE: Double = 0.5
     }
 }
