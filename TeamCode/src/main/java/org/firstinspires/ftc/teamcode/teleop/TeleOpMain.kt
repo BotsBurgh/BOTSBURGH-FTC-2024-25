@@ -57,43 +57,48 @@ class TeleOpMain : OpMode() {
 
         ScissorLift.lift(-gamepad1.right_trigger.toDouble())
 
-//        var liftPos = ScissorLift.getLockPos()
-//
-//        if (gamepad1.x && gamepad1.y){ //Emergency stop
-//            ScissorLift.stop()
-//        }
-//
-//        if(ScissorLift.isPowered()){
-//            ScissorLift.goToPos(liftPos)
-//        }
+        var liftPos = ScissorLift.getLockPos()
+
+        if (gamepad1.x && gamepad1.y){ //Emergency stop
+            ScissorLift.stop()
+        }
+
+        if(ScissorLift.isPowered()){
+            ScissorLift.goToPos(liftPos)
+        }
 
 
 
         //claw movement
-        if(gamepad2.dpad_up) {
-            smallPos += RobotConfig.Claw.INCRIMENT;
-            smallPos = min(smallPos, RobotConfig.Claw.CLAW_SMALL_MAX_HEIGHT);
 
+        if(gamepad2.dpad_up) {
+            var pos = Claw.smallServo.position
+            pos += RobotConfig.Claw.SMALL_INCRIMENT
+            smallPos = min(pos, RobotConfig.Claw.SMALL_MAXIMUM_POSITION);
 
         }
 
         if(gamepad2.dpad_down){
-            smallPos -= RobotConfig.Claw.INCRIMENT;
-            smallPos = max(smallPos, RobotConfig.Claw.CLAW_SMALL_MIN_HEIGHT);
+            var pos = Claw.smallServo.position
+            pos -= RobotConfig.Claw.SMALL_INCRIMENT
+            smallPos = max(pos, RobotConfig.Claw.SMALL_MINIMUM_POSITION);
 
         }
 
         Claw.smallMoveToPos(smallPos)
 
         if(gamepad2.dpad_left){
-            bigPos += RobotConfig.Claw.INCRIMENT;
-            bigPos = min(bigPos, RobotConfig.Claw.CLAW_BIG_MAX_HEIGHT);
+            var pos = Claw.largeServo.position
+            pos += RobotConfig.Claw.LARGE_INCRIMENT
+            smallPos = min(pos, RobotConfig.Claw.LARGE_MAXIMUM_POSITION);
         }
 
         if(gamepad2.dpad_right){
-            bigPos -= RobotConfig.Claw.INCRIMENT;
-            bigPos = max(bigPos, RobotConfig.Claw.CLAW_BIG_MIN_HEIGHT);
+            var pos = Claw.largeServo.position
+            pos -= RobotConfig.Claw.LARGE_INCRIMENT
+            smallPos = max(pos, RobotConfig.Claw.LARGE_MINIMUM_POSITION);
         }
+
         Claw.largeMoveToPos(bigPos)
 
 
@@ -124,13 +129,9 @@ class TeleOpMain : OpMode() {
 
 
 
-        //debug telemetry
-        telemetry.addData("Current", Triple(
-                TriWheels.red.currentPosition,
-                TriWheels.green.currentPosition,
-                TriWheels.blue.currentPosition,
-            ),
-        )
+        //servos
+        telemetry.addData("small Servo Pos",Claw.smallServo.position)
+        telemetry.addData("Large Servo Pos", Claw.largeServo.position)
 
         telemetry.update()
 

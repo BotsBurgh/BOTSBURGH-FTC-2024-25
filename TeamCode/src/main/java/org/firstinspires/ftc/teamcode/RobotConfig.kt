@@ -45,6 +45,10 @@ object RobotConfig {
         /** A multiplier that scales the robot's rotation speed. */
         @JvmField
         var ROTATE_SPEED: Double = 0.5
+
+        /**A multiplier for the speed of the robot**/
+        @JvmField
+        var SPEED_MODIFIER: Double = 0.5
     }
 
     // TODO: Set robot radius and inches per tick.
@@ -198,26 +202,45 @@ object RobotConfig {
 
     @Config
     object Claw{
-        /*How short we can make the claw*/
+
+        /*Secondary Servo Position to close*/
+        @JvmField
+        var SMALL_CLOSE_POS: Double = 0.0
+
+        /*Primary Servo Position to close*/
+        @JvmField
+        var LARGE_CLOSE_POS: Double = 0.0
+
+        /*Primary Servo Position to open*/
+        @JvmField
+        var LARGE_OPEN_POS: Double = 0.0
+
+        /*Secondary Servo Position to open*/
+        @JvmField
+        var SMALL_OPEN_POS: Double = 0.0
+
+        /*Incrimental For Small Claw*/
+        @JvmField
+        var SMALL_INCRIMENT: Double = 0.0
+
+        /*Incrimental for Large Claw*/
+        @JvmField
+        var LARGE_INCRIMENT: Double = 0.0
+
+        /*Secondary Limits*/
+        @JvmField
+        var SMALL_MINIMUM_POSITION: Double = 0.0
 
         @JvmField
-        var CLAW_MIN_HEIGHT: Double = 0.7
+        var SMALL_MAXIMUM_POSITION: Double = 0.0
 
-        /*How tall we can make the claw*/
-
+        /*Primary Limits*/
+        @JvmField
+        var LARGE_MINIMUM_POSITION: Double = 0.0
 
         @JvmField
-        var CLAW_MAX_HEIGHT: Double = 0.4
+        var LARGE_MAXIMUM_POSITION: Double = 0.0
 
-        /*The incriment for the claw to rotate*/
-        @JvmField
-        var INCRIMENT: Double = 0.2
-
-        @JvmField
-        var CLAW_LEFT_TURN: Double = 0.14
-
-        @JvmField
-        var CLAW_RIGHT_TURN: Double = 0.52
     }
 
     @Config

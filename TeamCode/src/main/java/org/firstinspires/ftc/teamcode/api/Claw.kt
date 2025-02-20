@@ -33,6 +33,7 @@ object Claw :API(){
 
     }
     fun reset(){
+        close()
         LeftWheel.position
         RightWheel.position
 
@@ -83,6 +84,8 @@ object Claw :API(){
         smallMoveToPos(RobotConfig.Claw.SMALL_OPEN_POS)
         largeMoveToPos(RobotConfig.Claw.LARGE_OPEN_POS)
     }
+
+
 
 
 }
