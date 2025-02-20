@@ -287,6 +287,6 @@ object RobotConfig {
         var MAX_AUTO_TURN: Double = 0.4
 
         @JvmField
-        var MAGNITUDE: Double = 0.5
+        var MAGNITUDE: Double = -0.5
     }
 }
