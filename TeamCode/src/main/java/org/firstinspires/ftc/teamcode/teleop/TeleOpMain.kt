@@ -59,15 +59,15 @@ class TeleOpMain : OpMode() {
 
         ScissorLift.lift(-gamepad1.right_trigger.toDouble())
 
-        var liftPos = ScissorLift.getLockPos()
+//        var liftPos = ScissorLift.getLockPos()
 
         if (gamepad1.x && gamepad1.y){ //Emergency stop
             ScissorLift.stop()
         }
 
-        if(ScissorLift.isPowered()){
-            ScissorLift.goToPos(liftPos)
-        }
+//        if(ScissorLift.isPowered()){
+//            ScissorLift.goToPos(liftPos)
+//        }
 
 
 
