@@ -44,6 +44,8 @@ class TeleOpMain : OpMode() {
 
         val rotationPower = this.gamepad1.right_stick_x.toDouble()
 
+        var isSpeedModded = false
+
         // movement of all wheels
         TriWheels.drive(
             joyRadians,
@@ -71,14 +73,14 @@ class TeleOpMain : OpMode() {
 
         //claw movement
 
-        if(gamepad2.dpad_up) {
+        if(gamepad2.right_bumper) {
             var pos = Claw.smallServo.position
             pos += RobotConfig.Claw.SMALL_INCRIMENT
             smallPos = min(pos, RobotConfig.Claw.SMALL_MAXIMUM_POSITION);
 
         }
 
-        if(gamepad2.dpad_down){
+        if(gamepad2.left_bumper){
             var pos = Claw.smallServo.position
             pos -= RobotConfig.Claw.SMALL_INCRIMENT
             smallPos = max(pos, RobotConfig.Claw.SMALL_MINIMUM_POSITION);
@@ -110,13 +112,18 @@ class TeleOpMain : OpMode() {
         }
 
         if(this.gamepad1.b){
-            RobotConfig.TeleOpMain.ROTATE_SPEED /= RobotConfig.TeleOpMain.SPEED_MODIFIER
-            RobotConfig.TeleOpMain.DRIVE_SPEED /= RobotConfig.TeleOpMain.SPEED_MODIFIER
+
+            TriWheels.halfSpeed(isSpeedModded)
+            telemetry.addLine("1/2 Speed")
+            telemetry.update()
+            isSpeedModded=true
         }
 
         if(this.gamepad1.a){
-            RobotConfig.TeleOpMain.ROTATE_SPEED *= RobotConfig.TeleOpMain.SPEED_MODIFIER
-            RobotConfig.TeleOpMain.DRIVE_SPEED *= RobotConfig.TeleOpMain.SPEED_MODIFIER
+            TriWheels.halfSpeed(isSpeedModded)
+            telemetry.addLine("Full Speed")
+            telemetry.update()
+            isSpeedModded=false
         }
 
         if(this.gamepad2.x){
