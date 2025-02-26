@@ -205,7 +205,7 @@ object RobotConfig {
 
         /*Secondary Servo Position to close*/
         @JvmField
-        var SMALL_CLOSE_POS: Double = 0.0
+        var SMALL_CLOSE_POS: Double = 0.32
 
         /*Primary Servo Position to close*/
         @JvmField
@@ -213,33 +213,33 @@ object RobotConfig {
 
         /*Primary Servo Position to open*/
         @JvmField
-        var LARGE_OPEN_POS: Double = 0.0
+        var LARGE_OPEN_POS: Double = 0.5
 
         /*Secondary Servo Position to open*/
         @JvmField
-        var SMALL_OPEN_POS: Double = 0.0
+        var SMALL_OPEN_POS: Double = 0.085
 
         /*Incrimental For Small Claw*/
         @JvmField
-        var SMALL_INCRIMENT: Double = 0.0
+        var SMALL_INCRIMENT: Double = 0.005
 
         /*Incrimental for Large Claw*/
         @JvmField
-        var LARGE_INCRIMENT: Double = 0.0
+        var LARGE_INCRIMENT: Double = 0.005
 
         /*Secondary Limits*/
         @JvmField
         var SMALL_MINIMUM_POSITION: Double = 0.0
 
         @JvmField
-        var SMALL_MAXIMUM_POSITION: Double = 0.0
+        var SMALL_MAXIMUM_POSITION: Double = 1.0
 
         /*Primary Limits*/
         @JvmField
         var LARGE_MINIMUM_POSITION: Double = 0.0
 
         @JvmField
-        var LARGE_MAXIMUM_POSITION: Double = 0.0
+        var LARGE_MAXIMUM_POSITION: Double = 0.5
 
     }
 
@@ -260,7 +260,7 @@ object RobotConfig {
     @Config
     object OTOS {
         @JvmField
-        var OFFSET = SparkFunOTOS.Pose2D(0.0, 0.0 ,-42.0)
+        var OFFSET = SparkFunOTOS.Pose2D(0.0, 0.0 ,0.0)
 
         @JvmField
         var LINEAR_SCALAR: Double = 1.0
@@ -288,5 +288,49 @@ object RobotConfig {
 
         @JvmField
         var MAGNITUDE: Double = -0.5
+
+        @JvmField
+        var POS: DoubleArray = doubleArrayOf(-3.0, 26.0, 0.0, 1.25)
+
+        @JvmField
+        var POS2: DoubleArray = doubleArrayOf(-30.0, 15.0, 0.0, 10.0)
+
+        @JvmField
+        var POS3: DoubleArray = doubleArrayOf(-30.0, 45.0, 0.0, 10.0)
+
+        @JvmField
+        var POS4: DoubleArray = doubleArrayOf(-40.0, 45.0, 20.0, 10.0)
+
+        @JvmField
+        var POS5: DoubleArray = doubleArrayOf(-40.0, -5.0, 20.0, 10.0)
+
+        @JvmField
+        var POS6: DoubleArray = doubleArrayOf(-40.0, 45.0, 0.0, 10.0)
+
+        @JvmField
+        var POS7: DoubleArray = doubleArrayOf(-55.0, 45.0, 0.0, 10.0)
+
+        @JvmField
+        var POS8: DoubleArray = doubleArrayOf(-55.0, 0.0, 0.0, 10.0)
+
+        @JvmField
+        var POS9: DoubleArray = doubleArrayOf(-50.0, 20.0, 0.0, 10.0)
+
+        @JvmField
+        var POS10: DoubleArray = doubleArrayOf(-50.0, 20.0, 0.0, 10.0)
+
+        @JvmField
+        var X_THRESHOLD: Double = 5.0
+
+        @JvmField
+        var Y_THRESHOLD: Double = 5.0
+
+        @JvmField
+        var turn: Double = 90.0
+
+        @JvmField
+        var dir: Double = -1.0
+
+
     }
 }

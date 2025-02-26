@@ -29,7 +29,7 @@ object Claw :API(){
         this.CSensor = this.opMode.hardwareMap.get(ColorSensor::class.java, "CSensor")
 
         CSensor.enableLed(false)
-        this.reset()
+//        this.reset()
 
     }
     fun reset(){

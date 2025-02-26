@@ -70,18 +70,18 @@ object Otos : API() {
     fun otosDrive(x: Double, y: Double, h: Double, t: Double) {
 
         var currentPos: SparkFunOTOS.Pose2D = myPos()
-        xError = x - currentPos.x
+        xError = x + currentPos.x
         yError = y - currentPos.y
         hError = h - currentPos.h
 
         runtime.reset()
 
         while (linearOpMode.opModeIsActive() && (runtime.milliseconds() < t * 1000) &&
-            ((Math.abs(xError) > 1.5) || (Math.abs(yError) > 1.5) || (Math.abs(hError) > 4)))
+            ((Math.abs(xError) > RobotConfig.OTOS.X_THRESHOLD) || (Math.abs(yError) > RobotConfig.OTOS.Y_THRESHOLD) || (Math.abs(hError) > 4)))
         {
             with(RobotConfig.OTOS) {
-                drive = Range.clip(xError * SPEED_GAIN, -MAX_AUTO_SPEED, MAX_AUTO_SPEED)
-                strafe = Range.clip(yError * STRAFE_GAIN, -MAX_AUTO_STRAFE, MAX_AUTO_STRAFE)
+                drive = Range.clip(yError * SPEED_GAIN, -MAX_AUTO_SPEED, MAX_AUTO_SPEED)
+                strafe = -1*(Range.clip(xError * STRAFE_GAIN, -MAX_AUTO_STRAFE, MAX_AUTO_STRAFE))
                 turn = Range.clip(hError * TURN_GAIN, -MAX_AUTO_TURN, MAX_AUTO_TURN)
             }
             with(linearOpMode.telemetry) {
@@ -100,7 +100,7 @@ object Otos : API() {
             moveRobot(drive, strafe, turn)
 
             currentPos = myPos()
-            xError = x - currentPos.x
+            xError = x + currentPos.x
             yError = y - currentPos.y
             hError = h - currentPos.h
         }
@@ -113,9 +113,11 @@ object Otos : API() {
             addData("current Heading angle", currentPos.h);
             update();
         }
+        TriWheels.stop()
+
     }
 
-    fun moveRobot(x: Double, y: Double, h: Double) {
+    fun moveRobot(y: Double, x: Double, h: Double) {
 
         var rad: Double = atan2(yError, xError)
 
@@ -143,4 +145,19 @@ object Otos : API() {
         pos = otos.position
         return (pos)
     }
+
+    fun turn(h: Double, d: Double) {
+        var currentPos = myPos()
+
+        hError = h - currentPos.h
+
+        while (linearOpMode.opModeIsActive() && Math.abs(hError) > 5) {
+            currentPos = myPos()
+            hError = h - currentPos.h
+            TriWheels.power(0.25*d, 0.25*d, 0.25*d)
+            linearOpMode.telemetry.addData("hError", hError)
+            linearOpMode.telemetry.update()
+        }
+    }
+
 }

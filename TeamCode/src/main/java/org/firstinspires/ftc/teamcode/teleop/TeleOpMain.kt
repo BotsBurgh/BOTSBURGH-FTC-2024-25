@@ -19,7 +19,7 @@ import kotlin.math.sqrt
 
 class TeleOpMain : OpMode() {
 
-    var bigPos : Double = 0.0
+    var largePos : Double = 0.0
     var smallPos : Double = 0.0
 
     override fun init() {
@@ -92,16 +92,16 @@ class TeleOpMain : OpMode() {
         if(gamepad2.dpad_left){
             var pos = Claw.largeServo.position
             pos += RobotConfig.Claw.LARGE_INCRIMENT
-            smallPos = min(pos, RobotConfig.Claw.LARGE_MAXIMUM_POSITION);
+            largePos = min(pos, RobotConfig.Claw.LARGE_MAXIMUM_POSITION);
         }
 
         if(gamepad2.dpad_right){
             var pos = Claw.largeServo.position
             pos -= RobotConfig.Claw.LARGE_INCRIMENT
-            smallPos = max(pos, RobotConfig.Claw.LARGE_MINIMUM_POSITION);
+            largePos = max(pos, RobotConfig.Claw.LARGE_MINIMUM_POSITION);
         }
 
-        Claw.largeMoveToPos(bigPos)
+        Claw.largeMoveToPos(largePos)
 
 
         if (this.gamepad2.a){
@@ -127,10 +127,14 @@ class TeleOpMain : OpMode() {
         }
 
         if(this.gamepad2.x){
+            smallPos = RobotConfig.Claw.SMALL_CLOSE_POS
+            largePos = RobotConfig.Claw.LARGE_CLOSE_POS
             Claw.close()
         }
 
         if(this.gamepad2.y){
+            smallPos = RobotConfig.Claw.SMALL_OPEN_POS
+            largePos = RobotConfig.Claw.LARGE_OPEN_POS
             Claw.open()
         }
 
