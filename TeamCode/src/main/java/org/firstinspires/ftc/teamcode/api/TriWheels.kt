@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
+import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry
+import org.firstinspires.ftc.teamcode.RobotConfig
 import org.firstinspires.ftc.teamcode.core.API
 import org.firstinspires.ftc.teamcode.utils.PI_2
 import org.firstinspires.ftc.teamcode.utils.Polar2d
@@ -47,9 +49,7 @@ object TriWheels : API() {
     ) {
         red.power = redPower
         green.power = greenPower
-        // FIXME: The blue wheel has a motor with a different wheel ratio, and thus is 3x faster
-        //        than the other two.
-        blue.power = bluePower / 3.0
+        blue.power = bluePower
     }
 
     /**
@@ -146,4 +146,18 @@ object TriWheels : API() {
 
     /** Returns an array containing [red], [green], and [blue]. */
     fun wheels() = arrayOf(this.red, this.green, this.blue)
+
+    fun halfSpeed(possible: Boolean){
+            if(possible) {
+                RobotConfig.TeleOpMain.ROTATE_SPEED /= RobotConfig.TeleOpMain.SPEED_MODIFIER
+                RobotConfig.TeleOpMain.DRIVE_SPEED /= RobotConfig.TeleOpMain.SPEED_MODIFIER
+            }
+    }
+
+    fun fullSpeed(possible: Boolean){
+        if(!possible) {
+            RobotConfig.TeleOpMain.ROTATE_SPEED *= RobotConfig.TeleOpMain.SPEED_MODIFIER
+            RobotConfig.TeleOpMain.DRIVE_SPEED *= RobotConfig.TeleOpMain.SPEED_MODIFIER
+        }
+    }
 }

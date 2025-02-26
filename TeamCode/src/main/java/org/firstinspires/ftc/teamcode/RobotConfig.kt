@@ -6,6 +6,7 @@ package org.firstinspires.ftc.teamcode
 
 import com.acmerobotics.dashboard.config.Config
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot
+import com.qualcomm.hardware.sparkfun.SparkFunOTOS
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil
 import org.firstinspires.ftc.teamcode.core.logging.Level
@@ -44,6 +45,10 @@ object RobotConfig {
         /** A multiplier that scales the robot's rotation speed. */
         @JvmField
         var ROTATE_SPEED: Double = 0.5
+
+        /**A multiplier for the speed of the robot**/
+        @JvmField
+        var SPEED_MODIFIER: Double = 0.5
     }
 
     // TODO: Set robot radius and inches per tick.
@@ -179,13 +184,13 @@ object RobotConfig {
          * The maximum power a wheel can spin at when the robot is driving with encoders.
          */
         @JvmField
-        var MAX_DRIVE_SPEED: Double = 0.3
+        var MAX_DRIVE_SPEED: Double = 0.4 //TODO: Change as needed
 
         /**
          * The maximum power a wheel can spin at when the robot spinning with encoders.
          */
         @JvmField
-        var MAX_SPIN_SPEED: Double = 0.4
+        var MAX_SPIN_SPEED: Double = 0.5 //TODO: Change as needed
 
         /**
          * A multiplier that calculates the power of the wheel relative to the amount of time that
@@ -193,5 +198,139 @@ object RobotConfig {
          */
         @JvmField
         var TIME_GAIN: Double = 0.4
+    }
+
+    @Config
+    object Claw{
+
+        /*Secondary Servo Position to close*/
+        @JvmField
+        var SMALL_CLOSE_POS: Double = 0.32
+
+        /*Primary Servo Position to close*/
+        @JvmField
+        var LARGE_CLOSE_POS: Double = 0.0
+
+        /*Primary Servo Position to open*/
+        @JvmField
+        var LARGE_OPEN_POS: Double = 0.5
+
+        /*Secondary Servo Position to open*/
+        @JvmField
+        var SMALL_OPEN_POS: Double = 0.085
+
+        /*Incrimental For Small Claw*/
+        @JvmField
+        var SMALL_INCRIMENT: Double = 0.005
+
+        /*Incrimental for Large Claw*/
+        @JvmField
+        var LARGE_INCRIMENT: Double = 0.005
+
+        /*Secondary Limits*/
+        @JvmField
+        var SMALL_MINIMUM_POSITION: Double = 0.0
+
+        @JvmField
+        var SMALL_MAXIMUM_POSITION: Double = 1.0
+
+        /*Primary Limits*/
+        @JvmField
+        var LARGE_MINIMUM_POSITION: Double = 0.0
+
+        @JvmField
+        var LARGE_MAXIMUM_POSITION: Double = 0.5
+
+    }
+
+    @Config
+    object CloseAutonomous{
+        //Using variables for distances, so that it can be quickly modded by RobotConfig
+
+        @JvmField
+        var FIRST_TURN: Double = 90.0
+
+        @JvmField
+        var FORWARD: Double = 24.0
+
+        @JvmField
+        var SMALL_TURN: Double = 20.0
+    }
+
+    @Config
+    object OTOS {
+        @JvmField
+        var OFFSET = SparkFunOTOS.Pose2D(0.0, 0.0 ,0.0)
+
+        @JvmField
+        var LINEAR_SCALAR: Double = 1.0
+
+        @JvmField
+        var ANGULAR_SCALAR: Double = 1.0
+
+        @JvmField
+        var SPEED_GAIN: Double = 0.04
+
+        @JvmField
+        var MAX_AUTO_SPEED: Double = 0.4
+
+        @JvmField
+        var STRAFE_GAIN: Double = 0.04
+
+        @JvmField
+        var MAX_AUTO_STRAFE: Double = 0.4
+
+        @JvmField
+        var TURN_GAIN: Double = 0.04
+
+        @JvmField
+        var MAX_AUTO_TURN: Double = 0.4
+
+        @JvmField
+        var MAGNITUDE: Double = -0.5
+
+        @JvmField
+        var POS: DoubleArray = doubleArrayOf(-3.0, 26.0, 0.0, 1.25)
+
+        @JvmField
+        var POS2: DoubleArray = doubleArrayOf(-30.0, 15.0, 0.0, 10.0)
+
+        @JvmField
+        var POS3: DoubleArray = doubleArrayOf(-30.0, 45.0, 0.0, 10.0)
+
+        @JvmField
+        var POS4: DoubleArray = doubleArrayOf(-40.0, 45.0, 20.0, 10.0)
+
+        @JvmField
+        var POS5: DoubleArray = doubleArrayOf(-40.0, -5.0, 20.0, 10.0)
+
+        @JvmField
+        var POS6: DoubleArray = doubleArrayOf(-40.0, 45.0, 0.0, 10.0)
+
+        @JvmField
+        var POS7: DoubleArray = doubleArrayOf(-55.0, 45.0, 0.0, 10.0)
+
+        @JvmField
+        var POS8: DoubleArray = doubleArrayOf(-55.0, 0.0, 0.0, 10.0)
+
+        @JvmField
+        var POS9: DoubleArray = doubleArrayOf(-50.0, 20.0, 0.0, 10.0)
+
+        @JvmField
+        var POS10: DoubleArray = doubleArrayOf(-50.0, 20.0, 0.0, 10.0)
+
+        @JvmField
+        var X_THRESHOLD: Double = 5.0
+
+        @JvmField
+        var Y_THRESHOLD: Double = 5.0
+
+        @JvmField
+        var turn: Double = 90.0
+
+        @JvmField
+        var dir: Double = -1.0
+
+
     }
 }
