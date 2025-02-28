@@ -281,7 +281,7 @@ object RobotConfig {
         var MAX_AUTO_STRAFE: Double = 0.4
 
         @JvmField
-        var TURN_GAIN: Double = 0.04
+        var TURN_GAIN: Double = 0.035
 
         @JvmField
         var MAX_AUTO_TURN: Double = 0.4
@@ -290,7 +290,7 @@ object RobotConfig {
         var MAGNITUDE: Double = -0.5
 
         @JvmField
-        var POS: DoubleArray = doubleArrayOf(-3.0, 26.0, 0.0, 1.25)
+        var POS: DoubleArray = doubleArrayOf(-3.0, 0.0, 0.0, 1.2)
 
         @JvmField
         var POS2: DoubleArray = doubleArrayOf(-30.0, 15.0, 0.0, 10.0)
@@ -331,6 +331,7 @@ object RobotConfig {
         @JvmField
         var dir: Double = -1.0
 
-
+        @JvmField
+        var H_THRESHOLD: Double = 5.0
     }
 }

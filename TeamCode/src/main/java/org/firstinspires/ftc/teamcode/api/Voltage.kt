@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.api
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.VoltageSensor
+import org.firstinspires.ftc.teamcode.api.Voltage.get
 import org.firstinspires.ftc.teamcode.core.API
 import org.firstinspires.ftc.teamcode.core.logging.Logging
 
@@ -31,4 +32,5 @@ object Voltage : API() {
      * Returns the current voltage of the control hub.
      */
     fun get(): Double = this.sensor.voltage
+
 }

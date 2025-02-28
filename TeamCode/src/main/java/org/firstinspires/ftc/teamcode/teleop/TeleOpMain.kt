@@ -6,6 +6,7 @@ import org.firstinspires.ftc.teamcode.RobotConfig
 import org.firstinspires.ftc.teamcode.api.ScissorLift
 import org.firstinspires.ftc.teamcode.api.TriWheels
 import org.firstinspires.ftc.teamcode.api.Claw
+import org.firstinspires.ftc.teamcode.api.Voltage
 import kotlin.math.PI
 import kotlin.math.atan2
 import kotlin.math.max
@@ -120,7 +121,7 @@ class TeleOpMain : OpMode() {
         }
 
         if(this.gamepad1.a){
-            TriWheels.halfSpeed(isSpeedModded)
+            TriWheels.fullSpeed(isSpeedModded)
             telemetry.addLine("Full Speed")
             telemetry.update()
             isSpeedModded=false
@@ -137,8 +138,6 @@ class TeleOpMain : OpMode() {
             largePos = RobotConfig.Claw.LARGE_OPEN_POS
             Claw.open()
         }
-
-
 
         //servos
         telemetry.addData("small Servo Pos",Claw.smallServo.position)

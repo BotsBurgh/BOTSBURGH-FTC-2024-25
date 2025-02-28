@@ -77,7 +77,7 @@ object Otos : API() {
         runtime.reset()
 
         while (linearOpMode.opModeIsActive() && (runtime.milliseconds() < t * 1000) &&
-            ((Math.abs(xError) > RobotConfig.OTOS.X_THRESHOLD) || (Math.abs(yError) > RobotConfig.OTOS.Y_THRESHOLD) || (Math.abs(hError) > 4)))
+            ((Math.abs(xError) > RobotConfig.OTOS.X_THRESHOLD) || (Math.abs(yError) > RobotConfig.OTOS.Y_THRESHOLD) || (Math.abs(hError) > RobotConfig.OTOS.H_THRESHOLD)))
         {
             with(RobotConfig.OTOS) {
                 drive = Range.clip(yError * SPEED_GAIN, -MAX_AUTO_SPEED, MAX_AUTO_SPEED)
