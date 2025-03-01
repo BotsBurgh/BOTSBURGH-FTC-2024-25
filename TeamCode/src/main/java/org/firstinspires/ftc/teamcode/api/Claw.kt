@@ -6,15 +6,20 @@ import com.qualcomm.robotcore.hardware.ColorSensor
 import org.firstinspires.ftc.teamcode.core.API
 import org.firstinspires.ftc.teamcode.RobotConfig
 
-/* An API to Control the Claw and Color Sensor*/
+/** An API to Control the Claw and Color Sensor**/
 
 object Claw :API(){
+    /**Left Grabber Wheel**/
     lateinit var LeftWheel : Servo
+    /**Right Grabber Wheel**/
     lateinit var RightWheel : Servo
 
+    /**Servo on the scissorlift that moves whole arm**/
     lateinit var largeServo : Servo
+    /**Servo on the arm that moves claw**/
     lateinit var smallServo : Servo
 
+    /**Color Sensor**/
     lateinit var CSensor : ColorSensor
 
     override fun init(opMode: OpMode){
@@ -32,6 +37,8 @@ object Claw :API(){
 //        this.reset()
 
     }
+
+    /**Closes and resets the claw**/
     fun reset(){
         close()
         LeftWheel.position
@@ -43,28 +50,34 @@ object Claw :API(){
 
         CSensor.enableLed(false)
     }
-
+    /**Turns on the light**/
     fun light(){
         CSensor.enableLed(true)
     }
+
+    /**grabs the sample**/
     fun grab(){
         LeftWheel.position = 1.0
         RightWheel.position = 0.0
     }
+
+    /**Releases the sample**/
     fun release(){
         LeftWheel.position = 0.0
         RightWheel.position = 1.0
     }
 
+    /**Moves the Servo on the scissorlift to a certain position**/
     fun largeMoveToPos(pos : Double){
         largeServo.position = pos
     }
 
+    /**Moves the servo in the middle of the arm to a certain position**/
     fun smallMoveToPos(pos : Double){
         smallServo.position = pos
     }
 
-
+    /**Grabs the sample if its the right color**/
     fun scan(color:String){
         if(color == "Red" && CSensor.red()> CSensor.blue()){
             grab()
@@ -73,13 +86,13 @@ object Claw :API(){
         }
     }
 
-    //Closes the hook
+    /**Closes the hook**/
     fun close(){
         smallMoveToPos(RobotConfig.Claw.SMALL_CLOSE_POS)
         largeMoveToPos(RobotConfig.Claw.LARGE_CLOSE_POS)
     }
 
-    //Extends the hook to the bar for sample scoring(Scissorlift down)
+    /**Opens the hook**/
     fun open(){
         smallMoveToPos(RobotConfig.Claw.SMALL_OPEN_POS)
         largeMoveToPos(RobotConfig.Claw.LARGE_OPEN_POS)

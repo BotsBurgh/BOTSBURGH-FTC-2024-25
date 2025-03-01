@@ -6,11 +6,14 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.TouchSensor
 import org.firstinspires.ftc.teamcode.core.API
 
-
+/** API to control the Scissorlift**/
 object ScissorLift : API() {
+    /** Motor that lifts/collapses Scissorlift**/
     lateinit var motor: DcMotor
 
+    /**Touch sensor that manually stops the scissorlift from destroying itself**/
     private lateinit var minLift: TouchSensor
+    /**Touch sensor that manually stops the scissorlift from destroying itself**/
     private lateinit var maxLift: TouchSensor
 
     override fun init(opMode: OpMode){
@@ -23,13 +26,14 @@ object ScissorLift : API() {
         motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
     }
 
+    /**Lifts if the corresponding Touchsensor is not being touched**/
     fun lift(pwr: Double){
-
         if(!maxLift.isPressed) {
             this.motor.power = pwr
         }
     }
 
+    /**Lifts if the corresponding Touchsensor is not being touched**/
     fun unlift(pwr: Double){
 
         if(!minLift.isPressed){
@@ -37,6 +41,7 @@ object ScissorLift : API() {
         }
     }
 
+    /** Emergency stop on the scissorlift**/
     fun stop(){
         this.motor.power = 0.0
     }
@@ -57,7 +62,7 @@ object ScissorLift : API() {
             }
         }
     }
-
+    /**Stops and resets the motor**/
     fun stopAndResetMotor() {
         stop()
 
@@ -67,6 +72,7 @@ object ScissorLift : API() {
 
     }
 
+    /**Checks if motor is powered**/
     fun isPowered() : Boolean{
         return motor.power != 0.0
     }
