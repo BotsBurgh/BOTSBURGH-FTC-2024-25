@@ -1,19 +1,18 @@
 package org.firstinspires.ftc.teamcode.utils
 
+import com.acmerobotics.roadrunner.clamp
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.PIDCoefficients
 import com.qualcomm.robotcore.util.ElapsedTime
 import org.firstinspires.ftc.teamcode.RobotConfig
 import kotlin.math.abs
-import kotlin.math.max
-import kotlin.math.min
 
 class MotorControllerGroup(
     target: Int,
     pid: PIDCoefficients,
     vararg motors: DcMotor,
 ) {
-    private val controllers = motors.map { MotorController(target, pid, it) }
+    private val controllers = motors.map { MotorController(target, it, pid) }
 
     fun update() {
         for (controller in controllers) {
@@ -24,10 +23,20 @@ class MotorControllerGroup(
     fun isDone() = controllers.all { it.isDone() }
 }
 
+/**
+ * A PID controller that moves a motor to a target position.
+ *
+ * @param target The desired motor encoder position.
+ * @param motor The motor that will be controlled.
+ * @param pid The PID coefficients.
+ * @param threshold The distance the motor has to be within from the target position to be
+ *                  considered "done".
+ */
 class MotorController(
     private val target: Int,
-    private val pid: PIDCoefficients,
     private val motor: DcMotor,
+    private val pid: PIDCoefficients,
+    private val threshold: Int = RobotConfig.MotorController.DEFAULT_THRESHOLD,
 ) {
     private val runtime = ElapsedTime()
 
@@ -37,24 +46,23 @@ class MotorController(
     private var i = 0.0
 
     fun update() {
-        val currentTime = runtime.milliseconds()
-        val currentError = target - motor.currentPosition
+        val currentTime = this.runtime.milliseconds()
+        val currentError = this.target - this.motor.currentPosition
 
-        val p = pid.p * currentError
+        val p = this.pid.p * currentError
 
-        i += pid.i * currentError * (currentTime - previousTime)
+        i += this.pid.i * currentError * (currentTime - this.previousTime)
 
         // Clamp between [-MAX_I, MAX_I]
-        i = max(min(i, RobotConfig.MotorController.I_LIMIT), -RobotConfig.MotorController.I_LIMIT)
+        this.i = clamp(this.i, -RobotConfig.MotorController.I_LIMIT, RobotConfig.MotorController.I_LIMIT)
 
-        val d = pid.d * (currentError - previousError) / (currentTime - previousTime)
+        val d = this.pid.d * (currentError - this.previousError) / (currentTime - this.previousTime)
 
-        motor.power = max(min(p + i + d, RobotConfig.MotorController.POWER_LIMIT), -RobotConfig.MotorController.POWER_LIMIT)
+        this.motor.power = clamp(p + this.i + d, -RobotConfig.MotorController.POWER_LIMIT, RobotConfig.MotorController.POWER_LIMIT)
 
-        previousTime = currentTime
-        previousError = currentError
+        this.previousTime = currentTime
+        this.previousError = currentError
     }
 
-    // fun isDone() = abs(previousError) < 3 && abs(motor.power) < 0.03
-    fun isDone() = abs(previousError) < 10
+    fun isDone() = abs(this.previousError) < this.threshold
 }
