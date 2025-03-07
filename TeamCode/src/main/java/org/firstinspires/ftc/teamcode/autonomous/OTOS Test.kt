@@ -34,12 +34,14 @@ class OTOS : LinearOpMode() {
         Otos.otosDrive(RobotConfig.OTOS.POS[0], RobotConfig.OTOS.POS[1], RobotConfig.OTOS.POS[2], RobotConfig.OTOS.POS[3])
         sleep(100)
         //@TODO CLIP
-
-
-        //Align to push block 1
+        ScissorLift.goToPos(RobotConfig.Scissorlift.CLIPPABLE)
+        Claw.open()
+        Claw.release()
+        Claw.close()
+       //Align to push block 1
         Otos.otosDrive(RobotConfig.OTOS.POS2[0], RobotConfig.OTOS.POS2[1], RobotConfig.OTOS.POS2[2], RobotConfig.OTOS.POS2[3])
         sleep(100)
-        //Otos.turn(RobotConfig.OTOS.TURN180[0], RobotConfig.OTOS.TURN180[1])
+       //Otos.turn(RobotConfig.OTOS.TURN180[0], RobotConfig.OTOS.TURN180[1])
         sleep(100)
         Otos.otosDrive(RobotConfig.OTOS.POS3[0], RobotConfig.OTOS.POS3[1], RobotConfig.OTOS.POS3[2], RobotConfig.OTOS.POS3[3])
         sleep(100)
@@ -56,7 +58,12 @@ class OTOS : LinearOpMode() {
         //Drive to bar
         //Otos.turn(RobotConfig.OTOS.TURN0[0], RobotConfig.OTOS.TURN0[1])
         sleep(100)
-        //@TODO CLIP
+
+        //CLIP
+        Claw.open()
+        Claw.release()
+        Claw.close()
+
         Otos.otosDrive(RobotConfig.OTOS.POS7[0], RobotConfig.OTOS.POS7[1], RobotConfig.OTOS.POS7[2], RobotConfig.OTOS.POS7[3])
         sleep(100)
         //Otos.turn(RobotConfig.OTOS.TURN180[0], RobotConfig.OTOS.TURN180[1])
@@ -72,7 +79,11 @@ class OTOS : LinearOpMode() {
         //Drive to bar
         Otos.otosDrive(RobotConfig.OTOS.POS9[0], RobotConfig.OTOS.POS9[1], RobotConfig.OTOS.POS9[2], RobotConfig.OTOS.POS9[3])
         sleep(100)
-        //@TODO CLIP
+
+        //Clip
+        Claw.open()
+        Claw.release()
+        Claw.close()
 
         //Park
         Otos.otosDrive(RobotConfig.OTOS.POS10[0], RobotConfig.OTOS.POS10[1], RobotConfig.OTOS.POS10[2], RobotConfig.OTOS.POS10[3])

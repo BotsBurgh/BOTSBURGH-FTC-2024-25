@@ -242,19 +242,10 @@ object RobotConfig {
         var LARGE_MAXIMUM_POSITION: Double = 0.5
 
     }
-
     @Config
-    object CloseAutonomous {
-        //Using variables for distances, so that it can be quickly modded by RobotConfig
-
+    object Scissorlift {
         @JvmField
-        var FIRST_TURN: Double = 90.0
-
-        @JvmField
-        var FORWARD: Double = 24.0
-
-        @JvmField
-        var SMALL_TURN: Double = 20.0
+        var CLIPPABLE: Int = 0
     }
 
     @Config
@@ -296,16 +287,16 @@ object RobotConfig {
         var POS2: DoubleArray = doubleArrayOf(-30.0, 20.0, 0.0, 10.0)
 
         @JvmField
-        var POS3: DoubleArray = doubleArrayOf(-30.0, 53.0, 180.0, 10.0)
+        var POS3: DoubleArray = doubleArrayOf(-30.0, 53.0, 0.0, 10.0)
 
         @JvmField
-        var POS4: DoubleArray = doubleArrayOf(-44.0, 53.0, 180.0, 10.0)
+        var POS4: DoubleArray = doubleArrayOf(-44.0, 53.0, 0.0, 10.0)
 
         @JvmField
-        var POS5: DoubleArray = doubleArrayOf(-44.0, 1.5, 180.0, 10.0)
+        var POS5: DoubleArray = doubleArrayOf(-44.0, 1.5, 0.0, 10.0)
 
         @JvmField
-        var POS6: DoubleArray = doubleArrayOf(-44.0, 5.0, 180.0, 10.0)
+        var POS6: DoubleArray = doubleArrayOf(-44.0, 5.0, 0.0, 10.0)
 
         @JvmField
         var POS7: DoubleArray = doubleArrayOf(5.0, 26.0, 0.0, 10.0)
