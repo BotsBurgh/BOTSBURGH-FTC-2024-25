@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.api
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
 import com.qualcomm.robotcore.hardware.ColorSensor
+import com.qualcomm.robotcore.hardware.DistanceSensor
 import org.firstinspires.ftc.teamcode.core.API
 import org.firstinspires.ftc.teamcode.RobotConfig
 
@@ -16,6 +17,7 @@ object Claw :API(){
     lateinit var smallServo : Servo
 
     lateinit var CSensor : ColorSensor
+
 
     override fun init(opMode: OpMode){
         super.init(opMode)

@@ -201,7 +201,7 @@ object RobotConfig {
     }
 
     @Config
-    object Claw{
+    object Claw {
 
         /*Secondary Servo Position to close*/
         @JvmField
@@ -244,7 +244,7 @@ object RobotConfig {
     }
 
     @Config
-    object CloseAutonomous{
+    object CloseAutonomous {
         //Using variables for distances, so that it can be quickly modded by RobotConfig
 
         @JvmField
@@ -260,7 +260,7 @@ object RobotConfig {
     @Config
     object OTOS {
         @JvmField
-        var OFFSET = SparkFunOTOS.Pose2D(0.0, 0.0 ,0.0)
+        var OFFSET = SparkFunOTOS.Pose2D(0.0, 0.0, 0.0)
 
         @JvmField
         var LINEAR_SCALAR: Double = 1.0
@@ -290,34 +290,40 @@ object RobotConfig {
         var MAGNITUDE: Double = -0.5
 
         @JvmField
-        var POS: DoubleArray = doubleArrayOf(-3.0, 0.0, 0.0, 1.2)
+        var POS: DoubleArray = doubleArrayOf(0.0, 26.0, 0.0, 10.0)
 
         @JvmField
-        var POS2: DoubleArray = doubleArrayOf(-30.0, 15.0, 0.0, 10.0)
+        var POS2: DoubleArray = doubleArrayOf(-30.0, 20.0, 0.0, 10.0)
 
         @JvmField
-        var POS3: DoubleArray = doubleArrayOf(-30.0, 45.0, 0.0, 10.0)
+        var POS3: DoubleArray = doubleArrayOf(-30.0, 53.0, 180.0, 10.0)
 
         @JvmField
-        var POS4: DoubleArray = doubleArrayOf(-40.0, 45.0, 20.0, 10.0)
+        var POS4: DoubleArray = doubleArrayOf(-44.0, 53.0, 180.0, 10.0)
 
         @JvmField
-        var POS5: DoubleArray = doubleArrayOf(-40.0, -5.0, 20.0, 10.0)
+        var POS5: DoubleArray = doubleArrayOf(-44.0, 1.5, 180.0, 10.0)
 
         @JvmField
-        var POS6: DoubleArray = doubleArrayOf(-40.0, 45.0, 0.0, 10.0)
+        var POS6: DoubleArray = doubleArrayOf(-44.0, 5.0, 180.0, 10.0)
 
         @JvmField
-        var POS7: DoubleArray = doubleArrayOf(-55.0, 45.0, 0.0, 10.0)
+        var POS7: DoubleArray = doubleArrayOf(5.0, 26.0, 0.0, 10.0)
 
         @JvmField
-        var POS8: DoubleArray = doubleArrayOf(-55.0, 0.0, 0.0, 10.0)
+        var POS8: DoubleArray = doubleArrayOf(-44.0, 5.0, 0.0, 10.0)
 
         @JvmField
-        var POS9: DoubleArray = doubleArrayOf(-50.0, 20.0, 0.0, 10.0)
+        var POS9: DoubleArray = doubleArrayOf(-10.0, 26.0, 0.0, 10.0)
 
         @JvmField
-        var POS10: DoubleArray = doubleArrayOf(-50.0, 20.0, 0.0, 10.0)
+        var POS10: DoubleArray = doubleArrayOf(-44.0, 5.0, 0.0, 10.0)
+
+        @JvmField
+        var TURN180: DoubleArray = doubleArrayOf(180.0, 1.0)
+
+        @JvmField
+        var TURN0: DoubleArray = doubleArrayOf(0.0, 1.0)
 
         @JvmField
         var X_THRESHOLD: Double = 5.0
@@ -326,12 +332,14 @@ object RobotConfig {
         var Y_THRESHOLD: Double = 5.0
 
         @JvmField
+        var H_THRESHOLD: Double = 5.0
+
+        @JvmField
         var turn: Double = 90.0
 
         @JvmField
         var dir: Double = -1.0
 
-        @JvmField
-        var H_THRESHOLD: Double = 5.0
+
     }
 }
